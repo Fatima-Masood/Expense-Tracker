@@ -46,8 +46,6 @@ public class MonthlyLimitController {
         MonthlyLimit monthlyLimit = monthlyLimitRepository.findByUsernameAndMonth(username, yearMonth.toString())
                 .orElse(null);
 
-        log.info(username);
-
         MonthlySummaryResponse response = new MonthlySummaryResponse();
         response.setMonth(yearMonth);
         response.setTotalSpent(totalSpent);
