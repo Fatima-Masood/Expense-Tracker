@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ExpenditureController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Expense Tracker</a> &gt; <a href="index.source.html" class="el_package">com.expensetracker.expenditure</a> &gt; <span class="el_source">ExpenditureController.java</span></div><h1>ExpenditureController.java</h1><pre class="source lang-java linenums">package com.expensetracker.expenditure;
+
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Optional;
+
+@CrossOrigin(origins = &quot;http://localhost:8000&quot;)
+@RestController
+@RequestMapping(&quot;/api/expenditures&quot;)
+<span class="fc" id="L17">@RequiredArgsConstructor</span>
+<span class="fc" id="L18">@Slf4j</span>
+public class ExpenditureController {
+
+    private final ExpenditureRepository expenditureRepository;
+
+    @PostMapping
+    public ResponseEntity&lt;?&gt; addExpenditure(
+            @RequestBody Expenditure exp,
+            Authentication authentication) {
+<span class="pc bpc" id="L27" title="1 of 4 branches missed.">        if (exp.getTitle() == null || exp.getAmount() == 0){</span>
+<span class="fc" id="L28">            return ResponseEntity.status(HttpStatus.NO_CONTENT).body(&quot;incomplete content&quot;);</span>
+        }
+<span class="pc bpc" id="L30" title="1 of 2 branches missed.">        if (authentication != null ) {</span>
+<span class="fc" id="L31">            exp.setUser(authentication.getName());</span>
+<span class="fc" id="L32">            exp = expenditureRepository.save(exp);</span>
+<span class="fc" id="L33">            return ResponseEntity.ok(exp);</span>
+        }
+<span class="nc" id="L35">        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(&quot;Forbidden&quot;);</span>
+    }
+
+
+    @PutMapping(&quot;/{id}&quot;)
+    public ResponseEntity&lt;?&gt; updateExpenditure(@PathVariable String id,
+                                                         @RequestBody Expenditure exp,
+                                                         Authentication authentication) {
+<span class="fc bfc" id="L43" title="All 2 branches covered.">        if (exp.getUser().equals(authentication.getName())) {</span>
+<span class="fc" id="L44">            Optional&lt;Expenditure&gt; existing = expenditureRepository.findById(id);</span>
+
+<span class="fc bfc" id="L46" title="All 2 branches covered.">            if (existing.isEmpty()) {</span>
+<span class="fc" id="L47">                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(&quot;Does not exist&quot;);</span>
+            }
+
+<span class="fc" id="L50">            Expenditure expenditure = existing.get();</span>
+<span class="fc" id="L51">            expenditure.setTitle(exp.getTitle());</span>
+<span class="fc" id="L52">            expenditure.setAmount(exp.getAmount());</span>
+
+<span class="fc" id="L54">            return ResponseEntity.ok(expenditureRepository.save(expenditure));</span>
+        }
+<span class="fc" id="L56">        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(&quot;Forbidden&quot;);</span>
+    }
+
+    @DeleteMapping(&quot;/{id}&quot;)
+    public ResponseEntity&lt;String&gt; deleteExpenditure(@PathVariable String id, Authentication authentication) {
+<span class="fc" id="L61">        Optional&lt;Expenditure&gt; existing = expenditureRepository.findById(id);</span>
+<span class="fc bfc" id="L62" title="All 2 branches covered.">        if (existing.isEmpty()) {</span>
+<span class="fc" id="L63">            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(&quot;Does not exist&quot;);</span>
+        }
+
+<span class="fc" id="L66">        Expenditure exp = existing.get();</span>
+<span class="fc bfc" id="L67" title="All 2 branches covered.">        if (!exp.getUser().equals(authentication.getName())) {</span>
+<span class="fc" id="L68">            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(&quot;Forbidden&quot;);</span>
+        }
+
+<span class="fc" id="L71">        expenditureRepository.deleteById(id);</span>
+<span class="fc" id="L72">        return ResponseEntity.ok(&quot;Expenditure deleted&quot;);</span>
+    }
+
+
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity&lt;?&gt; getExpendituresByUser(Authentication authentication) {
+<span class="pc bpc" id="L78" title="1 of 4 branches missed.">        if (authentication!= null &amp;&amp; authentication.getName() != null) {</span>
+<span class="fc" id="L79">            List&lt;Expenditure&gt; data = expenditureRepository.findByUser(authentication.getName());</span>
+<span class="fc" id="L80">            return ResponseEntity.ok(data);</span>
+        }
+<span class="fc" id="L82">        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(&quot;Login First.&quot;);</span>
+    }
+}
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>MonthlyLimitController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Expense Tracker</a> &gt; <a href="index.source.html" class="el_package">com.expensetracker.limits</a> &gt; <span class="el_source">MonthlyLimitController.java</span></div><h1>MonthlyLimitController.java</h1><pre class="source lang-java linenums">package com.expensetracker.limits;
+
+import com.expensetracker.dto.MonthlySummaryResponse;
+import com.expensetracker.expenditure.Expenditure;
+import com.expensetracker.expenditure.ExpenditureRepository;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDateTime;
+import java.time.YearMonth;
+import java.util.List;
+
+@CrossOrigin(origins = &quot;http://localhost:8000&quot;)
+@RestController
+@RequestMapping(&quot;/api/expenditures/monthly&quot;)
+<span class="fc" id="L20">@RequiredArgsConstructor</span>
+<span class="fc" id="L21">@Slf4j</span>
+public class MonthlyLimitController {
+    private final MonthlyLimitRepository monthlyLimitRepository;
+    private final ExpenditureRepository expenditureRepository;
+
+    @GetMapping(&quot;/monthly-summary&quot;)
+    public ResponseEntity&lt;?&gt; getMonthlySummary(@RequestParam int year,
+                                               @RequestParam int month,
+                                               Authentication authentication) {
+<span class="pc bpc" id="L30" title="1 of 4 branches missed.">        if (authentication == null || authentication.getName() == null) {</span>
+<span class="fc" id="L31">            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(&quot;Login First.&quot;);</span>
+        }
+
+<span class="fc" id="L34">        YearMonth yearMonth = YearMonth.of(year, month);</span>
+<span class="fc" id="L35">        String username = authentication.getName();</span>
+
+<span class="fc" id="L37">        LocalDateTime start = yearMonth.atDay(1).atStartOfDay();</span>
+<span class="fc" id="L38">        LocalDateTime end = yearMonth.atEndOfMonth().atTime(23, 59, 59);</span>
+<span class="fc" id="L39">        List&lt;Expenditure&gt; monthlyExpenses = expenditureRepository.findByUserAndTimestampBetween(</span>
+                username, start, end);
+
+<span class="fc" id="L42">        double totalSpent = monthlyExpenses.stream()</span>
+<span class="fc" id="L43">                .mapToDouble(Expenditure::getAmount)</span>
+<span class="fc" id="L44">                .sum();</span>
+
+<span class="fc" id="L46">        MonthlyLimit monthlyLimit = monthlyLimitRepository.findByUsernameAndMonth(username, yearMonth.toString())</span>
+<span class="fc" id="L47">                .orElse(null);</span>
+
+<span class="fc" id="L49">        log.info(username);</span>
+
+<span class="fc" id="L51">        MonthlySummaryResponse response = new MonthlySummaryResponse();</span>
+<span class="fc" id="L52">        response.setMonth(yearMonth);</span>
+<span class="fc" id="L53">        response.setTotalSpent(totalSpent);</span>
+<span class="pc bpc" id="L54" title="1 of 2 branches missed.">        response.setLimitAmount(monthlyLimit != null ? monthlyLimit.getLimitAmount() : 0);</span>
+<span class="fc" id="L55">        response.setExpenses(monthlyExpenses);</span>
+
+<span class="fc" id="L57">        return ResponseEntity.ok(response);</span>
+    }
+
+    @PostMapping(&quot;/set-limit&quot;)
+    public ResponseEntity&lt;?&gt; setMonthlyLimit(@RequestParam String year,
+                                             @RequestParam String month,
+                                             @RequestParam double limit,
+                                             Authentication authentication) {
+<span class="pc bpc" id="L65" title="1 of 4 branches missed.">        if (authentication == null || authentication.getName() == null) {</span>
+<span class="fc" id="L66">            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(&quot;Login First.&quot;);</span>
+        }
+
+<span class="fc" id="L69">        String yearMonth = year + '-' + month;</span>
+<span class="fc" id="L70">        String username = authentication.getName();</span>
+
+<span class="fc" id="L72">        MonthlyLimit monthlyLimit = monthlyLimitRepository.findByUsernameAndMonth(username, yearMonth)</span>
+<span class="fc" id="L73">                .orElse(new MonthlyLimit());</span>
+
+<span class="fc" id="L75">        monthlyLimit.setUsername(username);</span>
+<span class="fc" id="L76">        monthlyLimit.setMonth(yearMonth);</span>
+<span class="fc" id="L77">        monthlyLimit.setLimitAmount(limit);</span>
+
+<span class="fc" id="L79">        monthlyLimitRepository.save(monthlyLimit);</span>
+
+<span class="fc" id="L81">        return ResponseEntity.ok(&quot;Monthly limit set successfully&quot;);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

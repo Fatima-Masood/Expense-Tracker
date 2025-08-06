@@ -41,8 +41,8 @@ class UserTest {
     void testEquals_NullAndDifferentClass() {
         User user = new User("1", "john", "123", "USER");
 
-        assertNotEquals(user, null);
-        assertNotEquals(user, "some string");
+        assertNotEquals(null, user);
+        assertNotEquals("some string", user);
     }
 
     @Test

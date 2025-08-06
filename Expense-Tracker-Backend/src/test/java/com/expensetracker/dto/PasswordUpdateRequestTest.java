@@ -11,7 +11,7 @@ class PasswordUpdateRequestTest {
     @Test
     void testEquals_SameObject() {
         PasswordUpdateRequest req = new PasswordUpdateRequest("old123", "new123");
-        assertEquals(req, req); // Reflexive
+        assertEquals(req, req);
     }
 
     @Test
@@ -69,7 +69,7 @@ class PasswordUpdateRequestTest {
     @Test
     void testEquals_NullAndDifferentType() {
         PasswordUpdateRequest req = new PasswordUpdateRequest("a", "b");
-        assertNotEquals(req, null);
-        assertNotEquals(req, "string");
+        assertNotEquals(null, req);
+        assertNotEquals("string", req);
     }
 }

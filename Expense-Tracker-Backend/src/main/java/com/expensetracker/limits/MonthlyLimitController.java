@@ -67,7 +67,6 @@ public class MonthlyLimitController {
         }
 
         String yearMonth = year + '-' + month;
-        log.info(yearMonth);
         String username = authentication.getName();
 
         MonthlyLimit monthlyLimit = monthlyLimitRepository.findByUsernameAndMonth(username, yearMonth)

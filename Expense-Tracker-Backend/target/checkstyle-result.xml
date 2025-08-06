@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <checkstyle version="9.3">
-<file name="C:\Users\sayyeda.fatima.masoo\Documents\Expense Tracker\Expense-Tracker-Backend\src\main\java\com\expensetracker\Application.java">
+<file name="C:\Users\sayyeda.fatima.masoo\Documents\Expense-Tracker\Expense-Tracker-Backend\src\main\java\com\expensetracker\Application.java">
 <error line="6" column="1" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocTypeCheck"/>
 <error line="9" column="5" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 4, expected level should be 2." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
 <error line="10" column="9" severity="warning" message="&apos;method def&apos; child has incorrect indentation level 8, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
 <error line="11" column="5" severity="warning" message="&apos;method def rcurly&apos; has incorrect indentation level 4, expected level should be 2." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
 </file>
-<file name="C:\Users\sayyeda.fatima.masoo\Documents\Expense Tracker\Expense-Tracker-Backend\src\main\java\com\expensetracker\config\JwtAuthFilter.java">
+<file name="C:\Users\sayyeda.fatima.masoo\Documents\Expense-Tracker\Expense-Tracker-Backend\src\main\java\com\expensetracker\config\JwtAuthFilter.java">
 <error line="23" column="1" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocTypeCheck"/>
 <error line="27" column="5" severity="warning" message="&apos;member def modifier&apos; has incorrect indentation level 4, expected level should be 2." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
 <error line="30" column="5" severity="warning" message="&apos;member def modifier&apos; has incorrect indentation level 4, expected level should be 2." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
@@ -39,7 +39,7 @@
 <error line="72" column="9" severity="warning" message="&apos;method def&apos; child has incorrect indentation level 8, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
 <error line="73" column="5" severity="warning" message="&apos;method def rcurly&apos; has incorrect indentation level 4, expected level should be 2." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
 </file>
-<file name="C:\Users\sayyeda.fatima.masoo\Documents\Expense Tracker\Expense-Tracker-Backend\src\main\java\com\expensetracker\config\SecurityConfig.java">
+<file name="C:\Users\sayyeda.fatima.masoo\Documents\Expense-Tracker\Expense-Tracker-Backend\src\main\java\com\expensetracker\config\SecurityConfig.java">
 <error line="28" column="47" severity="warning" message="Using the &apos;.*&apos; form of import should be avoided - org.springframework.security.oauth2.jwt.*." source="com.puppycrawl.tools.checkstyle.checks.imports.AvoidStarImportCheck"/>
 <error line="35" column="1" severity="warning" message="Extra separation in import group before &apos;javax.crypto.spec.SecretKeySpec&apos;" source="com.puppycrawl.tools.checkstyle.checks.imports.CustomImportOrderCheck"/>
 <error line="35" column="1" severity="warning" message="Wrong lexicographical order for &apos;javax.crypto.spec.SecretKeySpec&apos; import. Should be before &apos;org.springframework.web.cors.UrlBasedCorsConfigurationSource&apos;." source="com.puppycrawl.tools.checkstyle.checks.imports.CustomImportOrderCheck"/>
@@ -92,7 +92,7 @@
 <error line="136" column="9" severity="warning" message="&apos;method def&apos; child has incorrect indentation level 8, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
 <error line="137" column="5" severity="warning" message="&apos;method def rcurly&apos; has incorrect indentation level 4, expected level should be 2." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
 </file>
-<file name="C:\Users\sayyeda.fatima.masoo\Documents\Expense Tracker\Expense-Tracker-Backend\src\main\java\com\expensetracker\dto\MonthlySummaryResponse.java">
+<file name="C:\Users\sayyeda.fatima.masoo\Documents\Expense-Tracker\Expense-Tracker-Backend\src\main\java\com\expensetracker\dto\MonthlySummaryResponse.java">
 <error line="6" column="1" severity="warning" message="Extra separation in import group before &apos;java.time.YearMonth&apos;" source="com.puppycrawl.tools.checkstyle.checks.imports.CustomImportOrderCheck"/>
 <error line="6" column="1" severity="warning" message="Wrong lexicographical order for &apos;java.time.YearMonth&apos; import. Should be before &apos;lombok.Data&apos;." source="com.puppycrawl.tools.checkstyle.checks.imports.CustomImportOrderCheck"/>
 <error line="7" column="1" severity="warning" message="Wrong lexicographical order for &apos;java.util.List&apos; import. Should be before &apos;lombok.Data&apos;." source="com.puppycrawl.tools.checkstyle.checks.imports.CustomImportOrderCheck"/>
@@ -102,18 +102,18 @@
 <error line="13" column="5" severity="warning" message="&apos;member def modifier&apos; has incorrect indentation level 4, expected level should be 2." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
 <error line="14" column="5" severity="warning" message="&apos;member def modifier&apos; has incorrect indentation level 4, expected level should be 2." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
 </file>
-<file name="C:\Users\sayyeda.fatima.masoo\Documents\Expense Tracker\Expense-Tracker-Backend\src\main\java\com\expensetracker\dto\PasswordUpdateRequest.java">
+<file name="C:\Users\sayyeda.fatima.masoo\Documents\Expense-Tracker\Expense-Tracker-Backend\src\main\java\com\expensetracker\dto\PasswordUpdateRequest.java">
 <error line="7" column="1" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocTypeCheck"/>
 <error line="11" column="5" severity="warning" message="&apos;member def modifier&apos; has incorrect indentation level 4, expected level should be 2." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
 <error line="12" column="5" severity="warning" message="&apos;member def modifier&apos; has incorrect indentation level 4, expected level should be 2." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
 </file>
-<file name="C:\Users\sayyeda.fatima.masoo\Documents\Expense Tracker\Expense-Tracker-Backend\src\main\java\com\expensetracker\dto\UserDTO.java">
+<file name="C:\Users\sayyeda.fatima.masoo\Documents\Expense-Tracker\Expense-Tracker-Backend\src\main\java\com\expensetracker\dto\UserDTO.java">
 <error line="9" column="1" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocTypeCheck"/>
 <error line="13" column="14" severity="warning" message="Abbreviation in name &apos;UserDTO&apos; must contain no more than &apos;1&apos; consecutive capital letters." source="com.puppycrawl.tools.checkstyle.checks.naming.AbbreviationAsWordInNameCheck"/>
 <error line="14" column="5" severity="warning" message="&apos;member def modifier&apos; has incorrect indentation level 4, expected level should be 2." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
 <error line="15" column="5" severity="warning" message="&apos;member def modifier&apos; has incorrect indentation level 4, expected level should be 2." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
 </file>
-<file name="C:\Users\sayyeda.fatima.masoo\Documents\Expense Tracker\Expense-Tracker-Backend\src\main\java\com\expensetracker\expenditure\Expenditure.java">
+<file name="C:\Users\sayyeda.fatima.masoo\Documents\Expense-Tracker\Expense-Tracker-Backend\src\main\java\com\expensetracker\expenditure\Expenditure.java">
 <error line="3" column="14" severity="warning" message="Using the &apos;.*&apos; form of import should be avoided - lombok.*." source="com.puppycrawl.tools.checkstyle.checks.imports.AvoidStarImportCheck"/>
 <error line="7" column="1" severity="warning" message="Extra separation in import group before &apos;java.time.LocalDateTime&apos;" source="com.puppycrawl.tools.checkstyle.checks.imports.CustomImportOrderCheck"/>
 <error line="7" column="1" severity="warning" message="Wrong lexicographical order for &apos;java.time.LocalDateTime&apos; import. Should be before &apos;org.springframework.data.mongodb.core.mapping.Document&apos;." source="com.puppycrawl.tools.checkstyle.checks.imports.CustomImportOrderCheck"/>
@@ -124,7 +124,7 @@
 <error line="20" column="5" severity="warning" message="&apos;member def modifier&apos; has incorrect indentation level 4, expected level should be 2." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
 <error line="21" column="5" severity="warning" message="&apos;member def modifier&apos; has incorrect indentation level 4, expected level should be 2." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
 </file>
-<file name="C:\Users\sayyeda.fatima.masoo\Documents\Expense Tracker\Expense-Tracker-Backend\src\main\java\com\expensetracker\expenditure\ExpenditureController.java">
+<file name="C:\Users\sayyeda.fatima.masoo\Documents\Expense-Tracker\Expense-Tracker-Backend\src\main\java\com\expensetracker\expenditure\ExpenditureController.java">
 <error line="9" column="47" severity="warning" message="Using the &apos;.*&apos; form of import should be avoided - org.springframework.web.bind.annotation.*." source="com.puppycrawl.tools.checkstyle.checks.imports.AvoidStarImportCheck"/>
 <error line="11" column="1" severity="warning" message="Extra separation in import group before &apos;java.util.List&apos;" source="com.puppycrawl.tools.checkstyle.checks.imports.CustomImportOrderCheck"/>
 <error line="11" column="1" severity="warning" message="Wrong lexicographical order for &apos;java.util.List&apos; import. Should be before &apos;org.springframework.web.bind.annotation.*&apos;." source="com.puppycrawl.tools.checkstyle.checks.imports.CustomImportOrderCheck"/>
@@ -183,7 +183,7 @@
 <error line="82" column="9" severity="warning" message="&apos;method def&apos; child has incorrect indentation level 8, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
 <error line="83" column="5" severity="warning" message="&apos;method def rcurly&apos; has incorrect indentation level 4, expected level should be 2." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
 </file>
-<file name="C:\Users\sayyeda.fatima.masoo\Documents\Expense Tracker\Expense-Tracker-Backend\src\main\java\com\expensetracker\expenditure\ExpenditureRepository.java">
+<file name="C:\Users\sayyeda.fatima.masoo\Documents\Expense-Tracker\Expense-Tracker-Backend\src\main\java\com\expensetracker\expenditure\ExpenditureRepository.java">
 <error line="5" column="1" severity="warning" message="Extra separation in import group before &apos;java.time.LocalDateTime&apos;" source="com.puppycrawl.tools.checkstyle.checks.imports.CustomImportOrderCheck"/>
 <error line="5" column="1" severity="warning" message="Wrong lexicographical order for &apos;java.time.LocalDateTime&apos; import. Should be before &apos;org.springframework.data.mongodb.repository.MongoRepository&apos;." source="com.puppycrawl.tools.checkstyle.checks.imports.CustomImportOrderCheck"/>
 <error line="6" column="1" severity="warning" message="Wrong lexicographical order for &apos;java.util.List&apos; import. Should be before &apos;org.springframework.data.mongodb.repository.MongoRepository&apos;." source="com.puppycrawl.tools.checkstyle.checks.imports.CustomImportOrderCheck"/>
@@ -195,15 +195,15 @@
 <error line="11" column="5" severity="warning" message="&apos;METHOD_DEF&apos; should be separated from previous line." source="com.puppycrawl.tools.checkstyle.checks.whitespace.EmptyLineSeparatorCheck"/>
 <error line="11" column="5" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 4, expected level should be 2." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
 </file>
-<file name="C:\Users\sayyeda.fatima.masoo\Documents\Expense Tracker\Expense-Tracker-Backend\src\main\java\com\expensetracker\limits\MonthlyLimit.java">
+<file name="C:\Users\sayyeda.fatima.masoo\Documents\Expense-Tracker\Expense-Tracker-Backend\src\main\java\com\expensetracker\limits\MonthlyLimit.java">
 <error line="3" column="14" severity="warning" message="Using the &apos;.*&apos; form of import should be avoided - lombok.*." source="com.puppycrawl.tools.checkstyle.checks.imports.AvoidStarImportCheck"/>
-<error line="7" column="1" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocTypeCheck"/>
-<error line="13" column="5" severity="warning" message="&apos;member def modifier&apos; has incorrect indentation level 4, expected level should be 2." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="8" column="1" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocTypeCheck"/>
 <error line="15" column="5" severity="warning" message="&apos;member def modifier&apos; has incorrect indentation level 4, expected level should be 2." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
-<error line="16" column="5" severity="warning" message="&apos;member def modifier&apos; has incorrect indentation level 4, expected level should be 2." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
 <error line="17" column="5" severity="warning" message="&apos;member def modifier&apos; has incorrect indentation level 4, expected level should be 2." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="18" column="5" severity="warning" message="&apos;member def modifier&apos; has incorrect indentation level 4, expected level should be 2." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="19" column="5" severity="warning" message="&apos;member def modifier&apos; has incorrect indentation level 4, expected level should be 2." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
 </file>
-<file name="C:\Users\sayyeda.fatima.masoo\Documents\Expense Tracker\Expense-Tracker-Backend\src\main\java\com\expensetracker\limits\MonthlyLimitController.java">
+<file name="C:\Users\sayyeda.fatima.masoo\Documents\Expense-Tracker\Expense-Tracker-Backend\src\main\java\com\expensetracker\limits\MonthlyLimitController.java">
 <error line="11" column="47" severity="warning" message="Using the &apos;.*&apos; form of import should be avoided - org.springframework.web.bind.annotation.*." source="com.puppycrawl.tools.checkstyle.checks.imports.AvoidStarImportCheck"/>
 <error line="13" column="1" severity="warning" message="Extra separation in import group before &apos;java.time.LocalDateTime&apos;" source="com.puppycrawl.tools.checkstyle.checks.imports.CustomImportOrderCheck"/>
 <error line="13" column="1" severity="warning" message="Wrong lexicographical order for &apos;java.time.LocalDateTime&apos; import. Should be before &apos;org.springframework.web.bind.annotation.*&apos;." source="com.puppycrawl.tools.checkstyle.checks.imports.CustomImportOrderCheck"/>
@@ -241,22 +241,21 @@
 <error line="67" column="9" severity="warning" message="&apos;if rcurly&apos; has incorrect indentation level 8, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
 <error line="69" column="9" severity="warning" message="&apos;method def&apos; child has incorrect indentation level 8, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
 <error line="70" column="9" severity="warning" message="&apos;method def&apos; child has incorrect indentation level 8, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
-<error line="71" column="9" severity="warning" message="&apos;method def&apos; child has incorrect indentation level 8, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
-<error line="73" severity="warning" message="Line is longer than 100 characters (found 102)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
-<error line="73" column="9" severity="warning" message="&apos;method def&apos; child has incorrect indentation level 8, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="72" severity="warning" message="Line is longer than 100 characters (found 102)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="72" column="9" severity="warning" message="&apos;method def&apos; child has incorrect indentation level 8, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="75" column="9" severity="warning" message="&apos;method def&apos; child has incorrect indentation level 8, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
 <error line="76" column="9" severity="warning" message="&apos;method def&apos; child has incorrect indentation level 8, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
 <error line="77" column="9" severity="warning" message="&apos;method def&apos; child has incorrect indentation level 8, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
-<error line="78" column="9" severity="warning" message="&apos;method def&apos; child has incorrect indentation level 8, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
-<error line="80" column="9" severity="warning" message="&apos;method def&apos; child has incorrect indentation level 8, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
-<error line="82" column="9" severity="warning" message="&apos;method def&apos; child has incorrect indentation level 8, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
-<error line="83" column="5" severity="warning" message="&apos;method def rcurly&apos; has incorrect indentation level 4, expected level should be 2." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="79" column="9" severity="warning" message="&apos;method def&apos; child has incorrect indentation level 8, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="81" column="9" severity="warning" message="&apos;method def&apos; child has incorrect indentation level 8, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="82" column="5" severity="warning" message="&apos;method def rcurly&apos; has incorrect indentation level 4, expected level should be 2." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
 </file>
-<file name="C:\Users\sayyeda.fatima.masoo\Documents\Expense Tracker\Expense-Tracker-Backend\src\main\java\com\expensetracker\limits\MonthlyLimitRepository.java">
+<file name="C:\Users\sayyeda.fatima.masoo\Documents\Expense-Tracker\Expense-Tracker-Backend\src\main\java\com\expensetracker\limits\MonthlyLimitRepository.java">
 <error line="4" column="1" severity="warning" message="Wrong lexicographical order for &apos;java.util.Optional&apos; import. Should be before &apos;org.springframework.data.mongodb.repository.MongoRepository&apos;." source="com.puppycrawl.tools.checkstyle.checks.imports.CustomImportOrderCheck"/>
 <error line="6" column="1" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocTypeCheck"/>
 <error line="7" column="5" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 4, expected level should be 2." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
 </file>
-<file name="C:\Users\sayyeda.fatima.masoo\Documents\Expense Tracker\Expense-Tracker-Backend\src\main\java\com\expensetracker\user\User.java">
+<file name="C:\Users\sayyeda.fatima.masoo\Documents\Expense-Tracker\Expense-Tracker-Backend\src\main\java\com\expensetracker\user\User.java">
 <error line="3" column="14" severity="warning" message="Using the &apos;.*&apos; form of import should be avoided - lombok.*." source="com.puppycrawl.tools.checkstyle.checks.imports.AvoidStarImportCheck"/>
 <error line="7" column="1" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocTypeCheck"/>
 <error line="14" column="5" severity="warning" message="&apos;member def modifier&apos; has incorrect indentation level 4, expected level should be 2." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
@@ -264,7 +263,7 @@
 <error line="17" column="5" severity="warning" message="&apos;member def modifier&apos; has incorrect indentation level 4, expected level should be 2." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
 <error line="18" column="5" severity="warning" message="&apos;member def modifier&apos; has incorrect indentation level 4, expected level should be 2." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
 </file>
-<file name="C:\Users\sayyeda.fatima.masoo\Documents\Expense Tracker\Expense-Tracker-Backend\src\main\java\com\expensetracker\user\UserController.java">
+<file name="C:\Users\sayyeda.fatima.masoo\Documents\Expense-Tracker\Expense-Tracker-Backend\src\main\java\com\expensetracker\user\UserController.java">
 <error line="14" column="51" severity="warning" message="Using the &apos;.*&apos; form of import should be avoided - org.springframework.security.authentication.*." source="com.puppycrawl.tools.checkstyle.checks.imports.AvoidStarImportCheck"/>
 <error line="17" column="47" severity="warning" message="Using the &apos;.*&apos; form of import should be avoided - org.springframework.security.oauth2.jwt.*." source="com.puppycrawl.tools.checkstyle.checks.imports.AvoidStarImportCheck"/>
 <error line="18" column="47" severity="warning" message="Using the &apos;.*&apos; form of import should be avoided - org.springframework.web.bind.annotation.*." source="com.puppycrawl.tools.checkstyle.checks.imports.AvoidStarImportCheck"/>
@@ -347,7 +346,7 @@
 <error line="117" column="9" severity="warning" message="&apos;method def&apos; child has incorrect indentation level 8, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
 <error line="118" column="5" severity="warning" message="&apos;method def rcurly&apos; has incorrect indentation level 4, expected level should be 2." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
 </file>
-<file name="C:\Users\sayyeda.fatima.masoo\Documents\Expense Tracker\Expense-Tracker-Backend\src\main\java\com\expensetracker\user\UserRepository.java">
+<file name="C:\Users\sayyeda.fatima.masoo\Documents\Expense-Tracker\Expense-Tracker-Backend\src\main\java\com\expensetracker\user\UserRepository.java">
 <error line="5" column="1" severity="warning" message="Extra separation in import group before &apos;java.util.List&apos;" source="com.puppycrawl.tools.checkstyle.checks.imports.CustomImportOrderCheck"/>
 <error line="5" column="1" severity="warning" message="Wrong lexicographical order for &apos;java.util.List&apos; import. Should be before &apos;org.springframework.data.mongodb.repository.MongoRepository&apos;." source="com.puppycrawl.tools.checkstyle.checks.imports.CustomImportOrderCheck"/>
 <error line="6" column="1" severity="warning" message="Wrong lexicographical order for &apos;java.util.Optional&apos; import. Should be before &apos;org.springframework.data.mongodb.repository.MongoRepository&apos;." source="com.puppycrawl.tools.checkstyle.checks.imports.CustomImportOrderCheck"/>
@@ -356,7 +355,7 @@
 <error line="12" column="5" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 4, expected level should be 2." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
 <error line="14" column="5" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 4, expected level should be 2." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
 </file>
-<file name="C:\Users\sayyeda.fatima.masoo\Documents\Expense Tracker\Expense-Tracker-Backend\src\main\java\com\expensetracker\user\UserService.java">
+<file name="C:\Users\sayyeda.fatima.masoo\Documents\Expense-Tracker\Expense-Tracker-Backend\src\main\java\com\expensetracker\user\UserService.java">
 <error line="12" column="53" severity="warning" message="Using the &apos;.*&apos; form of import should be avoided - org.springframework.security.core.userdetails.*." source="com.puppycrawl.tools.checkstyle.checks.imports.AvoidStarImportCheck"/>
 <error line="15" column="47" severity="warning" message="Using the &apos;.*&apos; form of import should be avoided - org.springframework.security.oauth2.jwt.*." source="com.puppycrawl.tools.checkstyle.checks.imports.AvoidStarImportCheck"/>
 <error line="19" column="1" severity="warning" message="Extra separation in import group before &apos;java.time.Instant&apos;" source="com.puppycrawl.tools.checkstyle.checks.imports.CustomImportOrderCheck"/>

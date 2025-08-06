@@ -123,7 +123,7 @@ class ExpenditureTest {
     void testEquals_WithNullAndDifferentType() {
         Expenditure exp = new Expenditure("1", "john", "Rent", 500.0, LocalDateTime.now());
 
-        assertNotEquals(exp, null);
-        assertNotEquals(exp, "some string");
+        assertNotEquals(null, exp);
+        assertNotEquals("some string", exp);
     }
 }

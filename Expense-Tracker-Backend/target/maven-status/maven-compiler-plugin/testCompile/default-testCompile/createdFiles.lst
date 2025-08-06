@@ -1,0 +1,12 @@
+com\expensetracker\user\UserControllerTest.class
+com\expensetracker\expenditure\ExpenditureControllerTest.class
+com\expensetracker\expenditure\ExpenditureTest.class
+com\expensetracker\dto\MonthlySummaryResponseTest.class
+com\expensetracker\limits\MonthlyLimitControllerTest.class
+com\expensetracker\limits\MonthlyLimitTest.class
+com\expensetracker\user\UserServiceTest.class
+com\expensetracker\dto\PasswordUpdateRequestTest.class
+com\expensetracker\JwtAuthFilterTest.class
+com\expensetracker\user\UserTest.class
+com\expensetracker\ApplicationTest.class
+com\expensetracker\dto\UserDTOTest.class
