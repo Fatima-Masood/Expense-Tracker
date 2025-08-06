@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="386a1296-72b8-41c2-b293-90aaf2c8095b" name="Changes" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;Fatima-Masood&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/Fatima-Masood/Java-Springboot.git&quot;,
+    &quot;accountId&quot;: &quot;510a0be0-2242-4e0d-adce-f55eb647c9b3&quot;
+  }
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 6
+}</component>
+  <component name="ProjectId" id="30UOTDgfWpEEC41zKi6B7hJvvHX" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.Application.executor": "Run",
+    "JUnit.APITests.executor": "Run",
+    "JUnit.AddExpenditureTests.executor": "Run",
+    "JUnit.All in Expense-Tracker (1).executor": "Run",
+    "JUnit.All in Expense-Tracker (2).executor": "Run",
+    "JUnit.All in Expense-Tracker (3).executor": "Run",
+    "JUnit.All in Expense-Tracker.executor": "Run",
+    "JUnit.ApplicationTest.executor": "Run",
+    "JUnit.AuthTest.executor": "Run",
+    "JUnit.CollectionsAndDTOsTest.executor": "Run",
+    "JUnit.DTOsTest.executor": "Run",
+    "JUnit.DTOsTest.testGettersSettersEqualsHashCodeToString.executor": "Run",
+    "JUnit.ExpenditureApiTests.executor": "Run",
+    "JUnit.ExpenditureControllerTest.executor": "Run",
+    "JUnit.ExpenditureControllerTest.testGetExpendituresByUser.executor": "Run",
+    "JUnit.ExpenditureControllerTest.testUpdateExpenditure_Failure.executor": "Run",
+    "JUnit.ExpenditureTest.executor": "Run",
+    "JUnit.JwtAuthFilterTest.executor": "Run",
+    "JUnit.PasswordUpdateRequestTest.executor": "Run",
+    "JUnit.UserApiTests.executor": "Run",
+    "JUnit.UserApiTests.testUpdatePasswordSuccess.executor": "Run",
+    "JUnit.UserControllerTest.executor": "Run",
+    "JUnit.UserControllerTest.testUpdatePassword_userNotFound.executor": "Run",
+    "JUnit.UserDTOTest.executor": "Run",
+    "JUnit.UserServiceTest.executor": "Run",
+    "JUnit.UserTest.executor": "Run",
+    "Maven.Expense-Tracker [clean].executor": "Run",
+    "Maven.Expense-Tracker [compile].executor": "Run",
+    "Maven.Expense-Tracker [install].executor": "Run",
+    "Maven.Expense-Tracker [org.apache.maven.plugins:maven-clean-plugin:3.3.2:clean].executor": "Run",
+    "Maven.Expense-Tracker [org.apache.maven.plugins:maven-install-plugin:3.1.2:install].executor": "Run",
+    "Maven.Expense-Tracker [site].executor": "Run",
+    "Maven.Expense-Tracker [test].executor": "Run",
+    "Maven.Expense-Tracker [verify].executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "main",
+    "last_directory_selection": "C:/Users/sayyeda.fatima.masoo/Documents/Java-Springboot/Expense-Tracker/src/test/java",
+    "last_opened_file_path": "C:/Users/sayyeda.fatima.masoo/Documents/Expense Tracker/Expense-Tracker-Backend",
+    "settings.editor.selected.configurable": "project.propVCSSupport.DirectoryMappings"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="com.expensetracker.user" />
+      <recent name="com.expensetracker.expenditure" />
+      <recent name="com.expensetracker" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="All in Expense-Tracker (2)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Expense-Tracker" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="TEST_OBJECT" value="package" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="All in Expense-Tracker (3)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Expense-Tracker" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="TEST_OBJECT" value="package" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CollectionsAndDTOsTest.testGettersSettersEqualsHashCodeToString" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Expense-Tracker" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.expensetracker.expenditure.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.expensetracker" />
+      <option name="MAIN_CLASS_NAME" value="com.expensetracker.CollectionsAndDTOsTest" />
+      <option name="METHOD_NAME" value="testGettersSettersEqualsHashCodeToString" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ExpenditureControllerTest.testUpdateExpenditure_Failure" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Expense-Tracker" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.expensetracker.expenditure.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.expensetracker.expenditure" />
+      <option name="MAIN_CLASS_NAME" value="com.expensetracker.expenditure.ExpenditureControllerTest" />
+      <option name="METHOD_NAME" value="testUpdateExpenditure_Failure" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="UserControllerTest.testUpdatePassword_userNotFound" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Expense-Tracker" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.expensetracker.expenditure.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.expensetracker.user" />
+      <option name="MAIN_CLASS_NAME" value="com.expensetracker.user.UserControllerTest" />
+      <option name="METHOD_NAME" value="testUpdatePassword_userNotFound" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.CollectionsAndDTOsTest.testGettersSettersEqualsHashCodeToString" />
+        <item itemvalue="JUnit.UserControllerTest.testUpdatePassword_userNotFound" />
+        <item itemvalue="JUnit.ExpenditureControllerTest.testUpdateExpenditure_Failure" />
+        <item itemvalue="JUnit.All in Expense-Tracker (3)" />
+        <item itemvalue="JUnit.All in Expense-Tracker (2)" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="386a1296-72b8-41c2-b293-90aaf2c8095b" name="Changes" comment="" />
+      <created>1753678690382</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1753678690382</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/Expense_Tracker$All_in_Expense_Tracker.ic" NAME="All in Expense-Tracker Coverage Results" MODIFIED="1754040410949" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true" />
+  </component>
+</project>
