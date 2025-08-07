@@ -6,7 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="386a1296-72b8-41c2-b293-90aaf2c8095b" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/expensetracker/expenditure/ExpenditureController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/expensetracker/expenditure/ExpenditureController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/expensetracker/limits/MonthlyLimitController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/expensetracker/limits/MonthlyLimitController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/expensetracker/user/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/expensetracker/user/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/expensetracker/limits/MonthlyLimitTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/expensetracker/limits/MonthlyLimitTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,12 +32,12 @@
     &quot;assignee&quot;: &quot;Fatima-Masood&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/Fatima-Masood/Java-Springboot.git&quot;,
-    &quot;accountId&quot;: &quot;510a0be0-2242-4e0d-adce-f55eb647c9b3&quot;
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/Fatima-Masood/Expense-Tracker.git",
+    "accountId": "510a0be0-2242-4e0d-adce-f55eb647c9b3"
   }
-}</component>
+}]]></component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 6
 }</component>
@@ -43,55 +46,55 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.Application.executor": "Run",
-    "JUnit.APITests.executor": "Run",
-    "JUnit.AddExpenditureTests.executor": "Run",
-    "JUnit.All in Expense-Tracker (1).executor": "Run",
-    "JUnit.All in Expense-Tracker (2).executor": "Run",
-    "JUnit.All in Expense-Tracker (3).executor": "Run",
-    "JUnit.All in Expense-Tracker.executor": "Run",
-    "JUnit.ApplicationTest.executor": "Run",
-    "JUnit.AuthTest.executor": "Run",
-    "JUnit.CollectionsAndDTOsTest.executor": "Run",
-    "JUnit.DTOsTest.executor": "Run",
-    "JUnit.DTOsTest.testGettersSettersEqualsHashCodeToString.executor": "Run",
-    "JUnit.ExpenditureApiTests.executor": "Run",
-    "JUnit.ExpenditureControllerTest.executor": "Run",
-    "JUnit.ExpenditureControllerTest.testGetExpendituresByUser.executor": "Run",
-    "JUnit.ExpenditureControllerTest.testUpdateExpenditure_Failure.executor": "Run",
-    "JUnit.ExpenditureTest.executor": "Run",
-    "JUnit.JwtAuthFilterTest.executor": "Run",
-    "JUnit.MonthlyLimitControllerTest.executor": "Run",
-    "JUnit.MonthlyLimitTest.executor": "Run",
-    "JUnit.MonthlySummaryResponseTest.executor": "Run",
-    "JUnit.PasswordUpdateRequestTest.executor": "Run",
-    "JUnit.UserApiTests.executor": "Run",
-    "JUnit.UserApiTests.testUpdatePasswordSuccess.executor": "Run",
-    "JUnit.UserControllerTest.executor": "Run",
-    "JUnit.UserControllerTest.testUpdatePassword_userNotFound.executor": "Run",
-    "JUnit.UserDTOTest.executor": "Run",
-    "JUnit.UserServiceTest.executor": "Run",
-    "JUnit.UserTest.executor": "Run",
-    "Maven.Expense-Tracker [clean].executor": "Run",
-    "Maven.Expense-Tracker [compile].executor": "Run",
-    "Maven.Expense-Tracker [install].executor": "Run",
-    "Maven.Expense-Tracker [org.apache.maven.plugins:maven-clean-plugin:3.3.2:clean].executor": "Run",
-    "Maven.Expense-Tracker [org.apache.maven.plugins:maven-install-plugin:3.1.2:install].executor": "Run",
-    "Maven.Expense-Tracker [site].executor": "Run",
-    "Maven.Expense-Tracker [test].executor": "Run",
-    "Maven.Expense-Tracker [verify].executor": "Run",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "main",
-    "last_directory_selection": "C:/Users/sayyeda.fatima.masoo/Documents/Java-Springboot/Expense-Tracker/src/test/java",
-    "last_opened_file_path": "C:/Users/sayyeda.fatima.masoo/Documents/Expense-Tracker/Expense-Tracker-Backend",
-    "settings.editor.selected.configurable": "project.propVCSSupport.DirectoryMappings"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.Application.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.APITests.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.AddExpenditureTests.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.All in Expense-Tracker (1).executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.All in Expense-Tracker (2).executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.All in Expense-Tracker (3).executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.All in Expense-Tracker.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.ApplicationTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.AuthTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.CollectionsAndDTOsTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.DTOsTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.DTOsTest.testGettersSettersEqualsHashCodeToString.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.ExpenditureApiTests.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.ExpenditureControllerTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.ExpenditureControllerTest.testGetExpendituresByUser.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.ExpenditureControllerTest.testUpdateExpenditure_Failure.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.ExpenditureTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.JwtAuthFilterTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.MonthlyLimitControllerTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.MonthlyLimitTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.MonthlySummaryResponseTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.PasswordUpdateRequestTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.UserApiTests.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.UserApiTests.testUpdatePasswordSuccess.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.UserControllerTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.UserControllerTest.testUpdatePassword_userNotFound.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.UserDTOTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.UserServiceTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.UserTest.executor&quot;: &quot;Run&quot;,
+    &quot;Maven.Expense-Tracker [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.Expense-Tracker [compile].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.Expense-Tracker [install].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.Expense-Tracker [org.apache.maven.plugins:maven-clean-plugin:3.3.2:clean].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.Expense-Tracker [org.apache.maven.plugins:maven-install-plugin:3.1.2:install].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.Expense-Tracker [site].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.Expense-Tracker [test].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.Expense-Tracker [verify].executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_directory_selection&quot;: &quot;C:/Users/sayyeda.fatima.masoo/Documents/Java-Springboot/Expense-Tracker/src/test/java&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/sayyeda.fatima.masoo/Documents/Expense-Tracker/Expense-Tracker-Backend&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;project.propVCSSupport.DirectoryMappings&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="com.expensetracker.user" />

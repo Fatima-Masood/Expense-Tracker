@@ -1,8 +1,6 @@
 package com.expensetracker.limits;
 
-import com.mongodb.DuplicateKeyException;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import static org.junit.jupiter.api.Assertions.*;
 
