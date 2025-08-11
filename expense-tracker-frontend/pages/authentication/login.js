@@ -1,50 +1,49 @@
-import { useState } from "react";
 import { useRouter } from "next/router";
+import { useEffect, useState, useContext } from "react";
+import Cookies from "js-cookie";
 
 export default function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const router = useRouter();
+  const [csrfToken, setCsrfToken] = useState("");
+
+  useEffect(() => {
+      const csrfToken = Cookies.get("XSRF-TOKEN");
+      setCsrfToken(csrfToken);
+      console.log("csrfToken:", csrfToken);
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    
     try {
-      console.log("SERVER_URI:", process.env.SERVER_URI);
-      const res = await fetch(`${process.env.SERVER_URI}/api/users/login`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URI}/api/users/login`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          username: username,
-          password: password,
-        }),
+        credentials: "include",   
+        headers: { 
+          "Content-Type": "application/json",
+          "X-XSRF-TOKEN": csrfToken
+        },
+        body: JSON.stringify({ username, password }),
       });
 
-      let data;
-      try {
-        if (!res.ok) {
-          const text = await res.text();
-          alert(`Login failed: ${res.status} - ${text}`);
-        }
-        data = await res.json();
-        console.log("Response data:", data);
-      } catch (err) {
-        console.error("Failed to parse JSON:", err);
-        alert("Invalid server response: " + err.message);
-        return;
-      }
-
       if (res.ok) {
+        const data = await res.json();
+        console.log(data.access_token );
+        console.log("access_token:", Cookies.get("access_token"));
+        Cookies.set("token", data.access_token, {sameSite: "Strict",});
+
         router.push("/user/dashboard");
       } else {
-        alert(data.message || "Login failed");
-      }
-    } catch (err) {
-      alert("Something went wrong. Please try again.");
-      console.error("Login error:", err);
-    }
-  };
+        alert("Login Failed, please check your credentials.");
+      } 
+    } catch (error) {
+      console.error("Login error:", error);
+      alert("An error occurred while logging in. Please try again.");
+    } 
 
+  };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">

@@ -14,11 +14,11 @@ import java.time.LocalDateTime;
 import java.time.YearMonth;
 import java.util.List;
 
-@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/api/expenditures/monthly")
 @RequiredArgsConstructor
 @Slf4j
+@CrossOrigin(origins = "http://localhost:3000")
 public class MonthlyLimitController {
     private final MonthlyLimitRepository monthlyLimitRepository;
     private final ExpenditureRepository expenditureRepository;

@@ -19,11 +19,11 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
-@CrossOrigin(origins = &quot;http://localhost:8000&quot;)
 @RestController
 @RequestMapping(&quot;/api/users&quot;)
-<span class="fc" id="L25">@RequiredArgsConstructor</span>
-<span class="fc" id="L26">@Slf4j</span>
+<span class="fc" id="L24">@RequiredArgsConstructor</span>
+<span class="fc" id="L25">@Slf4j</span>
+@CrossOrigin(origins = &quot;http://localhost:3000&quot;)
 public class UserController {
 
     private final UserRepository userRepository;
@@ -107,14 +107,13 @@ public class UserController {
 
     @GetMapping(&quot;/logout&quot;)
     public ResponseEntity&lt;?&gt; logout(HttpServletResponse response) {
-<span class="fc" id="L110">        Cookie cookie = new Cookie(&quot;access_token&quot;, &quot;&quot;);</span>
-<span class="fc" id="L111">        cookie.setHttpOnly(true);</span>
-<span class="fc" id="L112">        cookie.setSecure(true);</span>
-<span class="fc" id="L113">        cookie.setPath(&quot;/&quot;);</span>
-<span class="fc" id="L114">        cookie.setMaxAge(0);</span>
-
-<span class="fc" id="L116">        response.addCookie(cookie);</span>
-<span class="fc" id="L117">        return ResponseEntity.ok().body(&quot;{\&quot;message\&quot;:\&quot;Logged out successfully\&quot;}&quot;);</span>
+<span class="fc" id="L110">        userService.deleteCookie(response, &quot;access_token&quot;);</span>
+<span class="fc" id="L111">        userService.deleteCookie(response, &quot;token&quot;);</span>
+<span class="fc" id="L112">        userService.deleteCookie(response, &quot;XSRF-TOKEN&quot;);</span>
+<span class="fc" id="L113">        userService.deleteCookie(response, &quot;csrfToken&quot;);</span>
+<span class="fc" id="L114">        userService.deleteCookie(response, &quot;csrf_token&quot;);</span>
+<span class="fc" id="L115">        userService.deleteCookie(response, &quot;next-auth.session-token&quot;);</span>
+<span class="fc" id="L116">        return ResponseEntity.ok(&quot;{\&quot;message\&quot;:\&quot;Logged out successfully\&quot;}&quot;);</span>
     }
 
 }

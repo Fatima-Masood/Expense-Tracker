@@ -72,6 +72,13 @@ import org.springframework.web.filter.OncePerRequestFilter;
 <span class="fc" id="L72">        filterChain.doFilter(request, response);</span>
 <span class="fc" id="L73">    }</span>
 
+    @Override
+    protected boolean shouldNotFilter(HttpServletRequest request) {
+<span class="nc" id="L77">        String path = request.getServletPath();</span>
+<span class="nc bnc" id="L78" title="All 4 branches missed.">        return path.equals(&quot;/api/users/login&quot;) || path.equals(&quot;/api/users/register&quot;);</span>
+    }
+
+
 }
 
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

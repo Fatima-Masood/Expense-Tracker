@@ -14,11 +14,11 @@ import java.time.LocalDateTime;
 import java.time.YearMonth;
 import java.util.List;
 
-@CrossOrigin(origins = &quot;http://localhost:8000&quot;)
 @RestController
 @RequestMapping(&quot;/api/expenditures/monthly&quot;)
-<span class="fc" id="L20">@RequiredArgsConstructor</span>
-<span class="fc" id="L21">@Slf4j</span>
+<span class="fc" id="L19">@RequiredArgsConstructor</span>
+<span class="fc" id="L20">@Slf4j</span>
+@CrossOrigin(origins = &quot;http://localhost:3000&quot;)
 public class MonthlyLimitController {
     private final MonthlyLimitRepository monthlyLimitRepository;
     private final ExpenditureRepository expenditureRepository;
@@ -46,15 +46,13 @@ public class MonthlyLimitController {
 <span class="fc" id="L46">        MonthlyLimit monthlyLimit = monthlyLimitRepository.findByUsernameAndMonth(username, yearMonth.toString())</span>
 <span class="fc" id="L47">                .orElse(null);</span>
 
-<span class="fc" id="L49">        log.info(username);</span>
+<span class="fc" id="L49">        MonthlySummaryResponse response = new MonthlySummaryResponse();</span>
+<span class="fc" id="L50">        response.setMonth(yearMonth);</span>
+<span class="fc" id="L51">        response.setTotalSpent(totalSpent);</span>
+<span class="pc bpc" id="L52" title="1 of 2 branches missed.">        response.setLimitAmount(monthlyLimit != null ? monthlyLimit.getLimitAmount() : 0);</span>
+<span class="fc" id="L53">        response.setExpenses(monthlyExpenses);</span>
 
-<span class="fc" id="L51">        MonthlySummaryResponse response = new MonthlySummaryResponse();</span>
-<span class="fc" id="L52">        response.setMonth(yearMonth);</span>
-<span class="fc" id="L53">        response.setTotalSpent(totalSpent);</span>
-<span class="pc bpc" id="L54" title="1 of 2 branches missed.">        response.setLimitAmount(monthlyLimit != null ? monthlyLimit.getLimitAmount() : 0);</span>
-<span class="fc" id="L55">        response.setExpenses(monthlyExpenses);</span>
-
-<span class="fc" id="L57">        return ResponseEntity.ok(response);</span>
+<span class="fc" id="L55">        return ResponseEntity.ok(response);</span>
     }
 
     @PostMapping(&quot;/set-limit&quot;)
@@ -62,23 +60,23 @@ public class MonthlyLimitController {
                                              @RequestParam String month,
                                              @RequestParam double limit,
                                              Authentication authentication) {
-<span class="pc bpc" id="L65" title="1 of 4 branches missed.">        if (authentication == null || authentication.getName() == null) {</span>
-<span class="fc" id="L66">            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(&quot;Login First.&quot;);</span>
+<span class="pc bpc" id="L63" title="1 of 4 branches missed.">        if (authentication == null || authentication.getName() == null) {</span>
+<span class="fc" id="L64">            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(&quot;Login First.&quot;);</span>
         }
 
-<span class="fc" id="L69">        String yearMonth = year + '-' + month;</span>
-<span class="fc" id="L70">        String username = authentication.getName();</span>
+<span class="fc" id="L67">        String yearMonth = year + '-' + month;</span>
+<span class="fc" id="L68">        String username = authentication.getName();</span>
 
-<span class="fc" id="L72">        MonthlyLimit monthlyLimit = monthlyLimitRepository.findByUsernameAndMonth(username, yearMonth)</span>
-<span class="fc" id="L73">                .orElse(new MonthlyLimit());</span>
+<span class="fc" id="L70">        MonthlyLimit monthlyLimit = monthlyLimitRepository.findByUsernameAndMonth(username, yearMonth)</span>
+<span class="fc" id="L71">                .orElse(new MonthlyLimit());</span>
 
-<span class="fc" id="L75">        monthlyLimit.setUsername(username);</span>
-<span class="fc" id="L76">        monthlyLimit.setMonth(yearMonth);</span>
-<span class="fc" id="L77">        monthlyLimit.setLimitAmount(limit);</span>
+<span class="fc" id="L73">        monthlyLimit.setUsername(username);</span>
+<span class="fc" id="L74">        monthlyLimit.setMonth(yearMonth);</span>
+<span class="fc" id="L75">        monthlyLimit.setLimitAmount(limit);</span>
 
-<span class="fc" id="L79">        monthlyLimitRepository.save(monthlyLimit);</span>
+<span class="fc" id="L77">        monthlyLimitRepository.save(monthlyLimit);</span>
 
-<span class="fc" id="L81">        return ResponseEntity.ok(&quot;Monthly limit set successfully&quot;);</span>
+<span class="fc" id="L79">        return ResponseEntity.ok(&quot;Monthly limit set successfully&quot;);</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

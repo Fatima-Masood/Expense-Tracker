@@ -1,29 +1,31 @@
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import { useContext } from "react";
+import { AppContext } from "../_app";
+import ChangePassword from "@/components/login/ChangePassword";
+import Cookies from "js-cookie";
 
 export default function Dashboard() {
     const router = useRouter();
-    const [token, setToken] = useState(null);
     const [user, setUser] = useState(null);
-    const [oldPassword, setOldPassword] = useState("");
-    const [newPassword, setNewPassword] = useState("");
     const [message, setMessage] = useState("");
     const [error, setError] = useState("");
+    const [token, setToken] = useState("");
+    const [csrfToken, setCsrfToken] = useState("");
 
     useEffect(() => {
-        const getCookie = (name) => {
-            const value = `; ${document.cookie}`;
-            const parts = value.split(`; ${name}=`);
-            if (parts.length === 2) return parts.pop().split(';').shift();
-            return null;
-        };
+        const token = Cookies.get("token");
+        const csrfToken = Cookies.get("XSRF-TOKEN");
+        setCsrfToken(csrfToken);
+        setToken(token);
+        console.log("csrfToken:", csrfToken);
+        console.log("token:", token); 
 
-        const tok = getCookie("access_token");
-        setToken(tok);
-        console.log("Token from cookie:", tok);
-    });       
+    }, []);
 
-    useEffect(() => {          
+    useEffect(() => {    
+        setMessage("");
+        setError("");  
         if (!token) {
             setError("No token found");
             return;
@@ -31,10 +33,12 @@ export default function Dashboard() {
 
         const fetchUser = async () => {
             try {
-                const res = await fetch(`${process.env.SERVER_URI}/api/users`, {
+                const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URI}/api/users`, {
                     method: "GET",
+                    credentials: "include",
                     headers: {
-                        "Authorization": `Bearer ${token}`,
+                        Authorization: `Bearer ${token}`,
+                        "X-XSRF-TOKEN": csrfToken
                     },
                 });
 
@@ -52,49 +56,23 @@ export default function Dashboard() {
         };
 
         fetchUser();
-    }, [token, process.env.SERVER_URI]);
+    }, [process.env.NEXT_PUBLIC_SERVER_URI, token, csrfToken, error]);
 
-
-    const handlePasswordChange = async (e) => {
-        e.preventDefault();
-        setMessage("");
-        setError("");
-
-        try {
-            const res = await fetch(`${process.env.SERVER_URI}/api/users`, {
-                method: "PUT",
-                headers: {
-                    "Content-Type": "application/json",
-                    Authorization: `Bearer ${token}`,
-                },
-                body: JSON.stringify({
-                    oldPassword,
-                    newPassword,
-                }),
-            });
-
-            const text = await res.text();
-            if (!res.ok) throw new Error(text);
-
-            setMessage("Password updated successfully.");
-            setOldPassword("");
-            setNewPassword("");
-        } catch (err) {
-            setError(err.message || "Password update failed.");
-        }
-    };
+    
 
     const handleDeleteUser = async () => {
+        
         setMessage("");
         setError("");
 
         if (!confirm("Are you sure you want to delete your account? This cannot be undone.")) return;
 
         try {
-            const res = await fetch(`${process.env.SERVER_URI}/api/users`, {
+            const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URI}/api/users`, {
                 method: "DELETE",
                 headers: {
                     Authorization: `Bearer ${token}`,
+                    "X-XSRF-TOKEN": csrfToken
                 },
             });
 
@@ -126,31 +104,14 @@ export default function Dashboard() {
                 </div>
             )}
 
-            <form onSubmit={handlePasswordChange} className="mb-8 bg-white shadow rounded p-4">
-                <h2 className="text-xl font-semibold mb-4">Change Password</h2>
-                <input
-                    type="password"
-                    placeholder="Old Password"
-                    value={oldPassword}
-                    onChange={(e) => setOldPassword(e.target.value)}
-                    className="w-full px-4 py-2 mb-4 border rounded"
-                    required
+            {token && csrfToken &&
+                <ChangePassword
+                    csrfToken={csrfToken}
+                    token={token}
+                    setError={setError} 
+                    setMessage={setMessage}
                 />
-                <input
-                    type="password"
-                    placeholder="New Password"
-                    value={newPassword}
-                    onChange={(e) => setNewPassword(e.target.value)}
-                    className="w-full px-4 py-2 mb-4 border rounded"
-                    required
-                />
-                <button
-                    type="submit"
-                    className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition"
-                >
-                    Update Password
-                </button>
-            </form>
+            }
 
             <div className="bg-white shadow rounded p-4">
                 <button

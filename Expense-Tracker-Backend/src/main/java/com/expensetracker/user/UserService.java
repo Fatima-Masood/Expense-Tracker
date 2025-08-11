@@ -21,7 +21,6 @@ import java.util.Collections;
 
 @Service
 @RequiredArgsConstructor
-@CrossOrigin(origins = "http://localhost:8000")
 public class UserService implements UserDetailsService {
 
     private final UserRepository userRepository;
@@ -101,6 +100,7 @@ public class UserService implements UserDetailsService {
         cookie.setHttpOnly(true);
         cookie.setSecure(false);
         cookie.setPath("/");
+        cookie.setDomain("localhost");
         cookie.setMaxAge(expirySeconds);
         response.addCookie(cookie);
 
@@ -117,5 +117,14 @@ public class UserService implements UserDetailsService {
 
         JwsHeader jwsHeader = JwsHeader.with(MacAlgorithm.HS256).build();
         return jwtEncoder.encode(JwtEncoderParameters.from(jwsHeader, claims));
+    }
+    public void deleteCookie(HttpServletResponse response, String name) {
+        Cookie cookie = new Cookie(name, "");
+        cookie.setHttpOnly(true);
+        cookie.setSecure(false);
+        cookie.setPath("/");
+        cookie.setDomain("/");
+        cookie.setMaxAge(0);
+        response.addCookie(cookie);
     }
 }

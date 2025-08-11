@@ -19,11 +19,11 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
-@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/api/users")
 @RequiredArgsConstructor
 @Slf4j
+@CrossOrigin(origins = "http://localhost:3000")
 public class UserController {
 
     private final UserRepository userRepository;
@@ -107,14 +107,13 @@ public class UserController {
 
     @GetMapping("/logout")
     public ResponseEntity<?> logout(HttpServletResponse response) {
-        Cookie cookie = new Cookie("access_token", "");
-        cookie.setHttpOnly(true);
-        cookie.setSecure(true);
-        cookie.setPath("/");
-        cookie.setMaxAge(0);
-
-        response.addCookie(cookie);
-        return ResponseEntity.ok().body("{\"message\":\"Logged out successfully\"}");
+        userService.deleteCookie(response, "access_token");
+        userService.deleteCookie(response, "token");
+        userService.deleteCookie(response, "XSRF-TOKEN");
+        userService.deleteCookie(response, "csrfToken");
+        userService.deleteCookie(response, "csrf_token");
+        userService.deleteCookie(response, "next-auth.session-token");
+        return ResponseEntity.ok("{\"message\":\"Logged out successfully\"}");
     }
 
 }
