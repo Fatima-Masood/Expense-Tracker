@@ -20,11 +20,12 @@ import java.time.Instant;
 import java.util.Collections;
 
 @Service
-@RequiredArgsConstructor
 public class UserService implements UserDetailsService {
 
-    private final UserRepository userRepository;
-    private final PasswordEncoder passwordEncoder;
+    @Autowired
+    private UserRepository userRepository;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     public User authenticate(String username, String rawPassword) {
         User user = userRepository.findByUsername(username)
@@ -98,7 +99,7 @@ public class UserService implements UserDetailsService {
 
         Cookie cookie = new Cookie("access_token", jwt.getTokenValue());
         cookie.setHttpOnly(true);
-        cookie.setSecure(false);
+        cookie.setSecure(true);
         cookie.setPath("/");
         cookie.setDomain("localhost");
         cookie.setMaxAge(expirySeconds);
@@ -121,10 +122,11 @@ public class UserService implements UserDetailsService {
     public void deleteCookie(HttpServletResponse response, String name) {
         Cookie cookie = new Cookie(name, "");
         cookie.setHttpOnly(true);
-        cookie.setSecure(false);
+        cookie.setSecure(true);
         cookie.setPath("/");
         cookie.setDomain("/");
         cookie.setMaxAge(0);
         response.addCookie(cookie);
     }
+
 }

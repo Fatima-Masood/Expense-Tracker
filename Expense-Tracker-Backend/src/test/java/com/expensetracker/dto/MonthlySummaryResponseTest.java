@@ -4,7 +4,7 @@ import com.expensetracker.expenditure.Expenditure;
 import org.junit.jupiter.api.Test;
 
 import java.time.YearMonth;
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -12,106 +12,62 @@ import static org.junit.jupiter.api.Assertions.*;
 class MonthlySummaryResponseTest {
 
     @Test
-    void testEquals_SameValues() {
+    void testAllArgsConstructorAndDefensiveCopy() {
         YearMonth month = YearMonth.of(2023, 8);
-        List<Expenditure> expenses = Collections.emptyList();
+        List<Expenditure> expenses = new ArrayList<>();
+        expenses.add(new Expenditure("1", "user1", "Groceries", 100.0, null));
 
-        MonthlySummaryResponse r1 = new MonthlySummaryResponse();
-        r1.setMonth(month);
-        r1.setLimitAmount(1000.0);
-        r1.setTotalSpent(800.0);
-        r1.setExpenses(expenses);
+        MonthlySummaryResponse response =
+                new MonthlySummaryResponse(month, 2000.0, 500.0, expenses);
 
-        MonthlySummaryResponse r2 = new MonthlySummaryResponse();
-        r2.setMonth(month);
-        r2.setLimitAmount(1000.0);
-        r2.setTotalSpent(800.0);
-        r2.setExpenses(expenses);
+        assertEquals(month, response.getMonth());
+        assertEquals(2000.0, response.getLimitAmount());
+        assertEquals(500.0, response.getTotalSpent());
+        assertEquals(expenses, response.getExpenses());
+        assertNotSame(expenses, response.getExpenses(), "Should store a copy, not same reference");
 
-        assertEquals(r1, r2);
-        assertEquals(r1.hashCode(), r2.hashCode());
+        expenses.add(new Expenditure("2", "user2", "Rent", 500.0, null));
+        assertEquals(1, response.getExpenses().size());
     }
 
     @Test
-    void testEquals_NullFields() {
-        MonthlySummaryResponse r1 = new MonthlySummaryResponse();
-        MonthlySummaryResponse r2 = new MonthlySummaryResponse();
+    void testSetExpensesWithNull() {
+        MonthlySummaryResponse response =
+                new MonthlySummaryResponse(YearMonth.of(2023, 1), 1000.0, 100.0, null);
 
-        assertEquals(r1, r2);
-        assertEquals(r1.hashCode(), r2.hashCode());
+        assertNull(response.getExpenses(), "Expenses should be null when initialized with null");
+
+        response.setExpenses(null);
+        assertNull(response.getExpenses(), "Setting expenses to null should keep it null");
     }
 
     @Test
-    void testEquals_SameReference() {
-        MonthlySummaryResponse r1 = new MonthlySummaryResponse();
-        assertEquals(r1, r1);
-        assertEquals(r1.hashCode(), r1.hashCode());
+    void testGetExpensesDefensiveCopy() {
+        List<Expenditure> expenses = new ArrayList<>();
+        expenses.add(new Expenditure("1", "user1", "Utilities", 150.0, null));
+
+        MonthlySummaryResponse response =
+                new MonthlySummaryResponse(YearMonth.of(2023, 5), 3000.0, 1000.0, expenses);
+
+        List<Expenditure> retrieved = response.getExpenses();
+        assertEquals(expenses, retrieved);
+        assertNotSame(expenses, retrieved, "Returned list should be a new copy");
+
+        retrieved.add(new Expenditure("2", "user2", "Transport", 50.0, null));
+        assertEquals(1, response.getExpenses().size());
     }
 
     @Test
-    void testEquals_DifferentMonth() {
-        MonthlySummaryResponse r1 = new MonthlySummaryResponse();
-        r1.setMonth(YearMonth.of(2023, 8));
+    void testBasicSettersAndGetters() {
+        MonthlySummaryResponse response = new MonthlySummaryResponse(
+                YearMonth.of(2023, 6), 5000.0, 2000.0, new ArrayList<>());
 
-        MonthlySummaryResponse r2 = new MonthlySummaryResponse();
-        r2.setMonth(YearMonth.of(2024, 8));
+        response.setLimitAmount(6000.0);
+        response.setTotalSpent(2500.0);
+        response.setMonth(YearMonth.of(2024, 1));
 
-        assertNotEquals(r1, r2);
-        assertNotEquals(r1.hashCode(), r2.hashCode());
+        assertEquals(6000.0, response.getLimitAmount());
+        assertEquals(2500.0, response.getTotalSpent());
+        assertEquals(YearMonth.of(2024, 1), response.getMonth());
     }
-
-    @Test
-    void testEquals_DifferentYear() {
-        MonthlySummaryResponse r1 = new MonthlySummaryResponse();
-        r1.setMonth(YearMonth.of(2023, 8));
-
-        MonthlySummaryResponse r2 = new MonthlySummaryResponse();
-        r2.setMonth(YearMonth.of(2024, 8));
-
-        assertNotEquals(r1, r2);
-        assertNotEquals(r1.hashCode(), r2.hashCode());
-    }
-
-    @Test
-    void testNotEquals_Null() {
-        MonthlySummaryResponse r1 = new MonthlySummaryResponse();
-        assertNotEquals(null, r1);
-        assertNotEquals((Integer) null, r1.hashCode());
-    }
-
-    @Test
-    void testNotEquals_DifferentType() {
-        MonthlySummaryResponse r1 = new MonthlySummaryResponse();
-        assertNotEquals("Not a MonthlySummaryResponse", r1);
-    }
-
-    @Test
-    void testEquals_AllFieldsDifferent() {
-        MonthlySummaryResponse r1 = new MonthlySummaryResponse();
-        r1.setMonth(YearMonth.of(2023, 8));
-        r1.setLimitAmount(1000.0);
-        r1.setTotalSpent(800.0);
-        r1.setExpenses(Collections.emptyList());
-
-        MonthlySummaryResponse r2 = new MonthlySummaryResponse();
-        r2.setMonth(YearMonth.of(2024, 9));
-        r2.setLimitAmount(500.0);
-        r2.setTotalSpent(400.0);
-        r2.setExpenses(List.of(new Expenditure()));
-
-        assertNotEquals(r1, r2);
-        assertNotEquals(r1.hashCode(), r2.hashCode());
-    }
-
-    @Test
-    void testNotEquals_DifferentLimitAmount() {
-        MonthlySummaryResponse r1 = new MonthlySummaryResponse();
-        r1.setLimitAmount(1000.0);
-
-        MonthlySummaryResponse r2 = new MonthlySummaryResponse();
-        r2.setLimitAmount(999.0);
-
-        assertNotEquals(r1, r2);
-    }
-
 }

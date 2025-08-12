@@ -1,5 +1,6 @@
 package com.expensetracker.config;
 
+import com.expensetracker.expenditure.ExpenditureRepository;
 import com.expensetracker.user.User;
 import com.expensetracker.user.UserService;
 import com.nimbusds.jose.jwk.source.ImmutableSecret;
@@ -61,7 +62,6 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http,
                                                    UserService userService,
                                                    JwtEncoder jwtEncoder,
-                                                   JwtAuthFilter jwtAuthFilter,
                                                    AuthenticationManager authenticationManager) throws Exception {
 
         http
@@ -74,18 +74,12 @@ public class SecurityConfig {
 
                             Jwt jwt = userService.setJwt(user, jwtEncoder);
                             String json = userService.setJwtAndResponse(user, jwtEncoder, response, jwt);
-
-                            response.sendRedirect("http://localhost:8000/oauth2/success.html?token=" + jwt);
                         }))
 
-                .oauth2ResourceServer(oauth2 -> oauth2
-                        .jwt(Customizer.withDefaults())
-                )
+                .oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()))
 
                 .sessionManagement(config ->
                 config.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-
-                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
 
                 .authorizeHttpRequests(config -> config
                 .requestMatchers(

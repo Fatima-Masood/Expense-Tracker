@@ -1,6 +1,5 @@
 package com.expensetracker.limits;
 
-import com.expensetracker.config.JwtAuthFilter;
 import com.expensetracker.expenditure.Expenditure;
 import com.expensetracker.expenditure.ExpenditureRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -9,9 +8,9 @@ import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.jwt.JwtDecoder;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.time.LocalDateTime;
@@ -31,22 +30,19 @@ class MonthlyLimitControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
-    @MockBean
+    @MockitoBean
     private MonthlyLimitRepository monthlyLimitRepository;
 
-    @MockBean
+    @MockitoBean
     private ExpenditureRepository expenditureRepository;
 
-    @MockBean
+    @MockitoBean
     private Authentication authentication;
-
-    @MockBean
-    private JwtAuthFilter jwtAuthFilter;
 
     @Autowired
     private ObjectMapper objectMapper;
 
-    @MockBean
+    @MockitoBean
     private JwtDecoder jwtDecoder;
 
     @Test

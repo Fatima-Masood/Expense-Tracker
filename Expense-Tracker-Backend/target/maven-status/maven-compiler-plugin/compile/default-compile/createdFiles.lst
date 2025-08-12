@@ -7,13 +7,13 @@ com\expensetracker\user\User.class
 com\expensetracker\dto\PasswordUpdateRequest.class
 com\expensetracker\limits\MonthlyLimit$MonthlyLimitBuilder.class
 com\expensetracker\config\SecurityConfig.class
+com\expensetracker\dto\ExpenditureDTO.class
 com\expensetracker\limits\MonthlyLimitRepository.class
 com\expensetracker\user\User$UserBuilder.class
 com\expensetracker\Application.class
 com\expensetracker\limits\MonthlyLimitController.class
 com\expensetracker\user\UserController.class
 com\expensetracker\user\UserService.class
-com\expensetracker\config\JwtAuthFilter.class
 com\expensetracker\expenditure\ExpenditureRepository.class
 com\expensetracker\expenditure\ExpenditureController.class
 com\expensetracker\dto\MonthlySummaryResponse.class

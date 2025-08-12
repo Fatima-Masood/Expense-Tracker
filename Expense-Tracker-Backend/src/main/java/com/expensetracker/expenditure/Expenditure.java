@@ -19,4 +19,16 @@ public class Expenditure {
     private String title;
     private double amount = 0;
     private LocalDateTime timestamp = LocalDateTime.now();
+
+    public Expenditure(Expenditure expenditure) {
+        if (expenditure != null) {
+            this.id = expenditure.id;
+            this.user = expenditure.user;
+            this.title = expenditure.title;
+            this.amount = expenditure.amount;
+            this.timestamp = expenditure.timestamp;
+        }
+    }
+
+
 }

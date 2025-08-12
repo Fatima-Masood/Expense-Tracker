@@ -1,16 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>MonthlySummaryResponse.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Expense Tracker</a> &gt; <a href="index.source.html" class="el_package">com.expensetracker.dto</a> &gt; <span class="el_source">MonthlySummaryResponse.java</span></div><h1>MonthlySummaryResponse.java</h1><pre class="source lang-java linenums">package com.expensetracker.dto;
 
 import com.expensetracker.expenditure.Expenditure;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.time.YearMonth;
+import java.util.ArrayList;
 import java.util.List;
 
-<span class="pc bpc" id="L9" title="6 of 26 branches missed.">@Data</span>
+@Getter
+@Setter
 public class MonthlySummaryResponse {
-<span class="fc" id="L11">    private YearMonth month;</span>
-<span class="fc" id="L12">    private double limitAmount;</span>
-<span class="fc" id="L13">    private double totalSpent;</span>
-<span class="fc" id="L14">    private List&lt;Expenditure&gt; expenses;</span>
+    private YearMonth month;
+    private double limitAmount;
+    private double totalSpent;
+<span class="fc" id="L17">    private List&lt;Expenditure&gt; expenses = new ArrayList&lt;&gt;();</span>
+
+<span class="fc" id="L19">    public MonthlySummaryResponse(YearMonth month, double v, double v1, List&lt;Expenditure&gt; expenses) {</span>
+<span class="fc" id="L20">        setMonth(month);</span>
+<span class="fc" id="L21">        setLimitAmount(v);</span>
+<span class="fc" id="L22">        setTotalSpent(v1);</span>
+<span class="fc" id="L23">        setExpenses(expenses);</span>
+<span class="fc" id="L24">    }</span>
+
+    public void setExpenses(List&lt;Expenditure&gt; expenses) {
+<span class="fc bfc" id="L27" title="All 2 branches covered.">        this.expenses = expenses == null ? null : new ArrayList&lt;&gt;(expenses);</span>
+<span class="fc" id="L28">    }</span>
+
+    public List&lt;Expenditure&gt; getExpenses() {
+<span class="fc bfc" id="L31" title="All 2 branches covered.">        return expenses == null ? null : new ArrayList&lt;&gt;(expenses);</span>
+    }
 }
-</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.13.202504020838</span></div></body></html>

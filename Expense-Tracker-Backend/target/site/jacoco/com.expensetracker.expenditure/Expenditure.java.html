@@ -6,18 +6,30 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
 
-<span class="pc bpc" id="L9" title="6 of 40 branches missed.">@Data</span>
-<span class="pc" id="L10">@Builder</span>
-<span class="fc" id="L11">@NoArgsConstructor</span>
-<span class="fc" id="L12">@AllArgsConstructor</span>
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Document(collection = &quot;expenditure&quot;)
 public class Expenditure {
 
     @Id
-<span class="fc" id="L17">    private String id;</span>
-<span class="fc" id="L18">    private String user;</span>
-<span class="fc" id="L19">    private String title;</span>
-<span class="fc" id="L20">    private double amount = 0;</span>
-<span class="fc" id="L21">    private LocalDateTime timestamp = LocalDateTime.now();</span>
+    private String id;
+    private String user;
+    private String title;
+<span class="nc" id="L20">    private double amount = 0;</span>
+<span class="nc" id="L21">    private LocalDateTime timestamp = LocalDateTime.now();</span>
+
+<span class="nc" id="L23">    public Expenditure(Expenditure expenditure) {</span>
+<span class="nc bnc" id="L24" title="All 2 branches missed.">        if (expenditure != null) {</span>
+<span class="nc" id="L25">            this.id = expenditure.id;</span>
+<span class="nc" id="L26">            this.user = expenditure.user;</span>
+<span class="nc" id="L27">            this.title = expenditure.title;</span>
+<span class="nc" id="L28">            this.amount = expenditure.amount;</span>
+<span class="nc" id="L29">            this.timestamp = expenditure.timestamp;</span>
+        }
+<span class="nc" id="L31">    }</span>
+
+
 }
-</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.13.202504020838</span></div></body></html>

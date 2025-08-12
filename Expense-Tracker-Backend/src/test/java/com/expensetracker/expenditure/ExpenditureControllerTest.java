@@ -1,6 +1,5 @@
 package com.expensetracker.expenditure;
 
-import com.expensetracker.config.JwtAuthFilter;
 import com.expensetracker.user.UserRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
@@ -10,11 +9,11 @@ import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.TestingAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
@@ -24,7 +23,6 @@ import java.util.Optional;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
-import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -36,25 +34,22 @@ class ExpenditureControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
-    @MockBean
+    @MockitoBean
     private UserRepository userRepository;
 
-    @MockBean
+    @MockitoBean
     private ExpenditureRepository expenditureRepository;
 
     @Autowired
     private ObjectMapper objectMapper;
 
-    @MockBean
-    private JwtAuthFilter jwtAuthFilter;
-
-    @MockBean
+    @MockitoBean
     private AuthenticationManager authenticationManager;
 
-    @MockBean
+    @MockitoBean
     private Authentication authentication;
 
-    private String mockUsername = "john";
+    private final String mockUsername = "john";
 
 
     @BeforeEach
@@ -135,6 +130,8 @@ class ExpenditureControllerTest {
         exp.setUser("other_user");
         exp.setTitle("Test");
         exp.setAmount(50);
+
+        Mockito.when(expenditureRepository.findById("1")).thenReturn(Optional.of(exp));
 
         mockMvc.perform(put("/api/expenditures/1")
                         .principal(authentication)

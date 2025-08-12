@@ -3,8 +3,8 @@ package com.expensetracker.limits;
 import com.expensetracker.dto.MonthlySummaryResponse;
 import com.expensetracker.expenditure.Expenditure;
 import com.expensetracker.expenditure.ExpenditureRepository;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -16,12 +16,13 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/expenditures/monthly")
-@RequiredArgsConstructor
 @Slf4j
 @CrossOrigin(origins = "http://localhost:3000")
 public class MonthlyLimitController {
-    private final MonthlyLimitRepository monthlyLimitRepository;
-    private final ExpenditureRepository expenditureRepository;
+    @Autowired
+    private MonthlyLimitRepository monthlyLimitRepository;
+    @Autowired
+    private ExpenditureRepository expenditureRepository;
 
     @GetMapping("/monthly-summary")
     public ResponseEntity<?> getMonthlySummary(@RequestParam int year,
@@ -46,11 +47,9 @@ public class MonthlyLimitController {
         MonthlyLimit monthlyLimit = monthlyLimitRepository.findByUsernameAndMonth(username, yearMonth.toString())
                 .orElse(null);
 
-        MonthlySummaryResponse response = new MonthlySummaryResponse();
-        response.setMonth(yearMonth);
-        response.setTotalSpent(totalSpent);
-        response.setLimitAmount(monthlyLimit != null ? monthlyLimit.getLimitAmount() : 0);
-        response.setExpenses(monthlyExpenses);
+        MonthlySummaryResponse response = new MonthlySummaryResponse(yearMonth,
+                                                monthlyLimit != null ? monthlyLimit.getLimitAmount() : 0,
+                                                totalSpent, monthlyExpenses);
 
         return ResponseEntity.ok(response);
     }

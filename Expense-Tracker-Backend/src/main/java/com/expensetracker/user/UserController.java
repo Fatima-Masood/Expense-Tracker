@@ -12,28 +12,33 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.*;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.jwt.*;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Objects;
 import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/users")
-@RequiredArgsConstructor
 @Slf4j
 @CrossOrigin(origins = "http://localhost:3000")
 public class UserController {
 
-    private final UserRepository userRepository;
-    private final ExpenditureRepository expenditureRepository;
-    private final PasswordEncoder passwordEncoder;
     @Autowired
-    private final AuthenticationManager authenticationManager;
+    private UserRepository userRepository;
+    @Autowired
+    private  ExpenditureRepository expenditureRepository;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+    @Autowired
+    private AuthenticationManager authenticationManager;
     @Autowired
     private JwtEncoder jwtEncoder;
-    private final UserService userService;
+    @Autowired
+    private UserService userService;
 
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody UserDTO userDTO,
@@ -47,20 +52,28 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody User user,
+    public ResponseEntity<?> login(@RequestBody UserDTO loginRequest,
                                    HttpServletResponse response) {
         try {
-            String tokenResponse;
-            if (user.getUsername() != null && user.getPassword() != null) {
-                tokenResponse = userService.loginUser(user, response, authenticationManager, jwtEncoder);
+            if (loginRequest.getUsername() != null && loginRequest.getPassword() != null) {
+                User user = new User ();
+                user.setUsername(loginRequest.getUsername());
+                user.setPassword(loginRequest.getPassword());
+                String tokenResponse = userService.loginUser(
+                        user,
+                        response,
+                        authenticationManager,
+                        jwtEncoder
+                );
+                return ResponseEntity.status(HttpStatus.OK).body(tokenResponse);
             } else {
                 return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Incomplete credentials");
             }
-            return ResponseEntity.status(HttpStatus.OK).body(tokenResponse);
         } catch (BadCredentialsException e) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Invalid credentials");
         }
     }
+
 
     @DeleteMapping
     public ResponseEntity<String> deleteUser(HttpServletRequest request) {
@@ -77,14 +90,11 @@ public class UserController {
     }
 
     @GetMapping
-    public ResponseEntity<User> getUser(HttpServletRequest request) {
-        String username = SecurityContextHolder.getContext().getAuthentication().getName();
-
-        Optional<User> optionalUser = userRepository.findByUsername(username);
-        if (optionalUser.isEmpty()) return ResponseEntity.notFound().build();
-
-        User user = optionalUser.get();
-        return ResponseEntity.ok(user);
+    public ResponseEntity<String> getUser(HttpServletRequest request, Authentication authentication) {
+        if (authentication != null) {
+            return ResponseEntity.ok(authentication.getName());
+        }
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Login First");
     }
 
     @PutMapping

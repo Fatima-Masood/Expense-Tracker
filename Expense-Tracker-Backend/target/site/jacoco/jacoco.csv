@@ -1,17 +1,10 @@
 GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
-Expense Tracker,com.expensetracker.user,User,14,200,9,29,0,8,9,25,0,15
-Expense Tracker,com.expensetracker.user,User.UserBuilder,10,35,0,0,0,1,1,6,1,6
-Expense Tracker,com.expensetracker.user,UserService,30,222,2,4,8,52,4,10,2,9
-Expense Tracker,com.expensetracker.user,UserController,6,209,2,14,2,38,2,14,0,8
-Expense Tracker,com.expensetracker,Application,0,8,0,0,0,3,0,2,0,2
-Expense Tracker,com.expensetracker.dto,UserDTO,0,26,0,0,0,5,0,6,0,6
-Expense Tracker,com.expensetracker.dto,PasswordUpdateRequest,8,116,5,17,0,5,5,16,0,10
-Expense Tracker,com.expensetracker.dto,MonthlySummaryResponse,22,159,6,20,0,5,7,19,1,12
-Expense Tracker,com.expensetracker.limits,MonthlyLimit.MonthlyLimitBuilder,10,35,0,0,0,1,1,6,1,6
-Expense Tracker,com.expensetracker.limits,MonthlyLimit,4,202,5,27,0,8,5,26,0,15
-Expense Tracker,com.expensetracker.limits,MonthlyLimitController,1,133,3,7,0,31,3,6,0,4
-Expense Tracker,com.expensetracker.config,JwtAuthFilter,17,87,6,6,2,25,5,5,1,3
-Expense Tracker,com.expensetracker.config,SecurityConfig,32,183,0,0,7,34,1,14,1,14
-Expense Tracker,com.expensetracker.expenditure,ExpenditureController,5,135,3,15,1,29,3,12,0,6
-Expense Tracker,com.expensetracker.expenditure,Expenditure.ExpenditureBuilder,13,42,0,0,0,1,1,7,1,7
-Expense Tracker,com.expensetracker.expenditure,Expenditure,4,258,6,34,0,9,6,31,0,17
+Expense Tracker,com.expensetracker.user,UserService,30,216,2,4,8,52,4,10,2,9
+Expense Tracker,com.expensetracker.user,UserController,6,194,2,14,2,39,2,14,0,8
+Expense Tracker,com.expensetracker,Application,5,3,0,0,2,1,1,1,1,1
+Expense Tracker,com.expensetracker.dto,MonthlySummaryResponse,0,42,0,4,0,10,0,5,0,3
+Expense Tracker,com.expensetracker.dto,ExpenditureDTO,0,3,0,0,0,1,0,1,0,1
+Expense Tracker,com.expensetracker.limits,MonthlyLimitController,1,119,3,7,0,28,3,6,0,4
+Expense Tracker,com.expensetracker.config,SecurityConfig,207,0,0,0,38,0,15,0,15,0
+Expense Tracker,com.expensetracker.expenditure,ExpenditureController,5,144,3,15,1,32,3,12,0,6
+Expense Tracker,com.expensetracker.expenditure,Expenditure,31,0,2,0,10,0,2,0,1,0

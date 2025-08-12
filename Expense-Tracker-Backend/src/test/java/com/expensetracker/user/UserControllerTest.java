@@ -1,6 +1,5 @@
 package com.expensetracker.user;
 
-import com.expensetracker.config.JwtAuthFilter;
 import com.expensetracker.dto.PasswordUpdateRequest;
 import com.expensetracker.dto.UserDTO;
 import com.expensetracker.expenditure.ExpenditureRepository;
@@ -10,12 +9,14 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.TestingAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.jwt.JwtEncoder;
 import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
@@ -27,7 +28,6 @@ import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
-import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -45,26 +45,23 @@ public class UserControllerTest {
     @Autowired
     private ObjectMapper objectMapper;
 
-    @MockBean
+    @MockitoBean
     private UserRepository userRepository;
 
-    @MockBean
+    @MockitoBean
     private ExpenditureRepository expenditureRepository;
 
-    @MockBean
+    @MockitoBean
     private PasswordEncoder passwordEncoder;
 
-    @MockBean
+    @MockitoBean
     private AuthenticationManager authenticationManager;
 
-    @MockBean
+    @MockitoBean
     private UserService userService;
 
-    @MockBean
+    @MockitoBean
     private JwtEncoder jwtEncoder;
-
-    @MockBean
-    private JwtAuthFilter jwtAuthFilter;
 
     //-------------------
     //---REGISTER USER---
@@ -226,25 +223,19 @@ public class UserControllerTest {
     //-----GET USER------
     //-------------------
     @Test
-    @WithMockUser(username = "john")
     void testGetUser_success() throws Exception {
-        User user = new User();
-        user.setUsername("john");
-
-        when(userRepository.findByUsername("john")).thenReturn(Optional.of(user));
-
-        mockMvc.perform(MockMvcRequestBuilders.get("/api/users"))
+        Authentication authentication = new TestingAuthenticationToken("john", null);
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/users")
+                        .principal(authentication))
                 .andExpect(status().isOk())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.username").value("john"));
+                .andExpect(MockMvcResultMatchers.content().string("john"));
     }
 
     @Test
-    @WithMockUser(username = "unknown")
-    void testGetUser_notFound() throws Exception {
-        when(userRepository.findByUsername("unknown")).thenReturn(Optional.empty());
-
+    void testGetUser_forbidden() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.get("/api/users"))
-                .andExpect(status().isNotFound());
+                .andExpect(status().isForbidden())
+                .andExpect(MockMvcResultMatchers.content().string("Login First"));
     }
 
     //-------------------
