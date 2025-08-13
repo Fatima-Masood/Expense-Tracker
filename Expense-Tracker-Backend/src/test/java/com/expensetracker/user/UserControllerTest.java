@@ -55,9 +55,6 @@ public class UserControllerTest {
     private PasswordEncoder passwordEncoder;
 
     @MockitoBean
-    private AuthenticationManager authenticationManager;
-
-    @MockitoBean
     private UserService userService;
 
     @MockitoBean
@@ -73,7 +70,7 @@ public class UserControllerTest {
         userDTO.setPassword("password123");
         String token = "mock-jwt-token";
 
-        when(userService.register(eq("john"), eq("password123"), any(), eq(authenticationManager), eq(jwtEncoder)))
+        when(userService.register(eq("john"), eq("password123"), any(), eq(jwtEncoder) ))
                 .thenReturn(token);
 
         mockMvc.perform(post("/api/users/register")
@@ -89,7 +86,7 @@ public class UserControllerTest {
         UserDTO userDTO = new UserDTO(null, "password123");
         String token = "mock-jwt-token";
 
-        when(userService.register(eq(userDTO.getUsername()), eq(userDTO.getPassword()), any(), eq(authenticationManager), eq(jwtEncoder)))
+        when(userService.register(eq(userDTO.getUsername()), eq(userDTO.getPassword()), any(), eq(jwtEncoder)))
                 .thenReturn(token);
 
         mockMvc.perform(post("/api/users/register")
@@ -109,7 +106,7 @@ public class UserControllerTest {
         user.setUsername("john");
         user.setPassword("password");
 
-        when(userService.loginUser(eq(user), any(), eq(authenticationManager), eq(jwtEncoder)))
+        when(userService.loginUser(eq("john"), eq("password"), any(), eq(jwtEncoder)))
                 .thenReturn("mock-token");
 
         mockMvc.perform(post("/api/users/login")
@@ -247,6 +244,4 @@ public class UserControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(content().string("{\"message\":\"Logged out successfully\"}"));
     }
-
-
 }

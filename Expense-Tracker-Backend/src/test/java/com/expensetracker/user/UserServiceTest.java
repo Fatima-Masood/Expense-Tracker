@@ -1,6 +1,7 @@
 package com.expensetracker.user;
 
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.*;
@@ -28,7 +29,6 @@ class UserServiceTest {
     private JwtEncoder jwtEncoder;
     @Mock
     private HttpServletResponse response;
-
     @InjectMocks
     private UserService userService;
 
@@ -81,7 +81,7 @@ class UserServiceTest {
         when(userRepository.save(any(User.class))).thenAnswer(i -> i.getArgument(0));
         when(authenticationManager.authenticate(any())).thenReturn(mock(Authentication.class));
 
-        User newUser = userService.OAuthSignUp("oauthuser", authenticationManager);
+        User newUser = userService.OAuthSignUp("oauthuser");
         assertEquals("oauthuser", newUser.getUsername());
     }
 
@@ -96,7 +96,7 @@ class UserServiceTest {
 
         when(jwtEncoder.encode(any())).thenReturn(jwt);
 
-        String json = userService.register("newuser", "securepass", response, authenticationManager, jwtEncoder);
+        String json = userService.register("newuser", "securepass", response, jwtEncoder);
         assertTrue(json.contains("access_token"));
     }
 
@@ -107,7 +107,7 @@ class UserServiceTest {
         when(jwt.getTokenValue()).thenReturn("abc123");
         when(jwtEncoder.encode(any())).thenReturn(jwt);
 
-        String token = userService.loginUser(sampleUser, response, authenticationManager, jwtEncoder);
+        String token = userService.loginUser(sampleUser.getUsername(), sampleUser.getPassword(), response, jwtEncoder);
         assertTrue(token.contains("access_token"));
     }
 
@@ -116,18 +116,17 @@ class UserServiceTest {
         Jwt jwt = mock(Jwt.class);
         when(jwt.getTokenValue()).thenReturn("tok123");
 
-        String json = userService.setJwtAndResponse(sampleUser, jwtEncoder, response, jwt);
+        String json = userService.setJwtAndResponse(response, jwt);
         assertEquals("{\"access_token\":\"tok123\", \"expires_in\":3600}", json);
     }
 
     @Test
     void testSetJwt_CreatesToken() {
-        JwtEncoder encoder = mock(JwtEncoder.class);
         Jwt mockJwt = mock(Jwt.class);
         when(mockJwt.getTokenValue()).thenReturn("jwtToken");
-        when(encoder.encode(any())).thenReturn(mockJwt);
+        when(jwtEncoder.encode(any())).thenReturn(mockJwt);
 
-        Jwt jwt = userService.setJwt(sampleUser, encoder);
+        Jwt jwt = userService.setJwt(sampleUser.getUsername(), jwtEncoder);
         assertEquals("jwtToken", jwt.getTokenValue());
     }
 }

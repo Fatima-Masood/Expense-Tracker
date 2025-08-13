@@ -2,19 +2,19 @@ package com.expensetracker.user;
 
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.*;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.jose.jws.MacAlgorithm;
 import org.springframework.security.oauth2.jwt.*;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.CrossOrigin;
 
 import java.time.Instant;
 import java.util.Collections;
@@ -26,6 +26,8 @@ public class UserService implements UserDetailsService {
     private UserRepository userRepository;
     @Autowired
     private PasswordEncoder passwordEncoder;
+    @Autowired
+    private AuthenticationManager authenticationManager;
 
     public User authenticate(String username, String rawPassword) {
         User user = userRepository.findByUsername(username)
@@ -50,7 +52,7 @@ public class UserService implements UserDetailsService {
                 .build();
     }
 
-    public User OAuthSignUp(String username, AuthenticationManager authenticationManager) {
+    public User OAuthSignUp(String username) {
         User user = new User();
         user.setUsername(username);
         user.setPassword(passwordEncoder.encode(username));
@@ -68,7 +70,6 @@ public class UserService implements UserDetailsService {
 
     public String register(String username, String password,
                            HttpServletResponse response,
-                           AuthenticationManager authenticationManager,
                            JwtEncoder jwtEncoder) {
         User user = new User();
         user.setUsername(username);
@@ -78,23 +79,22 @@ public class UserService implements UserDetailsService {
             userRepository.save(user);
         }
         user.setPassword(password);
-        return loginUser(user, response, authenticationManager, jwtEncoder);
+        return loginUser(username, password, response, jwtEncoder);
     }
 
-    public String loginUser(User user, HttpServletResponse response,
-                            AuthenticationManager authenticationManager,
+    public String loginUser(String username, String password,
+                            HttpServletResponse response,
                             JwtEncoder jwtEncoder){
         Authentication auth = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword()));
+                new UsernamePasswordAuthenticationToken(username, password));
         SecurityContextHolder.getContext().setAuthentication(auth);
 
-        Jwt jwt = setJwt(user, jwtEncoder);
-        String json = setJwtAndResponse(user, jwtEncoder, response, jwt);
+        Jwt jwt = setJwt(username, jwtEncoder);
+        String json = setJwtAndResponse(response, jwt);
         return json;
     }
 
-    public String setJwtAndResponse(User user, JwtEncoder jwtEncoder,
-                                    HttpServletResponse response, Jwt jwt) {
+    public String setJwtAndResponse(HttpServletResponse response, Jwt jwt) {
         int expirySeconds = 3600;
 
         Cookie cookie = new Cookie("access_token", jwt.getTokenValue());
@@ -108,11 +108,11 @@ public class UserService implements UserDetailsService {
         return String.format("{\"access_token\":\"%s\", \"expires_in\":%d}", jwt.getTokenValue(), expirySeconds);
     }
 
-    public Jwt setJwt(User user, JwtEncoder jwtEncoder) {
+    public Jwt setJwt(String username, JwtEncoder jwtEncoder) {
         int expirySeconds = 3600;
 
         JwtClaimsSet claims = JwtClaimsSet.builder()
-                .subject(user.getUsername())
+                .subject(username)
                 .expiresAt(Instant.now().plusSeconds(expirySeconds))
                 .build();
 

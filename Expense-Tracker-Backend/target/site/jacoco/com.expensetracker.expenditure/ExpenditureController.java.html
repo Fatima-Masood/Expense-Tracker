@@ -12,11 +12,10 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
-@CrossOrigin(origins = &quot;http://localhost:3000&quot;)
 @RestController
 @RequestMapping(&quot;/api/expenditures&quot;)
-<span class="fc" id="L18">@Slf4j</span>
-<span class="fc" id="L19">public class ExpenditureController {</span>
+<span class="fc" id="L17">@Slf4j</span>
+<span class="fc" id="L18">public class ExpenditureController {</span>
     @Autowired
     private ExpenditureRepository expenditureRepository;
 
@@ -25,20 +24,20 @@ import java.util.Optional;
             @RequestBody ExpenditureDTO request,
             Authentication authentication) {
 
-<span class="pc bpc" id="L28" title="1 of 4 branches missed.">        if (request.getTitle() == null || request.getAmount() == 0) {</span>
-<span class="fc" id="L29">            return ResponseEntity.status(HttpStatus.NO_CONTENT).body(&quot;incomplete content&quot;);</span>
+<span class="pc bpc" id="L27" title="1 of 4 branches missed.">        if (request.getTitle() == null || request.getAmount() == 0) {</span>
+<span class="fc" id="L28">            return ResponseEntity.status(HttpStatus.NO_CONTENT).body(&quot;incomplete content&quot;);</span>
         }
 
-<span class="pc bpc" id="L32" title="1 of 2 branches missed.">        if (authentication != null) {</span>
-<span class="fc" id="L33">            Expenditure exp = new Expenditure();</span>
-<span class="fc" id="L34">            exp.setTitle(request.getTitle());</span>
-<span class="fc" id="L35">            exp.setAmount(request.getAmount());</span>
-<span class="fc" id="L36">            exp.setUser(authentication.getName());</span>
-<span class="fc" id="L37">            exp = expenditureRepository.save(exp);</span>
-<span class="fc" id="L38">            return ResponseEntity.ok(exp);</span>
+<span class="pc bpc" id="L31" title="1 of 2 branches missed.">        if (authentication != null) {</span>
+<span class="fc" id="L32">            Expenditure exp = new Expenditure();</span>
+<span class="fc" id="L33">            exp.setTitle(request.getTitle());</span>
+<span class="fc" id="L34">            exp.setAmount(request.getAmount());</span>
+<span class="fc" id="L35">            exp.setUser(authentication.getName());</span>
+<span class="fc" id="L36">            exp = expenditureRepository.save(exp);</span>
+<span class="fc" id="L37">            return ResponseEntity.ok(exp);</span>
         }
 
-<span class="nc" id="L41">        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(&quot;Forbidden&quot;);</span>
+<span class="nc" id="L40">        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(&quot;Forbidden&quot;);</span>
     }
 
     @PutMapping(&quot;/{id}&quot;)
@@ -46,48 +45,48 @@ import java.util.Optional;
                                                @RequestBody ExpenditureDTO dto,
                                                Authentication authentication) {
 
-<span class="fc" id="L49">        Optional&lt;Expenditure&gt; existing = expenditureRepository.findById(id);</span>
-<span class="fc bfc" id="L50" title="All 2 branches covered.">        if (existing.isEmpty()) {</span>
-<span class="fc" id="L51">            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(&quot;Does not exist&quot;);</span>
+<span class="fc" id="L48">        Optional&lt;Expenditure&gt; existing = expenditureRepository.findById(id);</span>
+<span class="fc bfc" id="L49" title="All 2 branches covered.">        if (existing.isEmpty()) {</span>
+<span class="fc" id="L50">            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(&quot;Does not exist&quot;);</span>
         }
 
-<span class="fc" id="L54">        Expenditure expenditure = existing.get();</span>
+<span class="fc" id="L53">        Expenditure expenditure = existing.get();</span>
 
-<span class="fc bfc" id="L56" title="All 2 branches covered.">        if (!expenditure.getUser().equals(authentication.getName())) {</span>
-<span class="fc" id="L57">            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(&quot;Forbidden&quot;);</span>
+<span class="fc bfc" id="L55" title="All 2 branches covered.">        if (!expenditure.getUser().equals(authentication.getName())) {</span>
+<span class="fc" id="L56">            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(&quot;Forbidden&quot;);</span>
         }
 
-<span class="fc" id="L60">        expenditure.setTitle(dto.getTitle());</span>
-<span class="fc" id="L61">        expenditure.setAmount(dto.getAmount());</span>
+<span class="fc" id="L59">        expenditure.setTitle(dto.getTitle());</span>
+<span class="fc" id="L60">        expenditure.setAmount(dto.getAmount());</span>
 
-<span class="fc" id="L63">        return ResponseEntity.ok(expenditureRepository.save(expenditure));</span>
+<span class="fc" id="L62">        return ResponseEntity.ok(expenditureRepository.save(expenditure));</span>
     }
 
 
     @DeleteMapping(&quot;/{id}&quot;)
     public ResponseEntity&lt;String&gt; deleteExpenditure(@PathVariable String id, Authentication authentication) {
-<span class="fc" id="L69">        Optional&lt;Expenditure&gt; existing = expenditureRepository.findById(id);</span>
-<span class="fc bfc" id="L70" title="All 2 branches covered.">        if (existing.isEmpty()) {</span>
-<span class="fc" id="L71">            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(&quot;Does not exist&quot;);</span>
+<span class="fc" id="L68">        Optional&lt;Expenditure&gt; existing = expenditureRepository.findById(id);</span>
+<span class="fc bfc" id="L69" title="All 2 branches covered.">        if (existing.isEmpty()) {</span>
+<span class="fc" id="L70">            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(&quot;Does not exist&quot;);</span>
         }
 
-<span class="fc" id="L74">        Expenditure exp = existing.get();</span>
-<span class="fc bfc" id="L75" title="All 2 branches covered.">        if (!exp.getUser().equals(authentication.getName())) {</span>
-<span class="fc" id="L76">            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(&quot;Forbidden&quot;);</span>
+<span class="fc" id="L73">        Expenditure exp = existing.get();</span>
+<span class="fc bfc" id="L74" title="All 2 branches covered.">        if (!exp.getUser().equals(authentication.getName())) {</span>
+<span class="fc" id="L75">            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(&quot;Forbidden&quot;);</span>
         }
 
-<span class="fc" id="L79">        expenditureRepository.deleteById(id);</span>
-<span class="fc" id="L80">        return ResponseEntity.ok(&quot;Expenditure deleted&quot;);</span>
+<span class="fc" id="L78">        expenditureRepository.deleteById(id);</span>
+<span class="fc" id="L79">        return ResponseEntity.ok(&quot;Expenditure deleted&quot;);</span>
     }
 
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity&lt;?&gt; getExpendituresByUser(Authentication authentication) {
-<span class="pc bpc" id="L86" title="1 of 4 branches missed.">        if (authentication!= null &amp;&amp; authentication.getName() != null) {</span>
-<span class="fc" id="L87">            List&lt;Expenditure&gt; data = expenditureRepository.findByUser(authentication.getName());</span>
-<span class="fc" id="L88">            return ResponseEntity.ok(data);</span>
+<span class="pc bpc" id="L85" title="1 of 4 branches missed.">        if (authentication!= null &amp;&amp; authentication.getName() != null) {</span>
+<span class="fc" id="L86">            List&lt;Expenditure&gt; data = expenditureRepository.findByUser(authentication.getName());</span>
+<span class="fc" id="L87">            return ResponseEntity.ok(data);</span>
         }
-<span class="fc" id="L90">        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(&quot;Login First.&quot;);</span>
+<span class="fc" id="L89">        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(&quot;Login First.&quot;);</span>
     }
 }
 

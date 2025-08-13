@@ -11,6 +11,7 @@ export default function Login() {
   useEffect(() => {
       const csrfToken = Cookies.get("XSRF-TOKEN");
       setCsrfToken(csrfToken);
+      Cookies.set("csrfToken", csrfToken, {sameSite: "Strict",});
       console.log("csrfToken:", csrfToken);
   }, []);
 

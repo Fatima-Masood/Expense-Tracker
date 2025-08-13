@@ -3,28 +3,24 @@ package com.expensetracker.user;
 import com.expensetracker.dto.PasswordUpdateRequest;
 import com.expensetracker.dto.UserDTO;
 import com.expensetracker.expenditure.ExpenditureRepository;
-import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.*;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.oauth2.jwt.*;
+import org.springframework.security.oauth2.jwt.JwtEncoder;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Objects;
 import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/users")
 @Slf4j
-@CrossOrigin(origins = "http://localhost:3000")
 public class UserController {
 
     @Autowired
@@ -34,11 +30,9 @@ public class UserController {
     @Autowired
     private PasswordEncoder passwordEncoder;
     @Autowired
-    private AuthenticationManager authenticationManager;
+    private UserService userService;
     @Autowired
     private JwtEncoder jwtEncoder;
-    @Autowired
-    private UserService userService;
 
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody UserDTO userDTO,
@@ -47,7 +41,7 @@ public class UserController {
         if (userDTO.getUsername() == null || userDTO.getPassword() == null)
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Incomplete credentials");
 
-        String tokenResponse = userService.register(userDTO.getUsername(), userDTO.getPassword(), response, authenticationManager, jwtEncoder);
+        String tokenResponse = userService.register(userDTO.getUsername(), userDTO.getPassword(), response, jwtEncoder);
         return ResponseEntity.status(HttpStatus.OK).body(tokenResponse);
     }
 
@@ -56,15 +50,7 @@ public class UserController {
                                    HttpServletResponse response) {
         try {
             if (loginRequest.getUsername() != null && loginRequest.getPassword() != null) {
-                User user = new User ();
-                user.setUsername(loginRequest.getUsername());
-                user.setPassword(loginRequest.getPassword());
-                String tokenResponse = userService.loginUser(
-                        user,
-                        response,
-                        authenticationManager,
-                        jwtEncoder
-                );
+                String tokenResponse = userService.loginUser(loginRequest.getUsername(), loginRequest.getPassword(), response, jwtEncoder);
                 return ResponseEntity.status(HttpStatus.OK).body(tokenResponse);
             } else {
                 return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Incomplete credentials");
