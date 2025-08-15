@@ -1,133 +1,152 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>UserService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Expense Tracker</a> &gt; <a href="index.source.html" class="el_package">com.expensetracker.user</a> &gt; <span class="el_source">UserService.java</span></div><h1>UserService.java</h1><pre class="source lang-java linenums">package com.expensetracker.user;
 
+import com.expensetracker.dto.PasswordUpdateRequest;
+import com.expensetracker.expenditure.ExpenditureRepository;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.*;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.jose.jws.MacAlgorithm;
 import org.springframework.security.oauth2.jwt.*;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Instant;
 import java.util.Collections;
+import java.util.Optional;
 
 @Service
-<span class="fc" id="L23">public class UserService implements UserDetailsService {</span>
+<span class="fc" id="L27">public class UserService implements UserDetailsService {</span>
 
     @Autowired
     private UserRepository userRepository;
     @Autowired
     private PasswordEncoder passwordEncoder;
     @Autowired
-    private AuthenticationManager authenticationManager;
-
-    public User authenticate(String username, String rawPassword) {
-<span class="fc" id="L33">        User user = userRepository.findByUsername(username)</span>
-<span class="pc" id="L34">                .orElseThrow(() -&gt; new UsernameNotFoundException(&quot;User not found&quot;));</span>
-
-<span class="fc bfc" id="L36" title="All 2 branches covered.">        if (!passwordEncoder.matches(rawPassword, user.getPassword())) {</span>
-<span class="fc" id="L37">            throw new BadCredentialsException(&quot;Invalid credentials&quot;);</span>
-        }
-
-<span class="fc" id="L40">        return user;</span>
-    }
+    private ExpenditureRepository expenditureRepository;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-<span class="fc" id="L45">        User user = userRepository.findByUsername(username)</span>
-<span class="fc" id="L46">                .orElseThrow(() -&gt; new UsernameNotFoundException(&quot;User not found&quot;));</span>
+<span class="fc" id="L38">        User user = userRepository.findByUsername(username)</span>
+<span class="fc" id="L39">                .orElseThrow(() -&gt; new UsernameNotFoundException(&quot;User not found&quot;));</span>
 
-<span class="fc" id="L48">        return org.springframework.security.core.userdetails.User</span>
-<span class="fc" id="L49">                .withUsername(user.getUsername())</span>
-<span class="fc" id="L50">                .password(user.getPassword())</span>
-<span class="fc" id="L51">                .authorities(Collections.emptyList())</span>
-<span class="fc" id="L52">                .build();</span>
+<span class="fc" id="L41">        return org.springframework.security.core.userdetails.User</span>
+<span class="fc" id="L42">                .withUsername(user.getUsername())</span>
+<span class="fc" id="L43">                .password(user.getPassword())</span>
+<span class="fc" id="L44">                .authorities(Collections.emptyList())</span>
+<span class="fc" id="L45">                .build();</span>
     }
 
-    public User OAuthSignUp(String username) {
-<span class="fc" id="L56">        User user = new User();</span>
-<span class="fc" id="L57">        user.setUsername(username);</span>
-<span class="fc" id="L58">        user.setPassword(passwordEncoder.encode(username));</span>
-<span class="fc" id="L59">        user.setRole(&quot;USER&quot;);</span>
+    public User authenticate(String username, String rawPassword) {
+<span class="fc" id="L49">        User user = userRepository.findByUsername(username)</span>
+<span class="pc" id="L50">                .orElseThrow(() -&gt; new UsernameNotFoundException(&quot;User not found&quot;));</span>
+<span class="fc bfc" id="L51" title="All 2 branches covered.">        if (!passwordEncoder.matches(rawPassword, user.getPassword()))</span>
+<span class="fc" id="L52">            throw new BadCredentialsException(&quot;Invalid credentials&quot;);</span>
+<span class="fc" id="L53">        return user;</span>
+    }
 
-<span class="pc bpc" id="L61" title="1 of 2 branches missed.">        if (!userRepository.existsByUsername(username)) {</span>
+    public User OAuthSignUp(String username, AuthenticationManager authenticationManager) {
+<span class="fc" id="L57">        User user = new User();</span>
+<span class="fc" id="L58">        user.setUsername(username);</span>
+<span class="fc" id="L59">        user.setPassword(passwordEncoder.encode(username));</span>
+<span class="fc" id="L60">        user.setRole(&quot;USER&quot;);</span>
+<span class="pc bpc" id="L61" title="1 of 2 branches missed.">        if (!userRepository.existsByUsername(username))</span>
 <span class="fc" id="L62">            user = userRepository.save(user);</span>
-        }
 
-<span class="fc" id="L65">        Authentication auth = authenticationManager.authenticate(</span>
+<span class="fc" id="L64">        Authentication auth = authenticationManager.authenticate(</span>
                 new UsernamePasswordAuthenticationToken(username, username));
-<span class="fc" id="L67">        SecurityContextHolder.getContext().setAuthentication(auth);</span>
-<span class="fc" id="L68">        return user;</span>
+<span class="fc" id="L66">        SecurityContextHolder.getContext().setAuthentication(auth);</span>
+<span class="fc" id="L67">        return user;</span>
     }
 
     public String register(String username, String password,
                            HttpServletResponse response,
+                           AuthenticationManager authenticationManager,
                            JwtEncoder jwtEncoder) {
 <span class="fc" id="L74">        User user = new User();</span>
 <span class="fc" id="L75">        user.setUsername(username);</span>
 <span class="fc" id="L76">        user.setPassword(passwordEncoder.encode(password));</span>
 <span class="fc" id="L77">        user.setRole(&quot;USER&quot;);</span>
-<span class="pc bpc" id="L78" title="1 of 2 branches missed.">        if (!userRepository.existsByUsername(username)) {</span>
-<span class="fc" id="L79">            userRepository.save(user);</span>
-        }
-<span class="fc" id="L81">        user.setPassword(password);</span>
-<span class="fc" id="L82">        return loginUser(username, password, response, jwtEncoder);</span>
+<span class="pc bpc" id="L78" title="1 of 2 branches missed.">        if (!userRepository.existsByUsername(username)) userRepository.save(user);</span>
+
+<span class="fc" id="L80">        user.setPassword(password);</span>
+<span class="fc" id="L81">        return loginUser(username, password, response, authenticationManager, jwtEncoder);</span>
     }
 
     public String loginUser(String username, String password,
                             HttpServletResponse response,
+                            AuthenticationManager authenticationManager,
                             JwtEncoder jwtEncoder){
 <span class="fc" id="L88">        Authentication auth = authenticationManager.authenticate(</span>
                 new UsernamePasswordAuthenticationToken(username, password));
 <span class="fc" id="L90">        SecurityContextHolder.getContext().setAuthentication(auth);</span>
-
-<span class="fc" id="L92">        Jwt jwt = setJwt(username, jwtEncoder);</span>
-<span class="fc" id="L93">        String json = setJwtAndResponse(response, jwt);</span>
-<span class="fc" id="L94">        return json;</span>
+<span class="fc" id="L91">        Jwt jwt = setJwt(username, jwtEncoder);</span>
+<span class="fc" id="L92">        return setJwtAndResponse(response, jwt);</span>
     }
 
     public String setJwtAndResponse(HttpServletResponse response, Jwt jwt) {
-<span class="fc" id="L98">        int expirySeconds = 3600;</span>
-
-<span class="fc" id="L100">        Cookie cookie = new Cookie(&quot;access_token&quot;, jwt.getTokenValue());</span>
-<span class="fc" id="L101">        cookie.setHttpOnly(true);</span>
-<span class="fc" id="L102">        cookie.setSecure(true);</span>
-<span class="fc" id="L103">        cookie.setPath(&quot;/&quot;);</span>
-<span class="fc" id="L104">        cookie.setDomain(&quot;localhost&quot;);</span>
-<span class="fc" id="L105">        cookie.setMaxAge(expirySeconds);</span>
-<span class="fc" id="L106">        response.addCookie(cookie);</span>
-
-<span class="fc" id="L108">        return String.format(&quot;{\&quot;access_token\&quot;:\&quot;%s\&quot;, \&quot;expires_in\&quot;:%d}&quot;, jwt.getTokenValue(), expirySeconds);</span>
+<span class="fc" id="L96">        Cookie cookie = new Cookie(&quot;access_token&quot;, jwt.getTokenValue());</span>
+<span class="fc" id="L97">        cookie.setHttpOnly(true);</span>
+<span class="fc" id="L98">        cookie.setSecure(true);</span>
+<span class="fc" id="L99">        cookie.setPath(&quot;/&quot;);</span>
+<span class="fc" id="L100">        cookie.setDomain(&quot;localhost&quot;);</span>
+<span class="fc" id="L101">        cookie.setMaxAge(3600);</span>
+<span class="fc" id="L102">        response.addCookie(cookie);</span>
+<span class="fc" id="L103">        return String.format(&quot;{\&quot;access_token\&quot;:\&quot;%s\&quot;, \&quot;expires_in\&quot;:%d}&quot;, jwt.getTokenValue(), 3600);</span>
     }
 
     public Jwt setJwt(String username, JwtEncoder jwtEncoder) {
-<span class="fc" id="L112">        int expirySeconds = 3600;</span>
-
-<span class="fc" id="L114">        JwtClaimsSet claims = JwtClaimsSet.builder()</span>
-<span class="fc" id="L115">                .subject(username)</span>
-<span class="fc" id="L116">                .expiresAt(Instant.now().plusSeconds(expirySeconds))</span>
-<span class="fc" id="L117">                .build();</span>
-
-<span class="fc" id="L119">        JwsHeader jwsHeader = JwsHeader.with(MacAlgorithm.HS256).build();</span>
-<span class="fc" id="L120">        return jwtEncoder.encode(JwtEncoderParameters.from(jwsHeader, claims));</span>
+<span class="fc" id="L107">        JwtClaimsSet claims = JwtClaimsSet.builder()</span>
+<span class="fc" id="L108">                .subject(username)</span>
+<span class="fc" id="L109">                .expiresAt(Instant.now().plusSeconds(3600))</span>
+<span class="fc" id="L110">                .build();</span>
+<span class="fc" id="L111">        JwsHeader jwsHeader = JwsHeader.with(MacAlgorithm.HS256).build();</span>
+<span class="fc" id="L112">        return jwtEncoder.encode(JwtEncoderParameters.from(jwsHeader, claims));</span>
     }
-    public void deleteCookie(HttpServletResponse response, String name) {
-<span class="nc" id="L123">        Cookie cookie = new Cookie(name, &quot;&quot;);</span>
-<span class="nc" id="L124">        cookie.setHttpOnly(true);</span>
-<span class="nc" id="L125">        cookie.setSecure(true);</span>
-<span class="nc" id="L126">        cookie.setPath(&quot;/&quot;);</span>
-<span class="nc" id="L127">        cookie.setDomain(&quot;/&quot;);</span>
-<span class="nc" id="L128">        cookie.setMaxAge(0);</span>
-<span class="nc" id="L129">        response.addCookie(cookie);</span>
-<span class="nc" id="L130">    }</span>
 
+    public void deleteCookie(HttpServletResponse response, String name) {
+<span class="fc" id="L116">        Cookie cookie = new Cookie(name, &quot;&quot;);</span>
+<span class="fc" id="L117">        cookie.setHttpOnly(true);</span>
+<span class="fc" id="L118">        cookie.setSecure(true);</span>
+<span class="fc" id="L119">        cookie.setPath(&quot;/&quot;);</span>
+<span class="fc" id="L120">        cookie.setDomain(&quot;/&quot;);</span>
+<span class="fc" id="L121">        cookie.setMaxAge(0);</span>
+<span class="fc" id="L122">        response.addCookie(cookie);</span>
+<span class="fc" id="L123">    }</span>
+
+    @Transactional
+    public int deleteUser() {
+<span class="fc" id="L127">        String username = SecurityContextHolder.getContext().getAuthentication().getName();</span>
+<span class="fc" id="L128">        Optional&lt;User&gt; optionalUser = userRepository.findByUsername(username);</span>
+<span class="fc bfc" id="L129" title="All 2 branches covered.">        if (optionalUser.isEmpty())</span>
+<span class="fc" id="L130">            return -1;</span>
+
+<span class="fc" id="L132">        User user = optionalUser.get();</span>
+<span class="fc" id="L133">        expenditureRepository.deleteByUser(username);</span>
+<span class="fc" id="L134">        userRepository.delete(user);</span>
+<span class="fc" id="L135">        return 0;</span>
+    }
+
+    public int updatePassword(PasswordUpdateRequest passwordUpdateRequest){
+<span class="fc" id="L139">        String username = SecurityContextHolder.getContext().getAuthentication().getName();</span>
+
+<span class="fc" id="L141">        Optional&lt;User&gt; optionalUser = userRepository.findByUsername(username);</span>
+<span class="fc bfc" id="L142" title="All 2 branches covered.">        if (optionalUser.isEmpty()) return -1;</span>
+
+<span class="fc" id="L144">        User user = optionalUser.get();</span>
+<span class="fc bfc" id="L145" title="All 2 branches covered.">        if (!passwordEncoder.matches(passwordUpdateRequest.getOldPassword(), user.getPassword())) return 1;</span>
+
+<span class="fc" id="L147">        user.setPassword(passwordEncoder.encode(passwordUpdateRequest.getNewPassword()));</span>
+<span class="fc" id="L148">        userRepository.save(user);</span>
+<span class="fc" id="L149">        return 0;</span>
+    }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.13.202504020838</span></div></body></html>

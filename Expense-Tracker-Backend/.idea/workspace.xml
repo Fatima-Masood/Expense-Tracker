@@ -5,28 +5,31 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="386a1296-72b8-41c2-b293-90aaf2c8095b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/expensetracker/config/AppConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/expensetracker/expenditure/ExpenditureService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/expensetracker/limits/MonthlyLimitService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/com/expensetracker/config/SecurityConfigTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/com/expensetracker/expenditure/ExpenditureServiceTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/com/expensetracker/limits/MonthlyLimitServiceTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/expensetracker/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/expensetracker/config/SecurityConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/expensetracker/expenditure/ExpenditureController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/expensetracker/expenditure/ExpenditureController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/expensetracker/limits/MonthlyLimitController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/expensetracker/limits/MonthlyLimitController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/expensetracker/user/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/expensetracker/user/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/expensetracker/user/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/expensetracker/user/UserRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/expensetracker/user/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/expensetracker/user/UserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/expensetracker/expenditure/ExpenditureControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/expensetracker/expenditure/ExpenditureControllerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/expensetracker/limits/MonthlyLimitControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/expensetracker/limits/MonthlyLimitControllerTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/com/expensetracker/user/UserControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/expensetracker/user/UserControllerTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/com/expensetracker/user/UserServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/expensetracker/user/UserServiceTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/Expense-Tracker-1.0-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/target/Expense-Tracker-1.0-SNAPSHOT.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/Expense-Tracker-1.0-SNAPSHOT.jar.original" beforeDir="false" afterPath="$PROJECT_DIR$/target/Expense-Tracker-1.0-SNAPSHOT.jar.original" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/checkstyle-cachefile" beforeDir="false" afterPath="$PROJECT_DIR$/target/checkstyle-cachefile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/checkstyle-result.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/checkstyle-result.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/application.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/expensetracker/config/SecurityConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/expensetracker/config/SecurityConfig.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/expensetracker/expenditure/ExpenditureController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/expensetracker/expenditure/ExpenditureController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/expensetracker/limits/MonthlyLimitController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/expensetracker/limits/MonthlyLimitController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/expensetracker/user/UserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/expensetracker/user/UserController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/expensetracker/user/UserRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/expensetracker/user/UserRepository.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/expensetracker/user/UserService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/expensetracker/user/UserService.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/git.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/git.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/dependency-check-report.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/dependency-check-report.html" afterDir="false" />
@@ -34,14 +37,19 @@
       <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/site/jacoco/com.expensetracker.config/SecurityConfig.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/site/jacoco/com.expensetracker.config/SecurityConfig.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/site/jacoco/com.expensetracker.config/SecurityConfig.java.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/site/jacoco/com.expensetracker.config/SecurityConfig.java.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/site/jacoco/com.expensetracker.config/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/site/jacoco/com.expensetracker.config/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/site/jacoco/com.expensetracker.config/index.source.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/site/jacoco/com.expensetracker.config/index.source.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/site/jacoco/com.expensetracker.expenditure/ExpenditureController.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/site/jacoco/com.expensetracker.expenditure/ExpenditureController.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/site/jacoco/com.expensetracker.expenditure/ExpenditureController.java.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/site/jacoco/com.expensetracker.expenditure/ExpenditureController.java.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/com.expensetracker.expenditure/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/site/jacoco/com.expensetracker.expenditure/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/com.expensetracker.expenditure/index.source.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/site/jacoco/com.expensetracker.expenditure/index.source.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/site/jacoco/com.expensetracker.limits/MonthlyLimitController.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/site/jacoco/com.expensetracker.limits/MonthlyLimitController.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/site/jacoco/com.expensetracker.limits/MonthlyLimitController.java.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/site/jacoco/com.expensetracker.limits/MonthlyLimitController.java.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/com.expensetracker.limits/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/site/jacoco/com.expensetracker.limits/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/com.expensetracker.limits/index.source.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/site/jacoco/com.expensetracker.limits/index.source.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/site/jacoco/com.expensetracker.user/UserController.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/site/jacoco/com.expensetracker.user/UserController.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/site/jacoco/com.expensetracker.user/UserController.java.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/site/jacoco/com.expensetracker.user/UserController.java.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/site/jacoco/com.expensetracker.user/UserService.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/site/jacoco/com.expensetracker.user/UserService.html" afterDir="false" />
@@ -54,7 +62,6 @@
       <change beforePath="$PROJECT_DIR$/target/site/jacoco/jacoco.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/site/jacoco/jacoco.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/site/spotbugs.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/site/spotbugs.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/spotbugsXml.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/spotbugsXml.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-com.expensetracker.ApplicationTest.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-com.expensetracker.dto.MonthlySummaryResponseTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/TEST-com.expensetracker.dto.MonthlySummaryResponseTest.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-com.expensetracker.expenditure.ExpenditureControllerTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/TEST-com.expensetracker.expenditure.ExpenditureControllerTest.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-com.expensetracker.expenditure.ExpenditureTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/TEST-com.expensetracker.expenditure.ExpenditureTest.xml" afterDir="false" />
@@ -63,7 +70,6 @@
       <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-com.expensetracker.user.UserControllerTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/TEST-com.expensetracker.user.UserControllerTest.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-com.expensetracker.user.UserServiceTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/TEST-com.expensetracker.user.UserServiceTest.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-com.expensetracker.user.UserTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/TEST-com.expensetracker.user.UserTest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/surefire-reports/com.expensetracker.ApplicationTest.txt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/target/surefire-reports/com.expensetracker.dto.MonthlySummaryResponseTest.txt" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/com.expensetracker.dto.MonthlySummaryResponseTest.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/surefire-reports/com.expensetracker.expenditure.ExpenditureControllerTest.txt" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/com.expensetracker.expenditure.ExpenditureControllerTest.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/surefire-reports/com.expensetracker.expenditure.ExpenditureTest.txt" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/com.expensetracker.expenditure.ExpenditureTest.txt" afterDir="false" />
@@ -72,10 +78,10 @@
       <change beforePath="$PROJECT_DIR$/target/surefire-reports/com.expensetracker.user.UserControllerTest.txt" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/com.expensetracker.user.UserControllerTest.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/surefire-reports/com.expensetracker.user.UserServiceTest.txt" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/com.expensetracker.user.UserServiceTest.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/surefire-reports/com.expensetracker.user.UserTest.txt" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/com.expensetracker.user.UserTest.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/com/expensetracker/expenditure/ExpenditureControllerTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/com/expensetracker/expenditure/ExpenditureControllerTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/com/expensetracker/limits/MonthlyLimitControllerTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/com/expensetracker/limits/MonthlyLimitControllerTest.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/test-classes/com/expensetracker/user/UserControllerTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/com/expensetracker/user/UserControllerTest.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/test-classes/com/expensetracker/user/UserServiceTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/com/expensetracker/user/UserServiceTest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../expense-tracker-frontend/pages/authentication/login.js" beforeDir="false" afterPath="$PROJECT_DIR$/../expense-tracker-frontend/pages/authentication/login.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../expense-tracker-frontend/pages/user/dashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/../expense-tracker-frontend/pages/user/dashboard.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -130,12 +136,15 @@
     "JUnit.ExpenditureControllerTest.executor": "Run",
     "JUnit.ExpenditureControllerTest.testGetExpendituresByUser.executor": "Run",
     "JUnit.ExpenditureControllerTest.testUpdateExpenditure_Failure.executor": "Run",
+    "JUnit.ExpenditureServiceTest.executor": "Run",
     "JUnit.ExpenditureTest.executor": "Run",
     "JUnit.JwtAuthFilterTest.executor": "Run",
     "JUnit.MonthlyLimitControllerTest.executor": "Run",
+    "JUnit.MonthlyLimitServiceTest.executor": "Run",
     "JUnit.MonthlyLimitTest.executor": "Run",
     "JUnit.MonthlySummaryResponseTest.executor": "Run",
     "JUnit.PasswordUpdateRequestTest.executor": "Run",
+    "JUnit.SecurityConfigTest.executor": "Run",
     "JUnit.UserApiTests.executor": "Run",
     "JUnit.UserApiTests.testUpdatePasswordSuccess.executor": "Run",
     "JUnit.UserControllerTest.executor": "Run",
@@ -168,6 +177,7 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="com.expensetracker.config" />
       <recent name="com.expensetracker.user" />
       <recent name="com.expensetracker.expenditure" />
       <recent name="com.expensetracker" />

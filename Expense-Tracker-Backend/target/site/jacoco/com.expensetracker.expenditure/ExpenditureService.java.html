@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ExpenditureService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Expense Tracker</a> &gt; <a href="index.source.html" class="el_package">com.expensetracker.expenditure</a> &gt; <span class="el_source">ExpenditureService.java</span></div><h1>ExpenditureService.java</h1><pre class="source lang-java linenums">package com.expensetracker.expenditure;
+
+import com.expensetracker.dto.ExpenditureDTO;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
+
+@Service
+<span class="fc" id="L11">public class ExpenditureService {</span>
+
+    @Autowired
+    private ExpenditureRepository expenditureRepository;
+
+    public Expenditure addExpenditure(String username, ExpenditureDTO request) {
+<span class="fc" id="L17">        Expenditure exp = new Expenditure();</span>
+<span class="fc" id="L18">        exp.setTitle(request.getTitle());</span>
+<span class="fc" id="L19">        exp.setAmount(request.getAmount());</span>
+<span class="fc" id="L20">        exp.setUser(username);</span>
+<span class="fc" id="L21">        return expenditureRepository.save(exp);</span>
+    }
+
+    public Optional&lt;Expenditure&gt; updateExpenditure(String username, String id, ExpenditureDTO dto) {
+<span class="fc" id="L25">        Optional&lt;Expenditure&gt; existing = expenditureRepository.findById(id);</span>
+<span class="fc bfc" id="L26" title="All 2 branches covered.">        if (existing.isEmpty()) {</span>
+<span class="fc" id="L27">            return Optional.empty();</span>
+        }
+
+<span class="fc" id="L30">        Expenditure expenditure = existing.get();</span>
+<span class="fc bfc" id="L31" title="All 2 branches covered.">        if (!expenditure.getUser().equals(username)) {</span>
+<span class="fc" id="L32">            throw new SecurityException(&quot;Forbidden&quot;);</span>
+        }
+
+<span class="fc" id="L35">        expenditure.setTitle(dto.getTitle());</span>
+<span class="fc" id="L36">        expenditure.setAmount(dto.getAmount());</span>
+
+<span class="fc" id="L38">        return Optional.of(expenditureRepository.save(expenditure));</span>
+    }
+
+    public boolean deleteExpenditure(String username, String id) {
+<span class="fc" id="L42">        Optional&lt;Expenditure&gt; existing = expenditureRepository.findById(id);</span>
+<span class="fc bfc" id="L43" title="All 2 branches covered.">        if (existing.isEmpty()) {</span>
+<span class="fc" id="L44">            return false;</span>
+        }
+
+<span class="fc" id="L47">        Expenditure exp = existing.get();</span>
+<span class="fc bfc" id="L48" title="All 2 branches covered.">        if (!exp.getUser().equals(username)) {</span>
+<span class="fc" id="L49">            throw new SecurityException(&quot;Forbidden&quot;);</span>
+        }
+
+<span class="fc" id="L52">        expenditureRepository.deleteById(id);</span>
+<span class="fc" id="L53">        return true;</span>
+    }
+
+    public List&lt;Expenditure&gt; getExpendituresByUser(String username) {
+<span class="fc" id="L57">        return expenditureRepository.findByUser(username);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.13.202504020838</span></div></body></html>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>MonthlyLimitService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Expense Tracker</a> &gt; <a href="index.source.html" class="el_package">com.expensetracker.limits</a> &gt; <span class="el_source">MonthlyLimitService.java</span></div><h1>MonthlyLimitService.java</h1><pre class="source lang-java linenums">package com.expensetracker.limits;
+
+import com.expensetracker.dto.MonthlySummaryResponse;
+import com.expensetracker.expenditure.Expenditure;
+import com.expensetracker.expenditure.ExpenditureRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.time.LocalDateTime;
+import java.time.YearMonth;
+import java.util.List;
+
+@Service
+<span class="fc" id="L14">public class MonthlyLimitService {</span>
+    @Autowired
+    private MonthlyLimitRepository monthlyLimitRepository;
+    @Autowired
+    private ExpenditureRepository expenditureRepository;
+
+    public String setMonthlyLimit(String username, String year, String month, double limit) {
+<span class="fc" id="L21">        String yearMonth = year + '-' + month;</span>
+
+<span class="fc" id="L23">        MonthlyLimit monthlyLimit = monthlyLimitRepository.findByUsernameAndMonth(username, yearMonth)</span>
+<span class="fc" id="L24">                .orElse(new MonthlyLimit());</span>
+
+<span class="fc" id="L26">        monthlyLimit.setUsername(username);</span>
+<span class="fc" id="L27">        monthlyLimit.setMonth(yearMonth);</span>
+<span class="fc" id="L28">        monthlyLimit.setLimitAmount(limit);</span>
+
+<span class="fc" id="L30">        monthlyLimitRepository.save(monthlyLimit);</span>
+
+<span class="fc" id="L32">        return &quot;Monthly limit set successfully&quot;;</span>
+    }
+
+    public MonthlySummaryResponse getMonthlySummary(String username, int year, int month) {
+<span class="fc" id="L36">        YearMonth yearMonth = YearMonth.of(year, month);</span>
+
+<span class="fc" id="L38">        LocalDateTime start = yearMonth.atDay(1).atStartOfDay();</span>
+<span class="fc" id="L39">        LocalDateTime end = yearMonth.atEndOfMonth().atTime(23, 59, 59);</span>
+<span class="fc" id="L40">        List&lt;Expenditure&gt; monthlyExpenses = expenditureRepository.findByUserAndTimestampBetween(</span>
+                username, start, end);
+
+<span class="fc" id="L43">        double totalSpent = monthlyExpenses.stream()</span>
+<span class="fc" id="L44">                .mapToDouble(Expenditure::getAmount)</span>
+<span class="fc" id="L45">                .sum();</span>
+
+<span class="fc" id="L47">        MonthlyLimit monthlyLimit = monthlyLimitRepository.findByUsernameAndMonth(username, yearMonth.toString())</span>
+<span class="fc" id="L48">                .orElse(null);</span>
+
+<span class="fc" id="L50">        return new MonthlySummaryResponse(yearMonth,</span>
+<span class="fc bfc" id="L51" title="All 2 branches covered.">                monthlyLimit != null ? monthlyLimit.getLimitAmount() : 0,</span>
+                totalSpent,
+                monthlyExpenses);
+    }
+}
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.13.202504020838</span></div></body></html>
