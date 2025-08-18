@@ -10,16 +10,10 @@ export default function Header(props) {
     const {theme, setTheme} = useContext(AppContext);
     const [darkMode, setDarkMode] = useState(theme === "dark");
 
-    const [csrfToken, setCsrfToken] = useState(null);
-
     useEffect(() => {
-        const newCsrfToken = Cookies.get("csrf_token");
         const newToken = Cookies.get("token");
-
-        setCsrfToken(newCsrfToken);
         setToken(newToken);
     }, []);
-
 
     const toggleDarkMode = () => {
         setTheme(theme === "dark" ? "light" : "dark");
@@ -32,53 +26,43 @@ export default function Header(props) {
 
     const logout = async () => {
         try {
-            await fetch(`${process.env.NEXT_PUBLIC_SERVER_URI}/api/users/logout`, {
+            await fetch(`../api/users/logout`, {
                 method: "GET",
                 credentials: "include",
                 headers: {
                     Authorization: `Bearer ${token}`,
-                    "X-XSRF-TOKEN": csrfToken,
                 }
             });
         } catch (error) {
             console.error("Logout failed:", error);
         }
-        
         setToken(null);
         setTimeout(() => {
-            router.push("/authentication/login");
+            router.push("../authentication/login");
         }, 100);
     };
-    
-    
-    const headerClass = `shadow-md px-6 py-4 flex flex-col sm:flex-row justify-between items-center gap-4 sm:gap-0 transition-colors duration-300 ${
-        darkMode ? "bg-gray-800" : "bg-gray-100"
+
+    const headerClass = `shadow-lg px-8 py-4 flex flex-col sm:flex-row justify-between items-center gap-6 sm:gap-0 transition-colors duration-300 fixed top-0 left-0 right-0 z-50 ${
+        darkMode ? "bg-gray-900" : "bg-gray-100"
     }`;
 
     const navButtonClass =
-        "px-4 py-2 rounded-md font-medium transition-colors duration-200 shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2";
+        "px-6 py-3 rounded-lg font-semibold text-lg transition-all duration-300 shadow-md hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-offset-2";
 
-    const blueButton = `${navButtonClass} bg-blue-700 text-white hover:bg-blue-400`;
+    const blueButton = `${navButtonClass} bg-blue-600 text-white hover:bg-blue-500 transform hover:scale-105`;
     const grayButton = `${navButtonClass} ${
         darkMode
             ? "bg-gray-700 text-white hover:bg-gray-600"
-            : "bg-gray-500 text-white hover:bg-gray-600"
-    }`;
-    const redButton = `${navButtonClass} bg-red-700 text-white hover:bg-red-600`;
-    const toggleButton = `${navButtonClass} ${
-        darkMode
-            ? "bg-gray-800 text-gray-100 hover:bg-gray-700"
-            : "bg-gray-200 text-gray-800 hover:bg-gray-300"
-    }`;
-
-
+            : "bg-gray-600 text-white hover:bg-gray-500"
+    } transform hover:scale-105`;
+    const redButton = `${navButtonClass} bg-red-600 text-white hover:bg-red-500 transform hover:scale-105`;
 
     return (
         <header className={headerClass}>
-            <div className="flex items-center gap-2">
-                <div className="bg-gradient-to-tr from-blue-400 via-blue-500 to-blue-700 rounded-full w-10 h-10 flex items-center justify-center shadow-lg">
+            <div className="flex items-center gap-4">
+                <div className="bg-gradient-to-tr from-blue-400 via-blue-500 to-blue-700 rounded-full w-14 h-8 flex items-center justify-center shadow-xl hover:shadow-2xl transition-all duration-300">
                     <svg
-                        className="w-6 h-6 text-white"
+                        className="w-8 h-6 text-white"
                         fill="none"
                         stroke="currentColor"
                         strokeWidth={2}
@@ -93,20 +77,20 @@ export default function Header(props) {
                 </div>
                 <Link
                     href={token ? "/user/dashboard" : "/authentication/login"}
-                    className="text-2xl font-extrabold tracking-wide bg-gradient-to-r from-blue-400 via-blue-600 to-blue-800 bg-clip-text text-transparent hover:underline"
-                    style={{ letterSpacing: "0.08em" }}
+                    className="text-4xl font-extrabold tracking-wider bg-gradient-to-r from-gray-400 via-blue-400 to-blue-600 bg-clip-text text-transparent hover:scale-105 transition-transform duration-300"
+                    style={{ letterSpacing: "0.1em" }}
                 >
                     Expense Tracker
                 </Link>
             </div>
-            <nav>
-                <ul className="flex flex-wrap justify-center gap-3 items-center">
+            <nav className="w-full sm:w-auto">
+                <ul className="flex flex-wrap justify-center gap-4 items-center">
                     {!token ? (
                         <>
                             <li>
                                 <button
                                     className={blueButton}
-                                    onClick={() => router.push("/authentication/signup")}
+                                    onClick={() => router.push("../authentication/signup")}
                                 >
                                     Sign Up
                                 </button>
@@ -114,7 +98,7 @@ export default function Header(props) {
                             <li>
                                 <button
                                     className={grayButton}
-                                    onClick={() => router.push("/authentication/login")}
+                                    onClick={() => router.push("../authentication/login")}
                                 >
                                     Log In
                                 </button>
@@ -125,7 +109,7 @@ export default function Header(props) {
                             <li>
                                 <button
                                     className={blueButton}
-                                    onClick={() => router.push("/user/dashboard")}
+                                    onClick={() => router.push("../user/dashboard")}
                                 >
                                     Dashboard
                                 </button>
@@ -133,7 +117,7 @@ export default function Header(props) {
                             <li>
                                 <button
                                     className={blueButton}
-                                    onClick={() => router.push("/user/monthly-expenditures")}
+                                    onClick={() => router.push("../user/monthly-expenditures")}
                                 >
                                     Monthly
                                 </button>
@@ -141,7 +125,7 @@ export default function Header(props) {
                             <li>
                                 <button
                                     className={blueButton}
-                                    onClick={() => router.push("/user/all-expenditures")}
+                                    onClick={() => router.push("../user/all-expenditures")}
                                 >
                                     All Expenditures
                                 </button>
@@ -156,7 +140,7 @@ export default function Header(props) {
                     <li>
                         <label className="flex items-center cursor-pointer select-none">
                             <span
-                                className={`mr-2 text-sm ${
+                                className={`mr-3 text-lg font-medium ${
                                     darkMode ? "text-gray-200" : "text-gray-700"
                                 }`}
                             >
@@ -171,14 +155,14 @@ export default function Header(props) {
                                     aria-label="Toggle dark mode"
                                 />
                                 <div
-                                    className={`block w-10 h-6 rounded-full transition-colors ${
+                                    className={`block w-14 h-8 rounded-full transition-colors ${
                                         darkMode ? "bg-gray-700" : "bg-gray-300"
                                     }`}
                                 ></div>
                                 <div
-                                    className={`dot absolute left-1 top-1 w-4 h-4 rounded-full transition-transform duration-200 ${
+                                    className={`dot absolute left-1 top-1 w-6 h-6 rounded-full transition-transform duration-200 ${
                                         darkMode
-                                            ? "translate-x-4 bg-blue-500"
+                                            ? "translate-x-6 bg-blue-500"
                                             : "translate-x-0 bg-yellow-400"
                                     }`}
                                 ></div>
@@ -190,4 +174,3 @@ export default function Header(props) {
         </header>
     );
 }
-

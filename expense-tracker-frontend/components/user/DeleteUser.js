@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-export default function DeleteUser({csrfToken, token, setError, setMessage}) {
+export default function DeleteUser({token, setError, setMessage}) {
     const router = useRouter();
 
     const handleDeleteUser = async () => {
@@ -12,12 +12,11 @@ export default function DeleteUser({csrfToken, token, setError, setMessage}) {
         }
 
         try {
-            const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URI}/api/users/delete`, {
+            const res = await fetch(`../api/users/delete`, {
                 method: "DELETE",
                 credentials: "include",
                 headers: {
                     Authorization: `Bearer ${token}`,
-                    "X-XSRF-TOKEN": csrfToken
                 },
             });
 
