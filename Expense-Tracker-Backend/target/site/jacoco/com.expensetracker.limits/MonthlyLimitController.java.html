@@ -8,40 +8,42 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.YearMonth;
+
 @RestController
 @RequestMapping(&quot;/api/expenditures/monthly&quot;)
-<span class="fc" id="L13">@Slf4j</span>
-<span class="fc" id="L14">public class MonthlyLimitController {</span>
+<span class="fc" id="L15">@Slf4j</span>
+<span class="fc" id="L16">public class MonthlyLimitController {</span>
     @Autowired
     private MonthlyLimitService monthlyLimitService;
+
+    @PostMapping(&quot;/set-limit&quot;)
+    public ResponseEntity&lt;?&gt; setMonthlyLimit(@RequestParam int year,
+                                             @RequestParam int month,
+                                             @RequestParam double limit,
+                                             Authentication authentication) {
+<span class="pc bpc" id="L25" title="1 of 4 branches missed.">        if (authentication == null || authentication.getName() == null) {</span>
+<span class="fc" id="L26">            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(&quot;Login First.&quot;);</span>
+        }
+<span class="fc" id="L28">        YearMonth yearMonth = YearMonth.of(year, month);</span>
+<span class="fc" id="L29">        String username = authentication.getName();</span>
+<span class="fc" id="L30">        String message = monthlyLimitService.setMonthlyLimit(username, yearMonth, limit);</span>
+
+<span class="fc" id="L32">        return ResponseEntity.ok(message);</span>
+    }
 
     @GetMapping(&quot;/monthly-summary&quot;)
     public ResponseEntity&lt;?&gt; getMonthlySummary(@RequestParam int year,
                                                @RequestParam int month,
                                                Authentication authentication) {
-<span class="pc bpc" id="L22" title="1 of 4 branches missed.">        if (authentication == null || authentication.getName() == null) {</span>
-<span class="fc" id="L23">            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(&quot;Login First.&quot;);</span>
+<span class="pc bpc" id="L39" title="1 of 4 branches missed.">        if (authentication == null || authentication.getName() == null) {</span>
+<span class="fc" id="L40">            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(&quot;Login First.&quot;);</span>
         }
+<span class="fc" id="L42">        YearMonth yearMonth = YearMonth.of(year, month);</span>
+<span class="fc" id="L43">        String username = authentication.getName();</span>
+<span class="fc" id="L44">        MonthlySummaryResponse response = monthlyLimitService.getMonthlySummary(username, yearMonth);</span>
 
-<span class="fc" id="L26">        String username = authentication.getName();</span>
-<span class="fc" id="L27">        MonthlySummaryResponse response = monthlyLimitService.getMonthlySummary(username, year, month);</span>
-
-<span class="fc" id="L29">        return ResponseEntity.ok(response);</span>
-    }
-
-    @PostMapping(&quot;/set-limit&quot;)
-    public ResponseEntity&lt;?&gt; setMonthlyLimit(@RequestParam String year,
-                                             @RequestParam String month,
-                                             @RequestParam double limit,
-                                             Authentication authentication) {
-<span class="pc bpc" id="L37" title="1 of 4 branches missed.">        if (authentication == null || authentication.getName() == null) {</span>
-<span class="fc" id="L38">            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(&quot;Login First.&quot;);</span>
-        }
-
-<span class="fc" id="L41">        String username = authentication.getName();</span>
-<span class="fc" id="L42">        String message = monthlyLimitService.setMonthlyLimit(username, year, month, limit);</span>
-
-<span class="fc" id="L44">        return ResponseEntity.ok(message);</span>
+<span class="fc" id="L46">        return ResponseEntity.ok(response);</span>
     }
 
 }

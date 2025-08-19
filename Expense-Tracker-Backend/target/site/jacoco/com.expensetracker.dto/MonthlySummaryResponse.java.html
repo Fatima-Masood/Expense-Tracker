@@ -4,31 +4,30 @@ import com.expensetracker.expenditure.Expenditure;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.time.YearMonth;
 import java.util.ArrayList;
 import java.util.List;
 
 @Getter
 @Setter
 public class MonthlySummaryResponse {
-    private YearMonth month;
+    private String yearMonth;
     private double limitAmount;
     private double totalSpent;
-<span class="fc" id="L17">    private List&lt;Expenditure&gt; expenses = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L16">    private List&lt;Expenditure&gt; expenses = new ArrayList&lt;&gt;();</span>
 
-<span class="fc" id="L19">    public MonthlySummaryResponse(YearMonth month, double v, double v1, List&lt;Expenditure&gt; expenses) {</span>
-<span class="fc" id="L20">        setMonth(month);</span>
-<span class="fc" id="L21">        setLimitAmount(v);</span>
-<span class="fc" id="L22">        setTotalSpent(v1);</span>
-<span class="fc" id="L23">        setExpenses(expenses);</span>
-<span class="fc" id="L24">    }</span>
+<span class="fc" id="L18">    public MonthlySummaryResponse(String month, double v, double v1, List&lt;Expenditure&gt; expenses) {</span>
+<span class="fc" id="L19">        setYearMonth(month);</span>
+<span class="fc" id="L20">        setLimitAmount(v);</span>
+<span class="fc" id="L21">        setTotalSpent(v1);</span>
+<span class="fc" id="L22">        setExpenses(expenses);</span>
+<span class="fc" id="L23">    }</span>
 
     public void setExpenses(List&lt;Expenditure&gt; expenses) {
-<span class="fc bfc" id="L27" title="All 2 branches covered.">        this.expenses = expenses == null ? null : new ArrayList&lt;&gt;(expenses);</span>
-<span class="fc" id="L28">    }</span>
+<span class="fc bfc" id="L26" title="All 2 branches covered.">        this.expenses = expenses == null ? null : new ArrayList&lt;&gt;(expenses);</span>
+<span class="fc" id="L27">    }</span>
 
     public List&lt;Expenditure&gt; getExpenses() {
-<span class="fc bfc" id="L31" title="All 2 branches covered.">        return expenses == null ? null : new ArrayList&lt;&gt;(expenses);</span>
+<span class="fc bfc" id="L30" title="All 2 branches covered.">        return expenses == null ? null : new ArrayList&lt;&gt;(expenses);</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.13.202504020838</span></div></body></html>

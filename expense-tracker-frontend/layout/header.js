@@ -47,9 +47,9 @@ export default function Header(props) {
     }`;
 
     const navButtonClass =
-        "px-6 py-3 rounded-lg font-semibold text-lg transition-all duration-300 shadow-md hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-offset-2";
+        "px-4 py-2 rounded-lg font-semibold text-lg transition-all duration-300 shadow-md hover:shadow-xl focus:outline-none focus:ring-3 focus:ring-gray-400";
 
-    const blueButton = `${navButtonClass} bg-blue-600 text-white hover:bg-blue-500 transform hover:scale-105`;
+    const blueButton = `${navButtonClass} bg-blue-600 text-white hover:bg-blue-600 transform hover:scale-105`;
     const grayButton = `${navButtonClass} ${
         darkMode
             ? "bg-gray-700 text-white hover:bg-gray-600"
@@ -76,9 +76,9 @@ export default function Header(props) {
                     </svg>
                 </div>
                 <Link
-                    href={token ? "/user/dashboard" : "/authentication/login"}
+                    href="/"
                     className="text-4xl font-extrabold tracking-wider bg-gradient-to-r from-gray-400 via-blue-400 to-blue-600 bg-clip-text text-transparent hover:scale-105 transition-transform duration-300"
-                    style={{ letterSpacing: "0.1em" }}
+                    style={{ letterSpacing: "0.05em" }}
                 >
                     Expense Tracker
                 </Link>
@@ -155,12 +155,12 @@ export default function Header(props) {
                                     aria-label="Toggle dark mode"
                                 />
                                 <div
-                                    className={`block w-14 h-8 rounded-full transition-colors ${
+                                    className={`block w-12 h-6 rounded-full transition-colors ${
                                         darkMode ? "bg-gray-700" : "bg-gray-300"
                                     }`}
                                 ></div>
                                 <div
-                                    className={`dot absolute left-1 top-1 w-6 h-6 rounded-full transition-transform duration-200 ${
+                                    className={`dot absolute left-1 top-1 w-4 h-4 rounded-full transition-transform duration-200 ${
                                         darkMode
                                             ? "translate-x-6 bg-blue-500"
                                             : "translate-x-0 bg-yellow-400"

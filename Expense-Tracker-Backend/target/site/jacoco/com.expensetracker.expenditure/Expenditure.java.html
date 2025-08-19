@@ -18,18 +18,19 @@ public class Expenditure {
     private String user;
     private String title;
 <span class="fc" id="L20">    private double amount = 0;</span>
-<span class="fc" id="L21">    private LocalDateTime timestamp = LocalDateTime.now();</span>
+    private String yearMonth;
+<span class="fc" id="L22">    private LocalDateTime timestamp = LocalDateTime.now();</span>
 
-<span class="fc" id="L23">    public Expenditure(Expenditure expenditure) {</span>
-<span class="fc bfc" id="L24" title="All 2 branches covered.">        if (expenditure != null) {</span>
-<span class="fc" id="L25">            this.id = expenditure.id;</span>
-<span class="fc" id="L26">            this.user = expenditure.user;</span>
-<span class="fc" id="L27">            this.title = expenditure.title;</span>
-<span class="fc" id="L28">            this.amount = expenditure.amount;</span>
-<span class="fc" id="L29">            this.timestamp = expenditure.timestamp;</span>
+<span class="fc" id="L24">    public Expenditure(Expenditure expenditure) {</span>
+<span class="fc bfc" id="L25" title="All 2 branches covered.">        if (expenditure != null) {</span>
+<span class="fc" id="L26">            this.id = expenditure.id;</span>
+<span class="fc" id="L27">            this.user = expenditure.user;</span>
+<span class="fc" id="L28">            this.title = expenditure.title;</span>
+<span class="fc" id="L29">            this.amount = expenditure.amount;</span>
+<span class="fc" id="L30">            this.yearMonth = expenditure.yearMonth;</span>
         }
-<span class="fc" id="L31">    }</span>
+<span class="fc" id="L32">        this.timestamp = LocalDateTime.now();</span>
 
-
+<span class="fc" id="L34">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.13.202504020838</span></div></body></html>

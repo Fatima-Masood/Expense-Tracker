@@ -1,13 +1,13 @@
 GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
-Expense Tracker,com.expensetracker.user,UserService,5,300,2,10,0,71,3,16,1,12
-Expense Tracker,com.expensetracker.user,UserController,6,130,2,13,2,27,2,13,0,7
+Expense Tracker,com.expensetracker.user,UserService,9,237,2,10,2,60,4,14,2,10
+Expense Tracker,com.expensetracker.user,UserController,0,100,1,10,0,23,1,11,0,6
 Expense Tracker,com.expensetracker,Application,5,3,0,0,2,1,1,1,1,1
-Expense Tracker,com.expensetracker.limits,MonthlyLimitService,0,86,0,2,0,20,0,4,0,3
-Expense Tracker,com.expensetracker.limits,MonthlyLimitController,0,54,2,6,0,12,2,6,0,4
+Expense Tracker,com.expensetracker.limits,MonthlyLimitService,0,68,0,0,0,16,0,3,0,3
+Expense Tracker,com.expensetracker.limits,MonthlyLimitController,0,60,2,6,0,14,2,6,0,4
 Expense Tracker,com.expensetracker.config,AppConfig,3,0,0,0,1,0,1,0,1,0
-Expense Tracker,com.expensetracker.config,SecurityConfig,27,172,0,0,6,31,1,14,1,14
+Expense Tracker,com.expensetracker.config,SecurityConfig,200,34,0,0,41,6,10,6,10,6
 Expense Tracker,com.expensetracker.dto,MonthlySummaryResponse,0,42,0,4,0,10,0,5,0,3
 Expense Tracker,com.expensetracker.dto,ExpenditureDTO,0,3,0,0,0,1,0,1,0,1
 Expense Tracker,com.expensetracker.expenditure,ExpenditureController,0,104,2,12,0,24,2,11,0,6
-Expense Tracker,com.expensetracker.expenditure,ExpenditureService,0,98,0,8,0,24,0,9,0,5
-Expense Tracker,com.expensetracker.expenditure,Expenditure,0,31,0,2,0,10,0,2,0,1
+Expense Tracker,com.expensetracker.expenditure,ExpenditureService,3,105,1,9,0,25,1,9,0,5
+Expense Tracker,com.expensetracker.expenditure,Expenditure,0,34,0,2,0,11,0,2,0,1

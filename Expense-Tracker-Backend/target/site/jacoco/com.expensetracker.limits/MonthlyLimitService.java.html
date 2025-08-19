@@ -6,52 +6,43 @@ import com.expensetracker.expenditure.ExpenditureRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
 import java.time.YearMonth;
 import java.util.List;
 
 @Service
-<span class="fc" id="L14">public class MonthlyLimitService {</span>
+<span class="fc" id="L13">public class MonthlyLimitService {</span>
     @Autowired
     private MonthlyLimitRepository monthlyLimitRepository;
     @Autowired
     private ExpenditureRepository expenditureRepository;
 
-    public String setMonthlyLimit(String username, String year, String month, double limit) {
-<span class="fc" id="L21">        String yearMonth = year + '-' + month;</span>
+    public String setMonthlyLimit(String username, YearMonth yearMonth, double limit) {
+<span class="fc" id="L20">        MonthlyLimit monthlyLimit = monthlyLimitRepository.findByUsernameAndYearMonth(username, yearMonth.toString())</span>
+<span class="fc" id="L21">                .orElse(new MonthlyLimit());</span>
 
-<span class="fc" id="L23">        MonthlyLimit monthlyLimit = monthlyLimitRepository.findByUsernameAndMonth(username, yearMonth)</span>
-<span class="fc" id="L24">                .orElse(new MonthlyLimit());</span>
+<span class="fc" id="L23">        monthlyLimit.setUsername(username);</span>
+<span class="fc" id="L24">        monthlyLimit.setYearMonth(yearMonth.toString());</span>
+<span class="fc" id="L25">        monthlyLimit.setLimitAmount(limit);</span>
 
-<span class="fc" id="L26">        monthlyLimit.setUsername(username);</span>
-<span class="fc" id="L27">        monthlyLimit.setMonth(yearMonth);</span>
-<span class="fc" id="L28">        monthlyLimit.setLimitAmount(limit);</span>
+<span class="fc" id="L27">        monthlyLimitRepository.save(monthlyLimit);</span>
 
-<span class="fc" id="L30">        monthlyLimitRepository.save(monthlyLimit);</span>
-
-<span class="fc" id="L32">        return &quot;Monthly limit set successfully&quot;;</span>
+<span class="fc" id="L29">        return &quot;Monthly limit set successfully&quot;;</span>
     }
 
-    public MonthlySummaryResponse getMonthlySummary(String username, int year, int month) {
-<span class="fc" id="L36">        YearMonth yearMonth = YearMonth.of(year, month);</span>
+    public MonthlySummaryResponse getMonthlySummary(String username, YearMonth yearMonth) {
+<span class="fc" id="L33">        List&lt;Expenditure&gt; monthlyExpenses = expenditureRepository.findByUserAndYearMonth(username, yearMonth.toString());</span>
 
-<span class="fc" id="L38">        LocalDateTime start = yearMonth.atDay(1).atStartOfDay();</span>
-<span class="fc" id="L39">        LocalDateTime end = yearMonth.atEndOfMonth().atTime(23, 59, 59);</span>
-<span class="fc" id="L40">        List&lt;Expenditure&gt; monthlyExpenses = expenditureRepository.findByUserAndTimestampBetween(</span>
-                username, start, end);
+<span class="fc" id="L35">        double totalSpent = monthlyExpenses.stream()</span>
+<span class="fc" id="L36">                .mapToDouble(Expenditure::getAmount)</span>
+<span class="fc" id="L37">                .sum();</span>
 
-<span class="fc" id="L43">        double totalSpent = monthlyExpenses.stream()</span>
-<span class="fc" id="L44">                .mapToDouble(Expenditure::getAmount)</span>
-<span class="fc" id="L45">                .sum();</span>
+<span class="fc" id="L39">        double limit = monthlyLimitRepository.findByUsernameAndYearMonth(username, yearMonth.toString())</span>
+<span class="fc" id="L40">                .map(MonthlyLimit::getLimitAmount)</span>
+<span class="fc" id="L41">                .orElse(0.0);</span>
 
-<span class="fc" id="L47">        MonthlyLimit monthlyLimit = monthlyLimitRepository.findByUsernameAndMonth(username, yearMonth.toString())</span>
-<span class="fc" id="L48">                .orElse(null);</span>
-
-<span class="fc" id="L50">        return new MonthlySummaryResponse(yearMonth,</span>
-<span class="fc bfc" id="L51" title="All 2 branches covered.">                monthlyLimit != null ? monthlyLimit.getLimitAmount() : 0,</span>
-                totalSpent,
-                monthlyExpenses);
+<span class="fc" id="L43">        return new MonthlySummaryResponse(yearMonth.toString(), limit, totalSpent, monthlyExpenses);</span>
     }
+
 }
 
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.13.202504020838</span></div></body></html>
