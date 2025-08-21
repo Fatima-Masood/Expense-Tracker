@@ -18,7 +18,7 @@ export default function MonthlyExpenditure() {
 
   useEffect(() => {
     const updateTheme = () => {
-      const currentTheme = localStorage.getItem("theme") || "dark";
+      const currentTheme = localStorage.getItem("theme");
       setIsDark(currentTheme === "dark");
     };
 
@@ -67,7 +67,6 @@ export default function MonthlyExpenditure() {
     if (token) fetchSummary();
   }, [year, month, token]);
 
-  // Handle setting limit
   const handleSetLimit = async (e) => {
     e.preventDefault();
     try {
@@ -126,17 +125,15 @@ export default function MonthlyExpenditure() {
         />
       </div>
 
-      {/* Summary Info */}
       {summary && (
         <div
-          className={`grid grid-cols-3 gap-6 mb-6 max-w-3xl p-8 rounded-3xl shadow-xl mt-8 mx-auto ${
+          className={`grid grid-cols-3 gap-6 mb-6 max-w-4xl p-8 rounded-3xl shadow-xl mt-8 mx-auto ${
             isDark ? "bg-gray-800" : "bg-white"
           }`}
         >
-          {/* Limit (clickable) */}
           <div
             onClick={() => setShowLimitForm(true)}
-            className={`p-4 rounded-xl cursor-pointer transition-transform hover:scale-105 ${
+            className={`p-3 rounded-xl cursor-pointer transition-transform hover:scale-105 ${
               isDark ? "bg-green-900" : "bg-green-100"
             }`}
           >
@@ -148,7 +145,7 @@ export default function MonthlyExpenditure() {
           </div>
 
           <div
-            className={`p-4 rounded-xl ${
+            className={`p-3 rounded-xl ${
               isDark ? "bg-red-900" : "bg-red-100"
             }`}
           >
@@ -156,7 +153,7 @@ export default function MonthlyExpenditure() {
             <p className="text-lg">Rs. {summary.totalSpent}</p>
           </div>
           <div
-            className={`p-4 rounded-xl ${
+            className={`p-3 rounded-xl ${
               isDark ? "bg-blue-900" : "bg-blue-100"
             }`}
           >
@@ -170,7 +167,7 @@ export default function MonthlyExpenditure() {
 
       {/* Limit Form Modal */}
       {showLimitForm && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+        <div className="fixed inset-0 flex items-center justify-center bg-white/60 z-50">
           <form
             onSubmit={handleSetLimit}
             className={`p-6 rounded-2xl shadow-xl ${

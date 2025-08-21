@@ -2,6 +2,7 @@ package com.expensetracker.user;
 
 import com.expensetracker.dto.PasswordUpdateRequest;
 import com.expensetracker.expenditure.ExpenditureRepository;
+import com.expensetracker.limits.MonthlyLimitRepository;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
 import org.junit.jupiter.api.BeforeEach;
@@ -9,12 +10,19 @@ import org.junit.jupiter.api.Test;
 import org.mockito.*;
 import org.springframework.security.authentication.*;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
+import org.springframework.security.oauth2.core.user.DefaultOAuth2User;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.security.oauth2.jwt.*;
 
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -31,6 +39,8 @@ class UserServiceTest {
     private PasswordEncoder passwordEncoder;
     @Mock
     private ExpenditureRepository expenditureRepository;
+    @Mock
+    private MonthlyLimitRepository monthlyLimitRepository;
     @Mock
     private AuthenticationManager authenticationManager;
     @Mock
@@ -94,11 +104,25 @@ class UserServiceTest {
     void oAuthSignUp_NewUser() {
         when(userRepository.existsByUsername("testuser")).thenReturn(false);
         when(userRepository.save(any())).thenReturn(mockUser);
+        when(jwtEncoder.encode(any())).thenReturn(mock(Jwt.class));
 
-        var result = userService.OAuthSignUp("testuser", authenticationManager);
-        assertEquals("testuser", result.getUsername());
+        Map<String, Object> attributes = new HashMap<>();
+        attributes.put("login", "testuser");
+
+        OAuth2User oAuth2User = new DefaultOAuth2User(
+                Collections.singleton(new SimpleGrantedAuthority("ROLE_USER")),
+                attributes, "login"
+        );
+
+        OAuth2AuthenticationToken auth = new OAuth2AuthenticationToken(oAuth2User,
+                        oAuth2User.getAuthorities(), "github");
+
+        var result = userService.OAuthSignUp(auth);
+
         verify(userRepository).save(any(User.class));
     }
+
+
 
     @Test
     void register_NewUser_CreatesAndLogsIn() {
@@ -106,7 +130,7 @@ class UserServiceTest {
         when(passwordEncoder.encode(anyString())).thenReturn("encodedpass");
         when(jwtEncoder.encode(any())).thenReturn(mock(Jwt.class));
 
-        var result = userService.register("testuser", "pass", authenticationManager, jwtEncoder);
+        var result = userService.register("testuser", "pass", authenticationManager);
         assertTrue(result.contains("access_token"));
     }
 
@@ -115,7 +139,7 @@ class UserServiceTest {
         Jwt expectedJwt = mock(Jwt.class);
         when(jwtEncoder.encode(any())).thenReturn(expectedJwt);
 
-        var result = userService.createJwt("testuser", jwtEncoder);
+        var result = userService.createJwt("testuser");
         assertEquals(expectedJwt, result);
     }
 
@@ -138,6 +162,7 @@ class UserServiceTest {
         int result = userService.deleteUser();
         assertEquals(0, result);
         verify(expenditureRepository).deleteByUser("testuser");
+        verify(monthlyLimitRepository).deleteByUsername("testuser");
         verify(userRepository).delete(mockUser);
     }
 

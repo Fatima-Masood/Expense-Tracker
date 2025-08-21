@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>SecurityConfig.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Expense Tracker</a> &gt; <a href="index.source.html" class="el_package">com.expensetracker.config</a> &gt; <span class="el_source">SecurityConfig.java</span></div><h1>SecurityConfig.java</h1><pre class="source lang-java linenums">package com.expensetracker.config;
 
-import com.expensetracker.user.User;
 import com.expensetracker.user.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nimbusds.jose.jwk.source.ImmutableSecret;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
+import javax.crypto.spec.SecretKeySpec;
+import java.util.HashMap;
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Profile;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
@@ -18,104 +20,101 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
-import org.springframework.security.oauth2.jwt.*;
+import org.springframework.security.oauth2.jwt.Jwt;
+import org.springframework.security.oauth2.jwt.JwtDecoder;
+import org.springframework.security.oauth2.jwt.JwtEncoder;
+import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
+import org.springframework.security.oauth2.jwt.NimbusJwtEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.security.web.csrf.CsrfTokenRequestAttributeHandler;
 
-import javax.crypto.spec.SecretKeySpec;
-import java.util.HashMap;
-import java.util.Map;
-
 
 @EnableMethodSecurity
 @Configuration
-<span class="fc" id="L34">@Slf4j</span>
-<span class="fc" id="L35">public class SecurityConfig {</span>
-    private AuthenticationManager authenticationManager;
+<span class="fc" id="L35">@Slf4j</span>
+<span class="fc" id="L36">public class SecurityConfig {</span>
+    @Value(&quot;${frontend.redirect-url}&quot;)
+    private String redirectUrl;
 
     @Bean
-    @Profile(&quot;!test&quot;)
     public SecurityFilterChain securityFilterChain(HttpSecurity http,
-                                                   UserService userService,
-                                                   JwtEncoder jwtEncoder) throws Exception {
+                                                   UserService userService) throws Exception {
 
 <span class="nc" id="L44">        http</span>
-<span class="nc" id="L45">                .formLogin(form -&gt; form</span>
-<span class="nc" id="L46">                        .loginProcessingUrl(&quot;/login&quot;)</span>
-<span class="nc" id="L47">                        .successHandler((request, response, authentication) -&gt; {</span>
-<span class="nc" id="L48">                            String username = authentication.getName();</span>
-<span class="nc" id="L49">                            Jwt jwt = userService.createJwt(username, jwtEncoder);</span>
-<span class="nc" id="L50">                            userService.setAuthentication(authentication);</span>
-<span class="nc" id="L51">                            response.setStatus(200);</span>
-<span class="nc" id="L52">                            Map&lt;String, String&gt; responseBody = new HashMap&lt;&gt;();</span>
-<span class="nc" id="L53">                            responseBody.put(&quot;access_token&quot;, jwt.getTokenValue());</span>
-<span class="nc" id="L54">                            new ObjectMapper().writeValue(response.getWriter(), responseBody);</span>
-
-<span class="nc" id="L56">                        })</span>
-<span class="nc" id="L57">                        .failureHandler((request, response, exception) -&gt; {</span>
-<span class="nc" id="L58">                            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);</span>
-<span class="nc" id="L59">                            response.setContentType(&quot;application/json&quot;);</span>
-<span class="nc" id="L60">                            response.getWriter().write(&quot;{\&quot;error\&quot;: \&quot;Invalid username or password\&quot;}&quot;);</span>
-<span class="nc" id="L61">                        })</span>
-                )
-<span class="nc" id="L63">                .oauth2Login(oauth2 -&gt; oauth2</span>
-<span class="nc" id="L64">                .loginPage(&quot;/oauth2/authorization/github&quot;)</span>
-<span class="nc" id="L65">                .successHandler((request, response, authentication) -&gt; {</span>
-<span class="nc" id="L66">                    OAuth2AuthenticationToken token = (OAuth2AuthenticationToken) authentication;</span>
-<span class="nc" id="L67">                    String username = token.getPrincipal().getAttribute(&quot;login&quot;);</span>
-<span class="nc" id="L68">                    User user = userService.OAuthSignUp(username, authenticationManager);</span>
-<span class="nc" id="L69">                    userService.setAuthentication(authentication);</span>
-<span class="nc" id="L70">                    Jwt jwt = userService.createJwt(user.getUsername(), jwtEncoder);</span>
-<span class="nc" id="L71">                    response.setStatus(200);</span>
-<span class="nc" id="L72">                    Map&lt;String, String&gt; responseBody = new HashMap&lt;&gt;();</span>
-<span class="nc" id="L73">                    responseBody.put(&quot;access_token&quot;, jwt.getTokenValue());</span>
-<span class="nc" id="L74">                    new ObjectMapper().writeValue(response.getWriter(), responseBody);</span>
-<span class="nc" id="L75">                }))</span>
-
-<span class="nc" id="L77">            .oauth2ResourceServer(oauth2 -&gt; oauth2</span>
-<span class="nc" id="L78">                    .jwt(Customizer.withDefaults()))</span>
-
-<span class="nc" id="L80">            .sessionManagement(config -&gt; config</span>
-<span class="nc" id="L81">                    .sessionCreationPolicy(SessionCreationPolicy.STATELESS))</span>
-
-<span class="nc" id="L83">            .authorizeHttpRequests(config -&gt; config</span>
-<span class="nc" id="L84">            .requestMatchers(</span>
-                    &quot;/error&quot;,
-                    &quot;/v3/api-docs/**&quot;,
-                    &quot;/swagger-ui/**&quot;,
-                    &quot;/swagger-ui.html&quot;,
-                    &quot;/favicon.ico&quot;,
-                    &quot;/oauth2/**&quot;,
-                    &quot;/target/**&quot;,
-                    &quot;/api/users/login&quot;,
-<span class="nc" id="L93">                    &quot;/api/users/register&quot;).permitAll()</span>
-<span class="nc" id="L94">            .anyRequest().authenticated())</span>
-<span class="nc" id="L95">            .csrf(csrf -&gt; csrf.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())</span>
-<span class="nc" id="L96">                    .csrfTokenRequestHandler(new CsrfTokenRequestAttributeHandler()));</span>
-
-<span class="nc" id="L98">        return http.build();</span>
+<span class="nc" id="L45">            .formLogin(form -&gt; form</span>
+<span class="nc" id="L46">                .loginProcessingUrl(&quot;/login&quot;)</span>
+<span class="nc" id="L47">                .successHandler((request, response, authentication) -&gt; {</span>
+<span class="nc" id="L48">                  String username = authentication.getName();</span>
+<span class="nc" id="L49">                  Jwt jwt = userService.createJwt(username);</span>
+<span class="nc" id="L50">                  userService.setAuthentication(authentication);</span>
+<span class="nc" id="L51">                  response.setStatus(200);</span>
+<span class="nc" id="L52">                  Map&lt;String, String&gt; responseBody = new HashMap&lt;&gt;();</span>
+<span class="nc" id="L53">                  responseBody.put(&quot;access_token&quot;, jwt.getTokenValue());</span>
+<span class="nc" id="L54">                  new ObjectMapper().writeValue(response.getWriter(), responseBody);</span>
+<span class="nc" id="L55">                })</span>
+<span class="nc" id="L56">                .failureHandler((request, response, exception) -&gt; {</span>
+<span class="nc" id="L57">                    response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);</span>
+<span class="nc" id="L58">                    response.setContentType(&quot;application/json&quot;);</span>
+<span class="nc" id="L59">                    response.getWriter().write(&quot;{\&quot;error\&quot;: \&quot;Invalid username or password\&quot;}&quot;);</span>
+<span class="nc" id="L60">                })</span>
+            )
+<span class="nc" id="L62">            .oauth2Login(oauth2 -&gt; oauth2</span>
+<span class="nc" id="L63">                .loginPage(&quot;/oauth2/authorization/github&quot;)</span>
+<span class="nc" id="L64">                .successHandler((request, response, authentication) -&gt; {</span>
+<span class="nc" id="L65">                    String token = userService.createJwt(authentication.getName()).getTokenValue();</span>
+<span class="nc" id="L66">                    Cookie cookie = new Cookie(&quot;access_token&quot;, token);</span>
+<span class="nc" id="L67">                    cookie.setHttpOnly(true);</span>
+<span class="nc" id="L68">                    cookie.setSecure(true);</span>
+<span class="nc" id="L69">                    cookie.setPath(&quot;/&quot;);</span>
+<span class="nc" id="L70">                    cookie.setMaxAge(60 * 60);</span>
+<span class="nc" id="L71">                    response.addCookie(cookie);</span>
+<span class="nc" id="L72">                    response.sendRedirect(&quot;http://localhost:3000/oauth2/github&quot;);</span>
+<span class="nc" id="L73">                })</span>
+            )
+<span class="nc" id="L75">            .oauth2ResourceServer(oauth2 -&gt; oauth2</span>
+<span class="nc" id="L76">                .jwt(Customizer.withDefaults())</span>
+            )
+<span class="nc" id="L78">            .sessionManagement(config -&gt; config</span>
+<span class="nc" id="L79">                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)</span>
+            )
+<span class="nc" id="L81">            .authorizeHttpRequests(config -&gt; config</span>
+<span class="nc" id="L82">                .requestMatchers(</span>
+                &quot;/error&quot;,
+                &quot;/v3/api-docs/**&quot;,
+                &quot;/swagger-ui/**&quot;,
+                &quot;/swagger-ui.html&quot;,
+                &quot;/favicon.ico&quot;,
+                &quot;/oauth2/**&quot;,
+                &quot;/target/**&quot;,
+                &quot;/api/users/login&quot;,
+<span class="nc" id="L91">                &quot;/api/users/register&quot;).permitAll()</span>
+<span class="nc" id="L92">                .anyRequest().authenticated()</span>
+            )
+<span class="nc" id="L94">            .csrf(csrf -&gt; csrf.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())</span>
+<span class="nc" id="L95">                .csrfTokenRequestHandler(new CsrfTokenRequestAttributeHandler())</span>
+            );
+<span class="nc" id="L97">        return http.build();</span>
     }
 
     @Bean
     public JwtEncoder jwtEncoder(@Value(&quot;${jwt.signing.key}&quot;) byte[] signingKey) {
-<span class="fc" id="L103">        return new NimbusJwtEncoder(new ImmutableSecret&lt;&gt;(new SecretKeySpec(signingKey, &quot;HmacSHA256&quot;)));</span>
+<span class="fc" id="L102">        return new NimbusJwtEncoder(new ImmutableSecret&lt;&gt;(new SecretKeySpec(signingKey, &quot;HmacSHA256&quot;)));</span>
     }
 
     @Bean
     public JwtDecoder jwtDecoder(@Value(&quot;${jwt.signing.key}&quot;) byte[] signingKey) {
-<span class="fc" id="L108">        return NimbusJwtDecoder.withSecretKey(new SecretKeySpec(signingKey, &quot;HmacSHA256&quot;)).build();</span>
+<span class="fc" id="L107">        return NimbusJwtDecoder.withSecretKey(new SecretKeySpec(signingKey, &quot;HmacSHA256&quot;)).build();</span>
     }
 
     @Bean
     public PasswordEncoder passwordEncoder() {
-<span class="fc" id="L113">        return new BCryptPasswordEncoder();</span>
+<span class="fc" id="L112">        return new BCryptPasswordEncoder();</span>
     }
 
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authConfig) throws Exception {
-<span class="fc" id="L118">        return authConfig.getAuthenticationManager();</span>
+<span class="fc" id="L117">        return authConfig.getAuthenticationManager();</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.13.202504020838</span></div></body></html>

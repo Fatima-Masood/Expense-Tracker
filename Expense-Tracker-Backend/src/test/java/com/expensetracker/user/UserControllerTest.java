@@ -65,7 +65,7 @@ public class UserControllerTest {
         userDTO.setPassword("password123");
         String token = "mock-jwt-token";
 
-        when(userService.register(eq("john"), eq("password123"), eq(authenticationManager), eq(jwtEncoder) ))
+        when(userService.register(eq("john"), eq("password123"), eq(authenticationManager)))
                 .thenReturn(token);
 
         mockMvc.perform(post("/api/users/register")
@@ -81,7 +81,7 @@ public class UserControllerTest {
         UserDTO userDTO = new UserDTO(null, "password123");
         String token = "mock-jwt-token";
 
-        when(userService.register(eq(userDTO.getUsername()), eq(userDTO.getPassword()), eq(authenticationManager), eq(jwtEncoder)))
+        when(userService.register(eq(userDTO.getUsername()), eq(userDTO.getPassword()), eq(authenticationManager)))
                 .thenReturn(token);
 
         mockMvc.perform(post("/api/users/register")

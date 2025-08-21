@@ -1,3 +1,6 @@
+frontend:
+  redirect-url: http://localhost:3000/oauth2/github
+
 spring:
   data:
     mongodb:
@@ -31,3 +34,4 @@ management:
       otlp:
         enabled: true
         url: http://localhost:4318/v1/metrics
+

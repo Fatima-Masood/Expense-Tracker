@@ -72,8 +72,8 @@ export default function ExpenditureList({ expenditures, token, refreshData, mont
   };
 
 return (
-<div className={`p-8 rounded-3xl shadow-xl ${isDark ? 'bg-gray-800' : 'bg-white'} mt-8 mx-auto max-w-3xl`}>
-        <h2 className={`text-3xl font-extrabold mb-8 ${isDark ? 'text-gray-200' : 'text-gray-800'} border-b pb-2`}>
+<div className={`p-8 rounded-2xl shadow-xl ${isDark ? 'bg-gray-800' : 'bg-white'} mt-8 mx-auto max-w-4xl`}>
+        <h2 className={`text-2xl font-extrabold mb-6 ${isDark ? 'text-gray-200' : 'text-gray-800'} border-b pb-2`}>
                 Expenditures
         </h2>
 
@@ -88,14 +88,14 @@ return (
         }
 
         {formVisible && (
-                <form onSubmit={handleSubmit} className={`flex flex-col sm:flex-row gap-4 mb-8 ${isDark ? 'bg-gray-700' : 'bg-gray-50'} p-6 rounded-xl`}>
+                <form onSubmit={handleSubmit} className={`flex flex-col sm:flex-row gap-3 mb-4 p-6 ${isDark ? 'bg-gray-700' : 'bg-gray-100'} rounded-xl`}>
                         <input
                                 type="text"
                                 placeholder="Title"
                                 value={formData.title}
                                 onChange={(e) => setFormData({ ...formData, title: e.target.value })}
                                 className={`border ${isDark ? 'bg-gray-600 border-gray-600 text-white' : 'border-gray-300'} 
-                                p-4 rounded-lg flex-1 focus:outline-none focus:ring-2 focus:ring-blue-400 transition shadow-sm`}
+                                p-2 rounded-lg flex-1 focus:outline-none focus:ring-2 focus:ring-blue-400 transition shadow-sm`}
                         />
                         <input
                                 type="number"
@@ -103,12 +103,12 @@ return (
                                 value={formData.amount}
                                 onChange={(e) => setFormData({ ...formData, amount: e.target.value })}
                                 className={`border ${isDark ? 'bg-gray-600 border-gray-600 text-white' : 'border-gray-300'} 
-                                p-4 rounded-lg w-40 focus:outline-none focus:ring-2 focus:ring-blue-400 transition shadow-sm`}
+                                p-2 rounded-lg w-40 focus:outline-none focus:ring-2 focus:ring-blue-400 transition shadow-sm`}
                         />
                         <button
                                 type="submit"
                                 className={`${isDark ? 'bg-blue-900 hover:bg-blue-800' : 'bg-green-600 hover:bg-green-700'} 
-                                text-white font-semibold px-6 py-4 rounded-lg transition-all duration-300 shadow-md hover:shadow-lg`}
+                                text-white font-semibold px-4 py-2 rounded-lg transition-all duration-300 shadow-md hover:shadow-lg`}
                         >
                                 {editingId ? "Update" : "Add"}
                         </button>

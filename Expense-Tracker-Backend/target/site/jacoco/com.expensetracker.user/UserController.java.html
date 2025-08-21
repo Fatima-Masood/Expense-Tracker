@@ -9,17 +9,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.oauth2.jwt.JwtEncoder;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(&quot;/api/users&quot;)
-<span class="fc" id="L17">public class UserController {</span>
+<span class="fc" id="L16">public class UserController {</span>
 
     @Autowired
     private UserService userService;
-    @Autowired
-    private JwtEncoder jwtEncoder;
     @Autowired
     private AuthenticationManager authenticationManager;
 
@@ -27,48 +24,48 @@ import org.springframework.web.bind.annotation.*;
     public ResponseEntity&lt;?&gt; register(@RequestBody UserDTO userDTO,
                                       HttpServletResponse response) {
 
-<span class="pc bpc" id="L30" title="1 of 4 branches missed.">        if (userDTO.getUsername() == null || userDTO.getPassword() == null)</span>
-<span class="fc" id="L31">            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(&quot;Incomplete credentials&quot;);</span>
+<span class="pc bpc" id="L27" title="1 of 4 branches missed.">        if (userDTO.getUsername() == null || userDTO.getPassword() == null)</span>
+<span class="fc" id="L28">            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(&quot;Incomplete credentials&quot;);</span>
 
-<span class="fc" id="L33">        String tokenResponse = userService.register(userDTO.getUsername(), userDTO.getPassword(), authenticationManager, jwtEncoder);</span>
-<span class="fc" id="L34">        return ResponseEntity.status(HttpStatus.OK).body(tokenResponse);</span>
+<span class="fc" id="L30">        String tokenResponse = userService.register(userDTO.getUsername(), userDTO.getPassword(), authenticationManager);</span>
+<span class="fc" id="L31">        return ResponseEntity.status(HttpStatus.OK).body(tokenResponse);</span>
     }
 
     @DeleteMapping
     public ResponseEntity&lt;String&gt; deleteUser(HttpServletRequest request) {
-<span class="fc" id="L39">        int response = userService.deleteUser();</span>
-<span class="fc bfc" id="L40" title="All 2 branches covered.">        if (response == -1)</span>
-<span class="fc" id="L41">            return ResponseEntity.notFound().build();</span>
+<span class="fc" id="L36">        int response = userService.deleteUser();</span>
+<span class="fc bfc" id="L37" title="All 2 branches covered.">        if (response == -1)</span>
+<span class="fc" id="L38">            return ResponseEntity.notFound().build();</span>
         else
-<span class="fc" id="L43">            return ResponseEntity.ok(&quot;User and related expenditures deleted&quot;);</span>
+<span class="fc" id="L40">            return ResponseEntity.ok(&quot;User and related expenditures deleted&quot;);</span>
     }
 
     @GetMapping
     public ResponseEntity&lt;String&gt; getUser(HttpServletRequest request, Authentication authentication) {
-<span class="fc bfc" id="L48" title="All 2 branches covered.">        if (authentication != null)</span>
-<span class="fc" id="L49">            return ResponseEntity.ok(authentication.getName());</span>
-<span class="fc" id="L50">        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(&quot;Login First&quot;);</span>
+<span class="fc bfc" id="L45" title="All 2 branches covered.">        if (authentication != null)</span>
+<span class="fc" id="L46">            return ResponseEntity.ok(authentication.getName());</span>
+<span class="fc" id="L47">        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(&quot;Login First&quot;);</span>
     }
 
     @PutMapping
     public ResponseEntity&lt;String&gt; updatePassword(@RequestBody PasswordUpdateRequest request) {
-<span class="fc" id="L55">        int result = userService.updatePassword(request);</span>
+<span class="fc" id="L52">        int result = userService.updatePassword(request);</span>
 
-<span class="fc bfc" id="L57" title="All 3 branches covered.">        return switch (result) {</span>
-<span class="fc" id="L58">            case -1 -&gt; ResponseEntity.notFound().build();</span>
-<span class="fc" id="L59">            case 1 -&gt; ResponseEntity.badRequest().body(&quot;Incorrect old password&quot;);</span>
-<span class="fc" id="L60">            default -&gt; ResponseEntity.ok(&quot;Password updated&quot;);</span>
+<span class="fc bfc" id="L54" title="All 3 branches covered.">        return switch (result) {</span>
+<span class="fc" id="L55">            case -1 -&gt; ResponseEntity.notFound().build();</span>
+<span class="fc" id="L56">            case 1 -&gt; ResponseEntity.badRequest().body(&quot;Incorrect old password&quot;);</span>
+<span class="fc" id="L57">            default -&gt; ResponseEntity.ok(&quot;Password updated&quot;);</span>
         };
     }
 
     @GetMapping(&quot;/logout&quot;)
     public ResponseEntity&lt;?&gt; logout(HttpServletResponse response) {
-<span class="fc" id="L66">        userService.deleteCookie(response, &quot;access_token&quot;);</span>
-<span class="fc" id="L67">        userService.deleteCookie(response, &quot;token&quot;);</span>
-<span class="fc" id="L68">        userService.deleteCookie(response, &quot;XSRF-TOKEN&quot;);</span>
-<span class="fc" id="L69">        userService.deleteCookie(response, &quot;csrf_token&quot;);</span>
-<span class="fc" id="L70">        userService.deleteCookie(response, &quot;next-auth.session-token&quot;);</span>
-<span class="fc" id="L71">        return ResponseEntity.ok(&quot;{\&quot;message\&quot;:\&quot;Logged out successfully\&quot;}&quot;);</span>
+<span class="fc" id="L63">        userService.deleteCookie(response, &quot;access_token&quot;);</span>
+<span class="fc" id="L64">        userService.deleteCookie(response, &quot;token&quot;);</span>
+<span class="fc" id="L65">        userService.deleteCookie(response, &quot;XSRF-TOKEN&quot;);</span>
+<span class="fc" id="L66">        userService.deleteCookie(response, &quot;csrf_token&quot;);</span>
+<span class="fc" id="L67">        userService.deleteCookie(response, &quot;next-auth.session-token&quot;);</span>
+<span class="fc" id="L68">        return ResponseEntity.ok(&quot;{\&quot;message\&quot;:\&quot;Logged out successfully\&quot;}&quot;);</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.13.202504020838</span></div></body></html>
