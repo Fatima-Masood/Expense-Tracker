@@ -6,14 +6,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.time.YearMonth;
 
 @RestController
 @RequestMapping(&quot;/api/expenditures/monthly&quot;)
-<span class="fc" id="L15">@Slf4j</span>
-<span class="fc" id="L16">public class MonthlyLimitController {</span>
+<span class="fc" id="L19">@Slf4j</span>
+<span class="fc" id="L20">public class MonthlyLimitController {</span>
     @Autowired
     private MonthlyLimitService monthlyLimitService;
 
@@ -22,28 +26,28 @@ import java.time.YearMonth;
                                              @RequestParam int month,
                                              @RequestParam double limit,
                                              Authentication authentication) {
-<span class="pc bpc" id="L25" title="1 of 4 branches missed.">        if (authentication == null || authentication.getName() == null) {</span>
-<span class="fc" id="L26">            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(&quot;Login First.&quot;);</span>
+<span class="pc bpc" id="L29" title="1 of 4 branches missed.">        if (authentication == null || authentication.getName() == null) {</span>
+<span class="fc" id="L30">            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(&quot;Login First.&quot;);</span>
         }
-<span class="fc" id="L28">        YearMonth yearMonth = YearMonth.of(year, month);</span>
-<span class="fc" id="L29">        String username = authentication.getName();</span>
-<span class="fc" id="L30">        String message = monthlyLimitService.setMonthlyLimit(username, yearMonth, limit);</span>
+<span class="fc" id="L32">        YearMonth yearMonth = YearMonth.of(year, month);</span>
+<span class="fc" id="L33">        String username = authentication.getName();</span>
+<span class="fc" id="L34">        String message = monthlyLimitService.setMonthlyLimit(username, yearMonth, limit);</span>
 
-<span class="fc" id="L32">        return ResponseEntity.ok(message);</span>
+<span class="fc" id="L36">        return ResponseEntity.ok(message);</span>
     }
 
     @GetMapping(&quot;/monthly-summary&quot;)
     public ResponseEntity&lt;?&gt; getMonthlySummary(@RequestParam int year,
                                                @RequestParam int month,
                                                Authentication authentication) {
-<span class="pc bpc" id="L39" title="1 of 4 branches missed.">        if (authentication == null || authentication.getName() == null) {</span>
-<span class="fc" id="L40">            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(&quot;Login First.&quot;);</span>
+<span class="pc bpc" id="L43" title="1 of 4 branches missed.">        if (authentication == null || authentication.getName() == null) {</span>
+<span class="fc" id="L44">            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(&quot;Login First.&quot;);</span>
         }
-<span class="fc" id="L42">        YearMonth yearMonth = YearMonth.of(year, month);</span>
-<span class="fc" id="L43">        String username = authentication.getName();</span>
-<span class="fc" id="L44">        MonthlySummaryResponse response = monthlyLimitService.getMonthlySummary(username, yearMonth);</span>
+<span class="fc" id="L46">        YearMonth yearMonth = YearMonth.of(year, month);</span>
+<span class="fc" id="L47">        String username = authentication.getName();</span>
+<span class="fc" id="L48">        MonthlySummaryResponse response = monthlyLimitService.getMonthlySummary(username, yearMonth);</span>
 
-<span class="fc" id="L46">        return ResponseEntity.ok(response);</span>
+<span class="fc" id="L50">        return ResponseEntity.ok(response);</span>
     }
 
 }
