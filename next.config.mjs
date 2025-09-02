@@ -5,10 +5,11 @@ const nextConfig = {
     return [
       {
         source: "/:path*",
-        destination: "https://expense-tracker-backend-production-724a.up.railway.app/:path*",
+        destination:
+          "https://expense-tracker-backend-production-724a.up.railway.app/:path*",
       },
     ];
   },
 };
 
-export default nextConfig;
+module.exports = nextConfig;
