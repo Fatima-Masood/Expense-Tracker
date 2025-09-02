@@ -1,8 +1,8 @@
 {
   "rewrites": [
     {
-      "source": "/:path*",
-      "destination": "https://expense-tracker-backend-production-724a.up.railway.app/:path*"
+      "source": "/(.*)",
+      "destination": "https://expense-tracker-backend-production-724a.up.railway.app/$1"
     }
   ]
 }
