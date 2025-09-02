@@ -17,8 +17,6 @@ export default function Header() {
         window.dispatchEvent(new Event("theme-changed"));
     };
 
-    console.log("1");
-
     const logout = async () => {
         try {
             await fetch("../api/users/logout", {
@@ -35,8 +33,6 @@ export default function Header() {
         setToken(null);
         router.push("../authentication/login");
     };
-
-    console.log("2");
 
     const headerClass = `shadow-lg px-8 py-4 flex flex-col sm:flex-row justify-between items-center gap-6 sm:gap-0 transition-colors duration-300 fixed top-0 left-0 right-0 z-50 ${
         darkMode ? "bg-gray-900" : "bg-gray-100"
