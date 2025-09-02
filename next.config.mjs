@@ -4,8 +4,12 @@ const nextConfig = {
   async rewrites() {
     return [
       {
-        source: "/:path*",
+        source: "/api/:path*",
         destination: "https://expense-tracker-backend-production-724a.up.railway.app/:path*",
+      },
+      {
+        source: "/oauth2/authorization/:path*",
+        destination: "https://expense-tracker-backend-production-724a.up.railway.app/oauth2/authorization/:path*",
       },
     ];
   },

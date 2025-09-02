@@ -1,8 +1,12 @@
 {
   "rewrites": [
     {
-      "source": "/(.*)",
+      "source": "/api/(.*)",
       "destination": "https://expense-tracker-backend-production-724a.up.railway.app/$1"
+    },
+    {
+      "source": "/oauth2/authorization/(.*)",
+      "destination": "https://expense-tracker-backend-production-724a.up.railway.app/oauth2/authorization/$1"
     }
   ]
 }
