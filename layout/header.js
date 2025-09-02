@@ -8,8 +8,6 @@ export default function Header() {
     const { token, setToken, theme, setTheme } = useContext(AppContext);
     const [darkMode, setDarkMode] = useState(theme === "dark");
 
-    console.log("Theme in header:", theme);
-
     const toggleDarkMode = () => {
         setTheme(theme === "dark" ? "light" : "dark");
         const newMode = !darkMode;

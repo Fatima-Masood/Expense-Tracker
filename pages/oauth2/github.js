@@ -17,7 +17,6 @@ export default function OAuthRedirect() {
     }
     Cookies.set("token", token, { sameSite: "Strict" });
     setToken(token);
-    console.log("Access token set in cookies:", token);
     window.close();
   }, [router, searchParams]);
 

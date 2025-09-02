@@ -12,7 +12,6 @@ export default function DeleteUser({token, setError, setMessage}) {
         }
 
         try {
-            console.log("Deleting user with token:", token);
             const res = await fetch("../api/users", {
                 method: "DELETE",
                 credentials: "include",

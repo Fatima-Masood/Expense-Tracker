@@ -34,7 +34,6 @@ export default function MonthlyExpenditure() {
   useEffect(() => {
     const temp = Cookies.get("token");
     setToken(temp);
-    console.log("Token:", temp);
 
     const currentDate = new Date();
     setYear((prev) => prev ?? currentDate.getFullYear());
@@ -77,8 +76,6 @@ export default function MonthlyExpenditure() {
       });
 
       if (res.ok) {
-        const msg = await res.text();
-        console.log("Limit set:", msg);
         setShowLimitForm(false);
         fetchSummary();
       } else {
