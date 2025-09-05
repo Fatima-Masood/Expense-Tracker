@@ -1,6 +1,3 @@
-Here’s an updated **README.md** for your project with your actual hosted link and cleaned-up instructions:
-
-````markdown
 # Expense Tracker
 
 This is an [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/pages/api-reference/create-next-app).
