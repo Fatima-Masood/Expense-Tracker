@@ -16,13 +16,13 @@ export default function Home() {
   }, []);
 
   const containerStyles = `min-h-screen flex items-center justify-center ${isDark ? 'bg-gray-700' : 'bg-gray'}`;
-  const headingStyles = `text-4xl font-bold text-center ${isDark ? 'text-gray-100' : 'text-gray-600'} mb-8`;
-  const subheadingStyles = `text-2xl ${isDark ? 'text-gray-300' : 'text-gray-500'} mb-4`;
-  const cardStyles = `${isDark ? 'bg-gray-800' : 'bg-white'} p-6 rounded-lg shadow-md`;
-  const cardTitleStyles = `text-2xl font-semibold ${isDark ? 'text-blue-300' : 'text-[#2c5282]'} mb-3`;
-  const cardTextStyles = `${isDark ? 'text-gray-400' : 'text-[#4a5568]'} text-xl`;
+  const headingStyles = `text-2xl font-bold text-center ${isDark ? 'text-gray-100' : 'text-gray-600'} mb-4`;
+  const subheadingStyles = `text-sm ${isDark ? 'text-gray-300' : 'text-gray-500'} mb-2`;
+  const cardStyles = `${isDark ? 'bg-gray-800' : 'bg-white'} p-4 rounded-lg shadow-md`;
+  const cardTitleStyles = `text-lg font-semibold ${isDark ? 'text-blue-300' : 'text-[#2c5282]'} mb-2`;
+  const cardTextStyles = `${isDark ? 'text-gray-400' : 'text-[#4a5568]'} text-sm`;
   const buttonStyles = `${isDark ? 'bg-blue-600 hover:bg-blue-700' : 'bg-[#1a365d] hover:bg-[#2c5282]'} 
-    text-white px-8 py-3 rounded-full transition-colors text-xl`;
+    text-white px-5 py-2 rounded-full transition-colors text-sm`;
 
   const features = [
     {
@@ -41,18 +41,18 @@ export default function Home() {
 
   return (
     <div className={containerStyles}>
-      <div className="max-w-5xl mx-auto px-4 py-16">
+      <div className="max-w-5xl mx-auto px-4 py-10">
         <h1 className={headingStyles}>
           Welcome to Smart Expense Tracker
         </h1>
         
-        <div className="text-center mb-12">
+        <div className="text-center mb-8">
           <p className={subheadingStyles}>
             Take control of your finances with our intuitive expense tracking solution
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 pb-12 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pb-8 mb-8">
           {features.map((feature, index) => (
             <div key={index} className={cardStyles}>
               <h3 className={cardTitleStyles}>{feature.title}</h3>

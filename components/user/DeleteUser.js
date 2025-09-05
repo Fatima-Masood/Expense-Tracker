@@ -38,7 +38,7 @@ export default function DeleteUser({token, setError, setMessage}) {
     return (
         <button 
             onClick={handleDeleteUser}
-            className="w-full bg-gray-600 text-white py-2 rounded hover:bg-red-700 transition"
+            className="w-full text-sm bg-gray-600 text-white py-2 rounded hover:bg-red-700 transition"
         >
             Delete My Account
         </button>

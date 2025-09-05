@@ -11,10 +11,9 @@ export default function Dashboard() {
   const [user, setUser] = useState(null);
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
-  const {token, setToken} = useContext(AppContext);
+  const { token, setToken } = useContext(AppContext);
   const [isDark, setIsDark] = useState(false);
 
-  
   useEffect(() => {
     const updateTheme = () => {
       const currentTheme = localStorage.getItem("theme") || "dark";
@@ -25,15 +24,13 @@ export default function Dashboard() {
     return () => window.removeEventListener("theme-changed", updateTheme);
   }, []);
 
-  
-  useEffect(() => { 
+  useEffect(() => {
     if (!token) {
       const token = Cookies.get("token");
       setToken(token);
     }
   }, []);
 
-  
   useEffect(() => {
     setMessage("");
     setError("");
@@ -60,26 +57,31 @@ export default function Dashboard() {
     fetchUser();
   }, [token]);
 
-  
   const bgGradient = isDark
     ? "bg-gray-700"
     : "bg-gradient-to-br from-gray-100 to-white";
   const glassCard =
     "backdrop-blur-lg bg-white/10 border border-white/20 shadow-2xl rounded-3xl";
   const cardPadding = "p-12";
-  const heading = isDark ? "text-blue-200 drop-shadow-lg" : "text-blue-800 drop-shadow";
+  const heading = isDark
+    ? "text-blue-200 drop-shadow-lg"
+    : "text-blue-800 drop-shadow";
   const subHeading = isDark ? "text-gray-200" : "text-gray-700";
   const divider = "border-b border-blue-200 my-8";
   const inputBg = isDark ? "bg-gray-800/80" : "bg-white/80";
   const inputText = isDark ? "text-blue-100" : "text-blue-900";
 
-  
   if (error) {
     return (
-      <div className={`${bgGradient} flex justify-center items-center min-h-screen`}>
-        <div className={`${glassCard} ${cardPadding} max-w-lg w-full flex flex-col items-center`}>
-          <p className="text-red-400 text-xl font-semibold text-center">
-           {error}.<br />Please log in again.
+      <div
+        className={`${bgGradient} flex justify-center items-center min-h-screen`}
+      >
+        <div
+          className={`${glassCard} ${cardPadding} max-w-lg w-full flex flex-col items-center`}
+        >
+          <p className="text-red-400 text-lg font-semibold text-center">
+            {error}.<br />
+            Please log in again.
           </p>
         </div>
       </div>
@@ -87,18 +89,37 @@ export default function Dashboard() {
   }
 
   return (
-    <div className="flex flex-col min-h-screen">
-      <main className={`${bgGradient} flex-1 flex justify-center items-start py-10 transition-colors duration-300`}>
+    <div>
+      <main
+        className={`${bgGradient} flex justify-center items-center min-h-screen transition-colors duration-300`}
+      >
         <div className={`${glassCard} ${cardPadding} max-w-2xl w-full`}>
           <div className="flex flex-col items-center">
-            <h1 className={`text-5xl font-extrabold mb-4 tracking-tight ${heading}`}>Welcome</h1>
-            <span className={`text-lg font-medium mb-6 ${subHeading}`}>User Dashboard</span>
+            <h1
+              className={`text-4xl font-extrabold mb-4 tracking-tight ${heading}`}
+            >
+              Welcome
+            </h1>
+            <span
+              className={`text-base font-medium mb-6 ${subHeading}`}
+            >
+              User Dashboard
+            </span>
           </div>
-          {message && <div className="bg-green-100 text-green-700 px-4 py-2 rounded-lg shadow mb-6 text-center">{message}</div>}
+
+          {message && (
+            <div className="bg-green-100 text-green-700 px-4 py-2 rounded-lg shadow mb-6 text-center">
+              {message}
+            </div>
+          )}
 
           {user && (
             <div className="flex flex-col items-center mb-10">
-              <h2 className={`text-2xl font-semibold text-center ${subHeading}`}>{user}</h2>
+              <h2
+                className={`text-xl font-semibold text-center ${subHeading}`}
+              >
+                {user}
+              </h2>
             </div>
           )}
 
@@ -106,20 +127,27 @@ export default function Dashboard() {
 
           {token && (
             <div className="mb-10">
-              <ChangePassword token={token} setError={setError} setMessage={setMessage} inputBg={inputBg} inputText={inputText} isDark={isDark} />
+              <ChangePassword
+                token={token}
+                setError={setError}
+                setMessage={setMessage}
+                inputBg={inputBg}
+                inputText={inputText}
+                isDark={isDark}
+              />
             </div>
           )}
 
           <div className={divider}></div>
 
-          <DeleteUser token={token} setError={setError} setMessage={setMessage} isDark={isDark} />
+          <DeleteUser
+            token={token}
+            setError={setError}
+            setMessage={setMessage}
+            isDark={isDark}
+          />
         </div>
       </main>
-
-
-      <footer className="h-20 flex items-center justify-center bg-gray-900 text-white shadow">
-        <p className="text-sm">© 2025 My App</p>
-      </footer>
     </div>
   );
 }

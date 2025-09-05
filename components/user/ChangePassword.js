@@ -8,7 +8,7 @@ export default function ChangePassword({ token, setError, setMessage, inputBg, i
 
   if (!token) {
     return (
-      <p className="text-red-500 text-center mb-4">
+      <p className="text-red-500 text-center mb-3 text-sm">
         Authentication token missing. Please log in again.
       </p>
     );
@@ -44,9 +44,9 @@ export default function ChangePassword({ token, setError, setMessage, inputBg, i
   return (
     <form
       onSubmit={handlePasswordChange}
-      className={`mb-8 p-6 rounded-lg shadow-md transition-colors duration-300 ${isDark ? "bg-[#2c3954]" : "bg-white"}`}
+      className={`mb-5 p-5 rounded-lg shadow-md transition-colors duration-300 ${isDark ? "bg-[#2c3954]" : "bg-white"}`}
     >
-      <h2 className={`text-xl font-semibold mb-4 ${isDark ? "text-gray-200" : "text-gray-800"}`}>
+      <h2 className={`text-lg font-semibold mb-3 ${isDark ? "text-gray-200" : "text-gray-800"}`}>
         Change Password
       </h2>
 
@@ -55,7 +55,7 @@ export default function ChangePassword({ token, setError, setMessage, inputBg, i
         placeholder="Old Password"
         value={oldPassword}
         onChange={(e) => setOldPassword(e.target.value)}
-        className={`w-full px-4 py-2 mb-4 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500 ${inputBg} ${inputText}`}
+        className={`w-full px-3 py-1.25 mb-3 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500 ${inputBg} ${inputText}`}
         required
       />
       <input
@@ -63,13 +63,13 @@ export default function ChangePassword({ token, setError, setMessage, inputBg, i
         placeholder="New Password"
         value={newPassword}
         onChange={(e) => setNewPassword(e.target.value)}
-        className={`w-full px-4 py-2 mb-4 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500 ${inputBg} ${inputText}`}
+        className={`w-full px-3 py-1.25 mb-3 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500 ${inputBg} ${inputText}`}
         required
       />
 
       <button
         type="submit"
-        className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition"
+        className="w-full bg-blue-600 text-white py-1.5 text-sm rounded hover:bg-blue-700 transition"
       >
         Update Password
       </button>

@@ -97,7 +97,7 @@ export default function Login() {
   return (
     <div className={`min-h-screen flex items-center justify-center ${theme.bg} transition-colors pb-12`}>
       <div className={`p-10 rounded-2xl shadow-2xl w-full max-w-md ${theme.card} transition-colors`}>
-        <h2 className="text-3xl font-extrabold mb-8 text-center" style={isDark ? { color: "#7da0d6" } : { color: "#3b5998" }}>
+        <h2 className="text-2xl font-extrabold mb-8 text-center" style={isDark ? { color: "#7da0d6" } : { color: "#3b5998" }}>
           Get Started With Expense Tracker
         </h2>
         <form onSubmit={handleSubmit} className="space-y-5">
